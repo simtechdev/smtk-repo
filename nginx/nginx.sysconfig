@@ -1,0 +1,5 @@
+# Sysconfig file for nginx
+
+BINARY="/usr/sbin/nginx"
+CONF_FILE="/etc/nginx/nginx.conf"
+ulimit -n 4096

@@ -1,0 +1,94 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:          hans
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: IP over ICMP tool.
+# Description:       Hans makes it possible to tunnel IPv4 through ICMP echo
+#                    packets, so you could call it a ping tunnel
+### END INIT INFO
+
+# chkconfig header
+# chkconfig: 345 97 04
+# description: IP over ICMP tool.
+#
+# processname: /usr/bin/hans
+
+###############################################################################
+
+source /etc/init.d/kaosv
+
+###############################################################################
+
+kv[prog_name]="hans"
+
+kv.readSysconfig "${kv[prog_name]}"
+
+binary=/usr/bin/${kv[prog_name]}
+args=${HANS_OPTIONS:-""}
+mode=${HANS_MODE:-"client"}
+remote_addr=${HANS_REMOTE_ADDR:-""}
+local_addr=${HANS_LOCAL_ADDR:-""}
+iface=${HANS_IFACE:-""}
+password=${HANS_PASSWORD:-""}
+
+kv[search_pattern]="${kv[prog_name]}"
+kv[pid_file]="/var/run/${kv[prog_name]}.pid"
+
+###############################################################################
+
+kv.addHandler "start"   "startServiceHandler"
+kv.addHandler "stop"    "stopServiceHandler"
+
+###############################################################################
+
+prepare() {
+  local has_errors=""
+
+  [[ ! -f $binary ]] && has_errors=true && kv.error "Error! File <$binary> is not exist."
+  [[ ! -x $binary ]] && has_errors=true && kv.error "Error! File <$binary> is not executable."
+
+  [[ "$mode" != "server" && "$mode" != "client" ]] && has_errors=true && kv.error "Error! Mode can be server or client only."
+  [[ "$mode" == "client" && "$remote_addr" == "" ]] && has_errors=true && kv.error "Error! You should specify the remote address."
+  [[ "$mode" == "client" && "$iface" == "" ]] && has_errors=true && kv.error "Error! You should specify the tunnel interface."
+  [[ "$local_addr" == "" ]] && has_errors=true && kv.error "Error! You should specify the local address."
+  [[ "$password" == "" ]] && has_errors=true && kv.error "Error! You cannot be empty."
+
+  [[ $has_errors ]] && kv.exit $ACTION_ERROR
+}
+
+startServiceHandler() {
+  if [[ "$mode" == "server" ]] ; then
+    kv.daemonize "$binary" "$args -f -r -s $local_addr -p $password &> /dev/null"
+  else
+    kv.daemonize "$binary" "$args -f -q -r -c $remote_addr -a $local_addr -d $iface -p $password &> /dev/null"
+  fi
+
+  if kv.getStartStatus ; then
+    return $ACTION_OK
+  else
+    return $ACTION_ERROR
+  fi
+}
+
+stopServiceHandler() {
+  local pid=`kv.getPid`
+
+  kv.sendSignal $SIGNAL_TERM
+
+  if kv.getStopStatus "$pid" ; then
+    return $ACTION_OK
+  else
+    kv.killProcess $pid
+    return $ACTION_FORCED
+  fi
+}
+
+###############################################################################
+
+prepare
+
+kv.go $@

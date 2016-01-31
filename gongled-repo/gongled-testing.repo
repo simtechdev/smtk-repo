@@ -1,0 +1,31 @@
+[gongled-testing]
+name=GONGLED Testing (Unstable) Repo for RHEL/CentOS
+baseurl=https://testing.yum.gongled.me/$releasever/$basearch/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=0
+
+[gongled-testing-src]
+name=GONGLED Testing (Unstable) Repo for RHEL/CentOS
+baseurl=https://testing.yum.gongled.me/$releasever/SRPMS/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=0
+
+[gongled-testing-i386]
+name=GONGLED Testing (Unstable) Repo for RHEL/CentOS
+baseurl=https://testing.yum.gongled.me/$releasever/i386/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=0
+
+[gongled-testing-x64]
+name=GONGLED Testing (Unstable) Repo for RHEL/CentOS
+baseurl=https://testing.yum.gongled.me/$releasever/x86_64/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=0

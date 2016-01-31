@@ -1,0 +1,35 @@
+[gongled-release]
+name=GONGLED Release (Stable) Repo for RHEL/CentOS
+baseurl=https://release.yum.gongled.me/$releasever/$basearch/
+enabled=1
+failovermethod=priority
+priority=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GONGLED
+
+[gongled-release-src]
+name=GONGLED Release (Stable) Repo for RHEL/CentOS
+baseurl=https://release.yum.gongled.me/$releasever/SRPMS/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GONGLED
+
+[gongled-release-i386]
+name=GONGLED Release (Stable) Repo for RHEL/CentOS
+baseurl=https://release.yum.gongled.me/$releasever/i386/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GONGLED
+
+[gongled-release-x64]
+name=GONGLED Release (Stable) Repo for RHEL/CentOS
+baseurl=https://release.yum.gongled.me/$releasever/x86_64/
+enabled=0
+failovermethod=priority
+priority=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GONGLED

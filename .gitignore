@@ -1,0 +1,14 @@
+*~
+Makefile
+*.rpm
+*.xz
+*.tar.gz
+*.tgz
+*.tar.xz
+*.txz
+*.tar.bz2
+*.tbz2
+*.zip
+*.pdf
+*.swp
+*.bak

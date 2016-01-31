@@ -1,0 +1,24 @@
+--- distcache-1.4.5/libdistcacheserver/Makefile.am.libdeps
++++ distcache-1.4.5/libdistcacheserver/Makefile.am
+@@ -3,4 +3,5 @@
+ lib_LTLIBRARIES			= libdistcacheserver.la
+ libdistcacheserver_la_SOURCES	= dc_server.c dc_server_default.c
+ libdistcacheserver_la_LDFLAGS	= -version-info 1:1:0
++libdistcacheserver_la_LIBADD	= ../libdistcache/libdistcache.la ../libnal/libnal.la 
+ 
+--- distcache-1.4.5/libdistcache/Makefile.am.libdeps
++++ distcache-1.4.5/libdistcache/Makefile.am
+@@ -3,4 +3,5 @@
+ lib_LTLIBRARIES		= libdistcache.la
+ libdistcache_la_SOURCES = dc_client.c dc_enc.c
+ libdistcache_la_LDFLAGS	= -version-info 1:1:0
++libdistcache_la_LIBADD	= ../libnal/libnal.la
+ 
+--- distcache-1.4.5/libsys/Makefile.am.libdeps
++++ distcache-1.4.5/libsys/Makefile.am
+@@ -3,5 +3,4 @@
+ # libsys is not installed, it's for internal use only
+ noinst_LTLIBRARIES	= libsys.la
+ libsys_la_SOURCES	= sys.c
+-libsys_la_LDFLAGS	= -static
+ 

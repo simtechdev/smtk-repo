@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# distcache    Startup script for the Distcache SSL Session Cache Server
+#
+# chkconfig: - 90 10
+# description: Distcache is a Distributed SSL Session Cache server.
+# processname: dc_server
+# config: /etc/sysconfig/distcache
+# pidfile: /var/run/dc_server.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+if [ -f /etc/sysconfig/distcache ]; then
+        . /etc/sysconfig/distcache
+fi
+
+port=${PORT-5555}
+sessions=${SESSIONS-3000}
+
+prog=dc_server
+RETVAL=0
+runas=distcache
+dc_server=/usr/bin/dc_server
+
+OPTIONS="-daemon -pidfile /var/run/dc_server.pid -user ${runas} -sessions ${sessions} -listen IP:${port}"
+
+start() {
+        echo -n $"Starting $prog: "
+        daemon $dc_server $OPTIONS
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch /var/lock/subsys/dc_server
+        return $RETVAL
+}
+stop() {
+	echo -n $"Stopping $prog: "
+	killproc $dc_server
+	RETVAL=$?
+	echo
+	[ $RETVAL = 0 ] && rm -f /var/lock/subsys/dc_server /var/run/dc_server.pid
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  status)
+        status $dc_server
+	RETVAL=$?
+	;;
+  restart)
+	stop
+	start
+	;;
+  condrestart)
+	if [ -f /var/run/dc_server.pid ] ; then
+		stop
+		start
+	fi
+	;;
+  reload)
+        reload
+	;;
+  *)
+	echo $"Usage: $prog {start|stop|restart|condrestart|status|help}"
+	exit 1
+esac
+
+exit $RETVAL

@@ -1,0 +1,15 @@
+diff -urN nginx-1.9.6-orig/src/http/modules/ngx_http_autoindex_module.c nginx-1.9.6/src/http/modules/ngx_http_autoindex_module.c
+--- nginx-1.9.6-orig/src/http/modules/ngx_http_autoindex_module.c	2015-10-27 09:47:30.000000000 -0400
++++ nginx-1.9.6/src/http/modules/ngx_http_autoindex_module.c	2015-11-19 15:59:12.978367138 -0500
+@@ -50,9 +50,9 @@
+ #define NGX_HTTP_AUTOINDEX_JSONP        2
+ #define NGX_HTTP_AUTOINDEX_XML          3
+ 
+-#define NGX_HTTP_AUTOINDEX_PREALLOCATE  50
++#define NGX_HTTP_AUTOINDEX_PREALLOCATE  80
+ 
+-#define NGX_HTTP_AUTOINDEX_NAME_LEN     50
++#define NGX_HTTP_AUTOINDEX_NAME_LEN     80
+ 
+ 
+ static ngx_buf_t *ngx_http_autoindex_html(ngx_http_request_t *r,
