@@ -61,8 +61,8 @@
 
 Summary:        Handle the administration of MySQL over the World Wide Web
 Name:           phpMyAdmin
-Version:        4.5.3.1
-Release:        1%{?dist}
+Version:        4.5.4.1
+Release:        0%{?dist}
 License:        GPLv2+
 Group:          Applications/Internet
 URL:            http://www.phpmyadmin.net/
@@ -207,13 +207,16 @@ sed -e "/'blowfish_secret'/s/MUSTBECHANGEDONINSTALL/$RANDOM$RANDOM$RANDOM$RANDOM
 ################################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <inbox@gongeld.ru> 4.5.3.1-0
+* Sun Feb 07 2015 Gleb Goncharov <yum@gongled.ru> 4.5.4.1-0
+- Upgrade to 4.5.4.1
+
+* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.ru> 4.5.3.1-0
 - Upgrade to 4.5.3.1
 
-* Sun Aug 02 2015 Gleb Goncharov <inbox@gongeld.ru> 4.4.12-1
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.ru> 4.4.12-1
 - Minor fixes.
 
-* Sun Aug 02 2015 Gleb Goncharov <inbox@gongeld.ru> 4.4.12-0
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.ru> 4.4.12-0
 - Upgrade to 4.4.12.0
 
 * Thu May 14 2015 Robert Scheck <robert@fedoraproject.org> 4.0.10.10-1
