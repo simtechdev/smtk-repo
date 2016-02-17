@@ -56,7 +56,7 @@
 
 Summary:          A parallel remote execution system
 Name:             salt
-Version:          2015.8.4
+Version:          2015.8.5
 Release:          0%{?dist}
 License:          ASL 2.0
 Group:            System Environment/Daemons
@@ -440,6 +440,9 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
+* Mon Feb 15 2016 Gleb Goncharov <yum@gongled.me> - 2015.8.5-0
+- Updated to 2015.8.5
+
 * Sun Jan 31 2016 Gleb Goncharov <yum@gongled.me> - 2015.8.4-0
 - Updated to 2015.8.4
 
