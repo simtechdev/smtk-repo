@@ -43,22 +43,21 @@
 %define service_name         %{name}
 %define service_home         %{_cachedir}/%{service_name}
 
-%define open_ssl_ver         1.0.2d
-%define psol_ver             1.9.32.4
-%define more_headers_ver     0.261
+%define open_ssl_ver         1.0.2f
+%define psol_ver             1.9.32.13
 %define pagespeed_ver        %{psol_ver}-beta
 %define pagespeed_fullver    release-%{pagespeed_ver}
 %define pagespeed_cache_path %{service_home}/pagespeed
 
-%define lua_module_ver       0.9.19
-%define mh_module_ver        0.28
+%define lua_module_ver       0.10.0
+%define mh_module_ver        0.29
 
 ###############################################################################
 
 Summary:              Rocket-fast web server
 Name:                 nginx
 Version:              1.9.10
-Release:              0%{?dist}
+Release:              1%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
 Vendor:               Nginx / Google / CloudFlare
@@ -94,7 +93,7 @@ Source46:             %{name}-maintenance.html
 Source60:             https://github.com/pagespeed/ngx_pagespeed/archive/%{pagespeed_fullver}.zip
 Source61:             https://dl.google.com/dl/page-speed/psol/%{psol_ver}.tar.gz
 Source62:             http://www.openssl.org/source/openssl-%{open_ssl_ver}.tar.gz
-Source63:             https://github.com/openresty/headers-more-nginx-module/archive/v%{more_headers_ver}.tar.gz
+Source63:             https://github.com/openresty/headers-more-nginx-module/archive/v%{mh_module_ver}.tar.gz
 Source64:             https://github.com/chaoslawful/lua-nginx-module/archive/v%{lua_module_ver}.tar.gz
 
 Patch0:               %{name}.patch
@@ -205,7 +204,7 @@ Not stripped version of nginx with the debugging log support
         --with-threads \
         --add-module=ngx_pagespeed-%{pagespeed_fullver} \
         --add-module=lua-nginx-module-%{lua_module_ver} \
-        --add-module=headers-more-nginx-module-%{more_headers_ver} \
+        --add-module=headers-more-nginx-module-%{mh_module_ver} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 %{__make} %{?_smp_mflags}
@@ -251,7 +250,7 @@ Not stripped version of nginx with the debugging log support
         --with-threads \
         --add-module=ngx_pagespeed-%{pagespeed_fullver} \
         --add-module=lua-nginx-module-%{lua_module_ver} \
-        --add-module=headers-more-nginx-module-%{more_headers_ver} \
+        --add-module=headers-more-nginx-module-%{mh_module_ver} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 %{__make} %{?_smp_mflags}
@@ -457,6 +456,9 @@ fi
 ###############################################################################
 
 %changelog
+* Wed Feb 17 2016 Gleb <yum@gongled.me> - 1.9.10-1
+- Dependencies updated to latest versions 
+
 * Wed Jan 27 2016 Gleb <yum@gongled.me> - 1.9.10-0
 - Nginx updated to 1.9.10
 

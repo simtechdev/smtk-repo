@@ -120,7 +120,7 @@ Requires(postun):     %{__service}
 
 BuildRequires:        libxml2-devel
 
-Obsoletes:            zabbix
+Obsoletes:            zabbix = %{version}-%{release}
 
 %description agent
 Zabbix agent to be installed on monitored systems.
@@ -164,8 +164,8 @@ Requires(postun):     %{__service}
 Provides:             zabbix-server = %{version}-%{release}
 Provides:             zabbix-server-implementation = %{version}-%{release}
 
-Obsoletes:            zabbix
-Obsoletes:            zabbix-server
+Obsoletes:            zabbix = %{version}-%{release}
+Obsoletes:            zabbix-server = %{version}-%{release}
 
 %description server-mysql
 Zabbix server with MySQL or MariaDB database support.
@@ -191,8 +191,8 @@ Requires(postun):     %{__service}
 Provides:             zabbix-server = %{version}-%{release}
 Provides:             zabbix-server-implementation = %{version}-%{release}
 
-Obsoletes:            zabbix
-Obsoletes:            zabbix-server
+Obsoletes:            zabbix = %{version}-%{release}
+Obsoletes:            zabbix-server = %{version}-%{release}
 
 %description server-pgsql
 Zabbix server with PostgresSQL database support.
@@ -218,8 +218,8 @@ Requires(postun):     %{__service}
 Provides:             zabbix-proxy = %{version}-%{release}
 Provides:             zabbix-proxy-implementation = %{version}-%{release}
 
-Obsoletes:            zabbix
-Obsoletes:            zabbix-proxy
+Obsoletes:            zabbix = %{version}-%{release}
+Obsoletes:            zabbix-proxy = %{version}-%{release}
 
 %description proxy-mysql
 Zabbix proxy with MySQL or MariaDB database support.
@@ -245,8 +245,8 @@ Requires(postun):     %{__service}
 Provides:             zabbix-proxy = %{version}-%{release}
 Provides:             zabbix-proxy-implementation = %{version}-%{release}
 
-Obsoletes:            zabbix
-Obsoletes:            zabbix-proxy
+Obsoletes:            zabbix = %{version}
+Obsoletes:            zabbix-proxy = %{version}-%{release}
 
 %description proxy-pgsql
 Zabbix proxy with PostgreSQL database support.
