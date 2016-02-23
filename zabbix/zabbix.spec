@@ -43,9 +43,9 @@
 
 ################################################################################
 
-%define service_user      zabbix
-%define service_group     zabbix
-%define service_home      %{_libdir}/zabbix
+%define service_user      %{name}
+%define service_group     %{name}
+%define service_home      %{_libdir}/%{name}
 
 ################################################################################
 
@@ -55,39 +55,31 @@ Release:              0%{?dist}
 Summary:              The Enterprise-class open source monitoring solution
 Group:                Applications/Internet
 License:              GPLv2+
-URL:                  http://www.zabbix.com/
+URL:                  http://www.zabbix.com
 
-Source0:              http://heanet.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/%{version}/zabbix-%{version}.tar.gz
-Source1:              zabbix-web22.conf
-Source2:              zabbix-web24.conf
-Source3:              zabbix-logrotate.in
+Source0:              http://heanet.dl.sourceforge.net/project/%{name}/ZABBIX%20Latest%20Stable/%{version}/%{name}-%{version}.tar.gz
+Source1:              %{name}-web22.conf
+Source2:              %{name}-web24.conf
+Source3:              %{name}-logrotate.in
 
-Source10:             zabbix-agent.init
-Source11:             zabbix-server.init
-Source12:             zabbix-proxy.init
+Source10:             %{name}-agent.init
+Source11:             %{name}-server.init
+Source12:             %{name}-proxy.init
 
-Source20:             zabbix-agent.service
-Source21:             zabbix-server.service
-Source22:             zabbix-proxy.service
-Source23:             zabbix-tmpfiles.conf
+Source20:             %{name}-agent.service
+Source21:             %{name}-server.service
+Source22:             %{name}-proxy.service
+Source23:             %{name}-tmpfiles.conf
 
 Patch0:               config.patch
 Patch1:               fonts-config.patch
 Patch2:               fping3-sourceip-option.patch
 
-Buildroot:            %{_tmppath}/zabbix-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:        mysql-devel
-BuildRequires:        postgresql-devel
-BuildRequires:        net-snmp-devel
-BuildRequires:        openldap-devel
-BuildRequires:        gnutls-devel
-BuildRequires:        iksemel-devel
-BuildRequires:        unixODBC-devel
-BuildRequires:        curl-devel >= 7.13.1
-BuildRequires:        OpenIPMI-devel >= 2
-BuildRequires:        libssh2-devel >= 1.0.0
-BuildRequires:        libxml2-devel
+BuildRequires:        mysql-devel postgresql-devel net-snmp-devel openldap-devel gnutls-devel 
+BuildRequires:        iksemel-devel unixODBC-devel libxml2-devel curl-devel >= 7.13.1 
+BuildRequires:        OpenIPMI-devel >= 2 libssh2-devel >= 1.0.0
 %if 0%{?rhel} >= 7
 BuildRequires:        systemd
 %endif
@@ -316,14 +308,11 @@ Zabbix web frontend for PostgreSQL
 %patch2 -p1
 %endif
 
-# remove obsolete fonts
-%{__rm} -f frontends/php/fonts/DejaVuSans.ttf
-
 # remove .htaccess files
-%{__rm} -f frontends/php/app/.htaccess
-%{__rm} -f frontends/php/conf/.htaccess
-%{__rm} -f frontends/php/include/.htaccess
-%{__rm} -f frontends/php/local/.htaccess
+rm -f frontends/php/app/.htaccess
+rm -f frontends/php/conf/.htaccess
+rm -f frontends/php/include/.htaccess
+rm -f frontends/php/local/.htaccess
 
 # remove translation source files and scripts
 find frontends/php/locale -name '*.po' -delete
@@ -358,25 +347,25 @@ build_flags="
 %configure $build_flags --with-mysql
 make %{?_smp_mflags}
 
-%{__mv} src/zabbix_server/zabbix_server src/zabbix_server/zabbix_server_mysql
-%{__mv} src/zabbix_proxy/zabbix_proxy src/zabbix_proxy/zabbix_proxy_mysql
+mv src/zabbix_server/zabbix_server src/zabbix_server/zabbix_server_mysql
+mv src/zabbix_proxy/zabbix_proxy src/zabbix_proxy/zabbix_proxy_mysql
 
 %configure $build_flags --with-postgresql
 make %{?_smp_mflags}
 
-%{__mv} src/zabbix_server/zabbix_server src/zabbix_server/zabbix_server_pgsql
-%{__mv} src/zabbix_proxy/zabbix_proxy src/zabbix_proxy/zabbix_proxy_pgsql
+mv src/zabbix_server/zabbix_server src/zabbix_server/zabbix_server_pgsql
+mv src/zabbix_proxy/zabbix_proxy src/zabbix_proxy/zabbix_proxy_pgsql
 
 
 %install
-%{__rm} -rf %{buildroot}
+rm -rf %{buildroot}
 
 # install
-make DESTDIR=%{buildroot} install
+%{make_install}
 
 # clean unnecessary binaries
-%{__rm} -f %{buildroot}%{_sbindir}/zabbix_server
-%{__rm} -f %{buildroot}%{_sbindir}/zabbix_proxy
+rm -f %{buildroot}%{_sbindir}/zabbix_server
+rm -f %{buildroot}%{_sbindir}/zabbix_proxy
 
 # install necessary directories
 install -dm 755 %{buildroot}%{_bindir}
@@ -411,32 +400,35 @@ install -dm 755 %{buildroot}%{_datadir}/zabbix
 install -dm 755 %{buildroot}%{_sysconfdir}/httpd/conf.d
 
 # install binaries
-install -m 0755 -p src/zabbix_agent/zabbix_agentd %{buildroot}%{_sbindir}/
-install -m 0755 -p src/zabbix_server/zabbix_server_* %{buildroot}%{_sbindir}/
-install -m 0755 -p src/zabbix_proxy/zabbix_proxy_* %{buildroot}%{_sbindir}/
-install -m 0755 -p src/zabbix_get/zabbix_get %{buildroot}%{_bindir}/
-install -m 0755 -p src/zabbix_sender/zabbix_sender %{buildroot}%{_bindir}/
+install -pm 755 src/zabbix_agent/zabbix_agentd %{buildroot}%{_sbindir}/
+install -pm 755 src/zabbix_server/zabbix_server_* %{buildroot}%{_sbindir}/
+install -pm 755 src/zabbix_proxy/zabbix_proxy_* %{buildroot}%{_sbindir}/
+install -pm 755 src/zabbix_get/zabbix_get %{buildroot}%{_bindir}/
+install -pm 755 src/zabbix_sender/zabbix_sender %{buildroot}%{_bindir}/
 
 # install man
-%{__gzip} -c man/zabbix_get.man > %{buildroot}%{_mandir}/man1/zabbix_get.1.gz
-%{__gzip} -c man/zabbix_sender.man > %{buildroot}%{_mandir}/man1/zabbix_sender.1.gz
-%{__gzip} -c man/zabbix_agentd.man > %{buildroot}%{_mandir}/man8/zabbix_agentd.8.gz
-%{__gzip} -c man/zabbix_server.man > %{buildroot}%{_mandir}/man8/zabbix_server.8.gz
-%{__gzip} -c man/zabbix_proxy.man > %{buildroot}%{_mandir}/man8/zabbix_proxy.8.gz
+cp man/zabbix_get.man %{buildroot}%{_mandir}/man1/zabbix_get.1
+cp man/zabbix_sender.man %{buildroot}%{_mandir}/man1/zabbix_sender.1
+cp man/zabbix_agentd.man %{buildroot}%{_mandir}/man8/zabbix_agentd.8
+cp man/zabbix_server.man %{buildroot}%{_mandir}/man8/zabbix_server.8
+cp man/zabbix_proxy.man %{buildroot}%{_mandir}/man8/zabbix_proxy.8
+
+# rename font for plots
+mv frontends/php/fonts/DejaVuSans.ttf frontends/php/fonts/graphfont.ttf
 
 # install frontend files
 find frontends/php -name '*.orig' -delete
-%{__cp} -a frontends/php/* %{buildroot}%{_datadir}/zabbix
+cp -a frontends/php/* %{buildroot}%{_datadir}/zabbix
 
 # install frontend configuration files
 touch %{buildroot}%{_sysconfdir}/zabbix/web/zabbix.conf.php
-%{__mv} %{buildroot}%{_datadir}/zabbix/conf/maintenance.inc.php %{buildroot}%{_sysconfdir}/zabbix/web/
+mv %{buildroot}%{_datadir}/zabbix/conf/maintenance.inc.php %{buildroot}%{_sysconfdir}/zabbix/web/
 
 # drop config files in place
 %if 0%{?rhel} >= 7
-install -m 0644 -p %{SOURCE2} %{buildroot}%{_sysconfdir}/httpd/conf.d/zabbix.conf
+install -pm 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/httpd/conf.d/zabbix.conf
 %else
-install -m 0644 -p %{SOURCE1} %{buildroot}%{_sysconfdir}/httpd/conf.d/zabbix.conf
+install -pm 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/httpd/conf.d/zabbix.conf
 %endif
 
 # generate config files
@@ -481,20 +473,20 @@ cat %{SOURCE3} | sed \
 
 # install startup scripts
 %if 0%{?rhel} >= 7
-install -Dm 0644 -p %{SOURCE20} %{buildroot}%{_unitdir}/zabbix-agent.service
-install -Dm 0644 -p %{SOURCE21} %{buildroot}%{_unitdir}/zabbix-server.service
-install -Dm 0644 -p %{SOURCE22} %{buildroot}%{_unitdir}/zabbix-proxy.service
+install -pDm 644 %{SOURCE20} %{buildroot}%{_unitdir}/zabbix-agent.service
+install -pDm 644 %{SOURCE21} %{buildroot}%{_unitdir}/zabbix-server.service
+install -pDm 644 %{SOURCE22} %{buildroot}%{_unitdir}/zabbix-proxy.service
 %else
-install -Dm 0755 -p %{SOURCE10} %{buildroot}%{_sysconfdir}/init.d/zabbix-agent
-install -Dm 0755 -p %{SOURCE11} %{buildroot}%{_sysconfdir}/init.d/zabbix-server
-install -Dm 0755 -p %{SOURCE12} %{buildroot}%{_sysconfdir}/init.d/zabbix-proxy
+install -pDm 755 %{SOURCE10} %{buildroot}%{_sysconfdir}/init.d/zabbix-agent
+install -pDm 755 %{SOURCE11} %{buildroot}%{_sysconfdir}/init.d/zabbix-server
+install -pDm 755 %{SOURCE12} %{buildroot}%{_sysconfdir}/init.d/zabbix-proxy
 %endif
 
 # install systemd-tmpfiles conf
 %if 0%{?rhel} >= 7
-install -Dm 0644 -p %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-agent.conf
-install -Dm 0644 -p %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-server.conf
-install -Dm 0644 -p %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-proxy.conf
+install -pDm 644 %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-agent.conf
+install -pDm 644 %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-server.conf
+install -pDm 644 %{SOURCE23} %{buildroot}%{_libdir}/tmpfiles.d/zabbix-proxy.conf
 %endif
 
 # copy sql files for servers
@@ -521,7 +513,7 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 
 
 %clean
-%{__rm} -rf %{buildroot}
+rm -rf %{buildroot}
 
 ################################################################################
 
@@ -530,14 +522,14 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %{__getent} passwd %{service_user} >/dev/null || \
         %{__useradd} -r -g %{service_user} -s /sbin/nologin -d %{service_home} \
         -c "Zabbix Monitoring System" %{service_user}
-:
+exit 0
 
 
 %post agent
 %if 0%{?rhel} >= 7
 %systemd_post zabbix-agent.service
 %else
-%{__chkconfig} --add zabbix-agent || :
+%{__chkconfig} --add zabbix-agent || exit 0
 %endif
 
 
@@ -546,7 +538,7 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %{__getent} passwd %{service_user} >/dev/null || \
         %{__useradd} -r -g %{service_user} -s /sbin/nologin -d %{service_home} \
         -c "Zabbix Monitoring System" %{service_user}
-:
+exit 0
 
 
 %pre server-pgsql
@@ -554,7 +546,7 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %{__getent} passwd %{service_user} >/dev/null || \
         %{__useradd} -r -g %{service_user} -s /sbin/nologin -d %{service_home} \
         -c "Zabbix Monitoring System" %{service_user}
-:
+exit 0
 
 
 %pre proxy-mysql
@@ -562,7 +554,7 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %{__getent} passwd %{service_user} >/dev/null || \
         %{__useradd} -r -g %{service_user} -s /sbin/nologin -d %{service_home} \
         -c "Zabbix Monitoring System" %{service_user}
-:
+exit 0
 
 
 %pre proxy-pgsql
@@ -570,29 +562,29 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %{__getent} passwd %{service_user} >/dev/null || \
         %{__useradd} -r -g %{service_user} -s /sbin/nologin -d %{service_home} \
         -c "Zabbix Monitoring System" %{service_user}
-:
+exit 0
 
 
 %post server-mysql
 %if 0%{?rhel} >= 7
 %systemd_post zabbix-server.service
 %else
-%{__chkconfig} --add zabbix-server || :
+%{__chkconfig} --add zabbix-server || exit 0
 %endif
 %{__updalternatives} --install %{_sbindir}/zabbix_server \
         zabbix-server %{_sbindir}/zabbix_server_mysql 10
-:
+exit 0
 
 
 %post server-pgsql
 %if 0%{?rhel} >= 7
 %systemd_post zabbix-server.service
 %else
-%{__chkconfig} --add zabbix-server || :
+%{__chkconfig} --add zabbix-server || exit 0
 %endif
 %{__updalternatives} --install %{_sbindir}/zabbix_server \
         zabbix-server %{_sbindir}/zabbix_server_pgsql 10
-:
+exit 0
 
 
 %post proxy-mysql
@@ -603,7 +595,7 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %endif
 %{__updalternatives} --install %{_sbindir}/zabbix_proxy \
         zabbix-proxy %{_sbindir}/zabbix_proxy_mysql 10
-:
+exit 0
 
 
 %post proxy-pgsql
@@ -614,17 +606,11 @@ cp database/postgresql/schema.sql $docdir/schema.sql
 %endif
 %{__updalternatives} --install %{_sbindir}/zabbix_proxy \
         zabbix-proxy %{_sbindir}/zabbix_proxy_pgsql 10
-:
-
-
-%post web
-%{__updalternatives} --install %{_datadir}/zabbix/fonts/graphfont.ttf \
-        zabbix-web-font %{_datadir}/fonts/dejavu/DejaVuSans.ttf 10
-:
+exit 0
 
 
 %preun agent
-if [ "$1" = 0 ]; then
+if [[ $1 -eq 0 ]] ; then
 %if 0%{?rhel} >= 7
 %systemd_preun zabbix-agent.service
 %else
@@ -632,11 +618,11 @@ if [ "$1" = 0 ]; then
 %{__chkconfig} --del zabbix-agent
 %endif
 fi
-:
+exit 0
 
 
 %preun server-mysql
-if [ "$1" = 0 ]; then
+if [[ $1 -eq 0 ]] ; then
 %if 0%{?rhel} >= 7
 %systemd_preun zabbix-server.service
 %else
@@ -646,11 +632,11 @@ if [ "$1" = 0 ]; then
 %{__updalternatives} --remove zabbix-server \
         %{_sbindir}/zabbix_server_mysql
 fi
-:
+exit 0
 
 
 %preun server-pgsql
-if [ "$1" = 0 ]; then
+if [[ $1 -eq 0 ]] ; then
 %if 0%{?rhel} >= 7
 %systemd_preun zabbix-server.service
 %else
@@ -660,11 +646,11 @@ if [ "$1" = 0 ]; then
 %{__updalternatives} --remove zabbix-server \
         %{_sbindir}/zabbix_server_pgsql
 fi
-:
+exit 0
 
 
 %preun proxy-mysql
-if [ "$1" = 0 ]; then
+if [[ $1 -eq 0 ]] ; then
 %if 0%{?rhel} >= 7
 %systemd_preun zabbix-proxy.service
 %else
@@ -674,11 +660,11 @@ if [ "$1" = 0 ]; then
 %{__updalternatives} --remove zabbix-proxy \
         %{_sbindir}/zabbix_proxy_mysql
 fi
-:
+exit 0
 
 
 %preun proxy-pgsql
-if [ "$1" = 0 ]; then
+if [[ $1 -eq 0 ]] ; then
 %if 0%{?rhel} >= 7
 %systemd_preun zabbix-proxy.service
 %else
@@ -688,23 +674,15 @@ if [ "$1" = 0 ]; then
 %{__updalternatives} --remove zabbix-proxy \
         %{_sbindir}/zabbix_proxy_pgsql
 fi
-:
-
-
-%preun web
-if [ "$1" = 0 ]; then
-%{__updalternatives} --remove zabbix-web-font \
-        %{_datadir}/fonts/dejavu/DejaVuSans.ttf
-fi
-:
+exit 0
 
 
 %postun agent
 %if 0%{?rhel} >= 7
 %systemd_postun_with_restart zabbix-agent.service
 %else
-if [ $1 -ge 1 ]; then
-%{__service} zabbix-agent try-restart >/dev/null 2>&1 || :
+if [[ $1 -ge 1 ]] ; then
+%{__service} zabbix-agent try-restart >/dev/null 2>&1 || exit 0
 fi
 %endif
 
@@ -713,8 +691,8 @@ fi
 %if 0%{?rhel} >= 7
 %systemd_postun_with_restart zabbix-server.service
 %else
-if [ $1 -ge 1 ]; then
-%{__service} zabbix-server try-restart >/dev/null 2>&1 || :
+if [[ $1 -ge 1 ]] ; then
+%{__service} zabbix-server try-restart >/dev/null 2>&1 || exit 0
 fi
 %endif
 
@@ -723,8 +701,8 @@ fi
 %if 0%{?rhel} >= 7
 %systemd_postun_with_restart zabbix-server.service
 %else
-if [ $1 -ge 1 ]; then
-%{__service} zabbix-server try-restart >/dev/null 2>&1 || :
+if [[ $1 -ge 1 ]] ; then
+%{__service} zabbix-server try-restart >/dev/null 2>&1 || exit 0
 fi
 %endif
 
@@ -733,8 +711,8 @@ fi
 %if 0%{?rhel} >= 7
 %systemd_postun_with_restart zabbix-proxy.service
 %else
-if [ $1 -ge 1 ]; then
-%{__service} zabbix-proxy try-restart >/dev/null 2>&1 || :
+if [[ $1 -ge 1 ]] ; then
+%{__service} zabbix-proxy try-restart >/dev/null 2>&1 || exit 0
 fi
 %endif
 
@@ -743,8 +721,8 @@ fi
 %if 0%{?rhel} >= 7
 %systemd_postun_with_restart zabbix-proxy.service
 %else
-if [ $1 -ge 1 ]; then
-%{__service} zabbix-proxy try-restart >/dev/null 2>&1 || :
+if [[ $1 -ge 1 ]] ; then
+%{__service} zabbix-proxy try-restart >/dev/null 2>&1 || exit 0
 fi
 %endif
 
@@ -897,5 +875,5 @@ fi
 
 %changelog
 * Wed Feb 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.0-0 
-- Initial build.
+- Initial build
 
