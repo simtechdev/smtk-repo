@@ -61,7 +61,7 @@
 
 Summary:        Handle the administration of MySQL over the World Wide Web
 Name:           phpMyAdmin
-Version:        4.5.4.1
+Version:        4.5.5
 Release:        0%{?dist}
 License:        GPLv2+
 Group:          Applications/Internet
@@ -207,7 +207,10 @@ sed -e "/'blowfish_secret'/s/MUSTBECHANGEDONINSTALL/$RANDOM$RANDOM$RANDOM$RANDOM
 ################################################################################
 
 %changelog
-* Sun Feb 07 2015 Gleb Goncharov <yum@gongled.ru> 4.5.4.1-0
+* Tue Feb 23 2016 Gleb Goncharov <yum@gongled.ru> 4.5.5-0
+- Upgrade to 4.5.5
+
+* Sun Feb 07 2016 Gleb Goncharov <yum@gongled.ru> 4.5.4.1-0
 - Upgrade to 4.5.4.1
 
 * Wed Dec 30 2015 Gleb Goncharov <yum@gongled.ru> 4.5.3.1-0
