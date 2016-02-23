@@ -51,8 +51,8 @@
 
 Summary:        Performance measure tool
 Name:           yandextank
-Version:        1.7.12
-Release:        2%{?dist}
+Version:        1.7.30
+Release:        0%{?dist}
 License:        BSD
 Group:          Development/Libraries
 URL:            https://tech.yandex.ru/tank/
@@ -71,7 +71,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 BuildArch:      x86_64
 
-Requires:	phantom
 Requires:       python-importlib
 Requires:       python-ipaddr
 Requires:       python-lxml
@@ -113,6 +112,9 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ################################################################################
 
 %changelog
+* Tue Feb 23 2016 Gleb Goncharov <yum@gongled.me> - 1.7.30-0
+- Updated to the latest version.
+
 * Sun Aug 2 2015 Gleb Goncharov <yum@gongled.me> - 1.7.12-2
 - Reduce limits of resource checks.
 
