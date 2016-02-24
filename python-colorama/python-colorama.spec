@@ -12,7 +12,7 @@ License:        MIT
 Group:          Development/Libraries
 URL:            https://pypi.python.org/pypi/colorama
 
-Source:         https://pypi.python.org/packages/source/c/colorama/colorama-%{version}.tar.gz
+Source:         https://pypi.python.org/packages/source/c/%{package_name}/%{package_name}-%{version}.tar.gz
 
 BuildRequires:  python-devel python-setuptools
 
