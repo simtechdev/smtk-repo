@@ -44,6 +44,7 @@ BuildRequires:        python2-devel
 BuildRequires:        python-setuptools
 
 Requires:             PyYAML
+Requires:             python-markupsafe
 Requires:             python-paramiko
 Requires:             python-jinja2
 Requires:             python-keyczar
