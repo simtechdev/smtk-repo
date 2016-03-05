@@ -20,21 +20,21 @@ Reverse proxy add forward module for Apache
 %setup -q
 
 %build
-make
+%{__make} %{?_smp_mflags}
 
 %install
+rm -rf %{buildroot}
 install -dm 755 %{buildroot}/usr/lib64/httpd/modules
 %{make_install}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %files
 %defattr(-,root,root,-)
 %doc CHANGES
 %{_libdir}/httpd/modules/mod_rpaf.so
-
 
 
 %changelog

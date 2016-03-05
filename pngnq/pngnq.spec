@@ -60,11 +60,11 @@ results on many types of images.
 %setup -qn %{name}-%{version}
 
 %build
-%{__rm} -rf %{buildroot}
-./configure --prefix=%{_prefix}
+%{configure}
 %{__make} %{?_smp_mflags}
 
 %install
+%{__rm} -rf %{buildroot}
 %{__make} install DESTDIR=%{buildroot}
 
 %clean

@@ -12,16 +12,24 @@ Vendor: Apache Software Foundation
 Source0: http://www.apache.org/dist/httpd/httpd-%{version}.tar.gz
 License: Apache License, Version 2.0
 Group: System Environment/Daemons
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildPrereq: apr-devel, apr-util-devel, openldap-devel, db4-devel, expat-devel, findutils, perl, pkgconfig, pcre-devel >= 5.0
-BuildPrereq: /usr/bin/apr-1-config, /usr/bin/apu-1-config
+
+BuildRequires: apr-devel, apr-util-devel, openldap-devel, db4-devel, expat-devel, findutils, perl, pkgconfig, pcre-devel >= 5.0
+BuildRequires: /usr/bin/apr-1-config, /usr/bin/apu-1-config
+
 Requires: apr >= 1.4.2, apr-util >= 1.3.10, pcre >= 5.0, gawk, /usr/bin/find, openldap
-Prereq: /sbin/chkconfig, /bin/mktemp, /bin/rm, /bin/mv
-Prereq: sh-utils, textutils, /usr/sbin/useradd
-Provides: webserver
+
+Requires(post): /sbin/chkconfig, /bin/mktemp, /bin/rm, /bin/mv
+Requires(post): sh-utils, textutils, /usr/sbin/useradd
+
 Provides: httpd-mmn = %{mmn}
+
 Conflicts: thttpd
-Obsoletes: apache, secureweb, mod_dav
+
+Obsoletes: apache = %{version}-%{release}
+Obsoletes: secureweb = %{version}-%{release}
+Obsoletes: mod_dav = %{version}-%{release}
 
 %description
 Apache is a powerful, full-featured, efficient, and freely-available
@@ -31,7 +39,8 @@ Internet.
 %package devel
 Group: Development/Libraries
 Summary: Development tools for the Apache HTTP server.
-Obsoletes: secureweb-devel, apache-devel
+Obsoletes: secureweb-devel = %{version}-%{release}
+Obsoletes: apache-devel = %{version}-%{release}
 Requires: libtool, httpd = %{version}
 Requires: apr-devel >= 1.4.2, apr-util-devel >= 1.3.10
 
@@ -46,7 +55,8 @@ to install this package.
 %package manual
 Group: Documentation
 Summary: Documentation for the Apache HTTP server.
-Obsoletes: secureweb-manual, apache-manual
+Obsoletes: secureweb-manual = %{version}-%{release}
+Obsoletes: apache-manual = %{version}-%{release}
 
 %description manual
 The httpd-manual package contains the complete manual and
@@ -56,9 +66,9 @@ also be found at http://httpd.apache.org/docs/.
 %package -n mod_ssl
 Group: System Environment/Daemons
 Summary: SSL/TLS module for the Apache HTTP server
-BuildPrereq: openssl-devel
-Prereq: openssl, dev, /bin/cat
+Requires: openssl-devel
 Requires: httpd, make, httpd-mmn = %{mmn}
+Requires(post): openssl, dev, /bin/cat
 
 %description -n mod_ssl
 The mod_ssl module provides strong cryptography for the Apache Web
@@ -90,20 +100,20 @@ function mpmbuild()
 mpm=$1; shift
 mkdir $mpm; pushd $mpm
 ../configure \
- 	--prefix=%{_sysconfdir}/httpd \
-        --with-apr=/usr/bin/apr-1-config \
-        --with-apr-util=/usr/bin/apu-1-config \
-        --with-pcre=/usr/bin/pcre-config \
-        --exec-prefix=%{_prefix} \
- 	--bindir=%{_bindir} \
- 	--sbindir=%{_sbindir} \
- 	--mandir=%{_mandir} \
+	--prefix=%{_sysconfdir}/httpd \
+	--with-apr=/usr/bin/apr-1-config \
+	--with-apr-util=/usr/bin/apu-1-config \
+	--with-pcre=/usr/bin/pcre-config \
+	--exec-prefix=%{_prefix} \
+	--bindir=%{_bindir} \
+	--sbindir=%{_sbindir} \
+	--mandir=%{_mandir} \
 	--libdir=%{_libdir} \
 	--sysconfdir=%{_sysconfdir}/httpd/conf \
 	--includedir=%{_includedir}/httpd \
 	--libexecdir=%{_libdir}/httpd/modules \
 	--datadir=%{contentdir} \
-        --with-installbuilddir=%{_libdir}/httpd/build \
+	--with-installbuilddir=%{_libdir}/httpd/build \
 	--with-mpm=$mpm \
 	--enable-suexec --with-suexec \
 	--with-suexec-caller=%{suexec_caller} \
@@ -121,15 +131,15 @@ popd
 
  # Build everything and the kitchen sink with the prefork build
 mpmbuild prefork \
-        --enable-mods-shared=all \
-        --enable-ssl --with-ssl --enable-distcache \
-        --enable-proxy \
-        --enable-cache \
-        --enable-disk-cache \
-        --enable-ldap --enable-authnz-ldap \
-        --enable-cgid \
-        --enable-authn-anon --enable-authn-alias \
-        --disable-imagemap
+	--enable-mods-shared=all \
+	--enable-ssl --with-ssl --enable-distcache \
+	--enable-proxy \
+	--enable-cache \
+	--enable-disk-cache \
+	--enable-ldap --enable-authnz-ldap \
+	--enable-cgid \
+	--enable-authn-anon --enable-authn-alias \
+	--disable-imagemap
 
 # For the other MPMs, just build httpd and no optional modules
 for f in %{mpms}; do
@@ -137,62 +147,62 @@ for f in %{mpms}; do
 done
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 pushd prefork
-make DESTDIR=$RPM_BUILD_ROOT install
+make DESTDIR=%{buildroot} install
 popd
 
 # install alternative MPMs
 for f in %{mpms}; do
-  install -m 755 ${f}/httpd $RPM_BUILD_ROOT%{_sbindir}/httpd.${f}
+  install -m 755 ${f}/httpd %{buildroot}%{_sbindir}/httpd.${f}
 done
 
 # for holding mod_dav lock database
-mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/lib/dav
+mkdir -p %{buildroot}%{_localstatedir}/lib/dav
 
 # create a prototype session cache
-mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/cache/mod_ssl
-touch $RPM_BUILD_ROOT%{_localstatedir}/cache/mod_ssl/scache.{dir,pag,sem}
+mkdir -p %{buildroot}%{_localstatedir}/cache/mod_ssl
+touch %{buildroot}%{_localstatedir}/cache/mod_ssl/scache.{dir,pag,sem}
 
 # move the build directory to within the library directory
-mv $RPM_BUILD_ROOT%{contentdir}/build $RPM_BUILD_ROOT%{_libdir}/httpd/build
+mv %{buildroot}%{contentdir}/build %{buildroot}%{_libdir}/httpd/build
 
 # Make the MMN accessible to module packages
-echo %{mmn} > $RPM_BUILD_ROOT%{_includedir}/httpd/.mmn
+echo %{mmn} > %{buildroot}%{_includedir}/httpd/.mmn
 
 # docroot
-mkdir $RPM_BUILD_ROOT%{contentdir}/html
+mkdir %{buildroot}%{contentdir}/html
 
 # Set up /var directories
-rmdir $RPM_BUILD_ROOT%{_sysconfdir}/httpd/logs
-mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/httpd
-mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/cache/httpd/cache-root
+rmdir %{buildroot}%{_sysconfdir}/httpd/logs
+mkdir -p %{buildroot}%{_localstatedir}/log/httpd
+mkdir -p %{buildroot}%{_localstatedir}/cache/httpd/cache-root
 
 # symlinks for /etc/httpd
-ln -s ../..%{_localstatedir}/log/httpd $RPM_BUILD_ROOT/etc/httpd/logs
-ln -s ../..%{_localstatedir}/run $RPM_BUILD_ROOT/etc/httpd/run
-ln -s ../..%{_libdir}/httpd/modules $RPM_BUILD_ROOT/etc/httpd/modules
+ln -s ../..%{_localstatedir}/log/httpd %{buildroot}/etc/httpd/logs
+ln -s ../..%{_localstatedir}/run %{buildroot}/etc/httpd/run
+ln -s ../..%{_libdir}/httpd/modules %{buildroot}/etc/httpd/modules
 
 # install SYSV init stuff
-mkdir -p $RPM_BUILD_ROOT/etc/rc.d/init.d
+mkdir -p %{buildroot}/etc/rc.d/init.d
 install -m755 ./build/rpm/httpd.init \
-	$RPM_BUILD_ROOT/etc/rc.d/init.d/httpd
+	%{buildroot}/etc/rc.d/init.d/httpd
 install -m755 ./build/rpm/htcacheclean.init \
-        $RPM_BUILD_ROOT/etc/rc.d/init.d/htcacheclean
+	%{buildroot}/etc/rc.d/init.d/htcacheclean
 
 # install log rotation stuff
-mkdir -p $RPM_BUILD_ROOT/etc/logrotate.d
+mkdir -p %{buildroot}/etc/logrotate.d
 install -m644 ./build/rpm/httpd.logrotate \
-	$RPM_BUILD_ROOT/etc/logrotate.d/httpd
+	%{buildroot}/etc/logrotate.d/httpd
 
 # Remove unpackaged files
-rm -rf $RPM_BUILD_ROOT%{_libdir}/httpd/modules/*.exp \
-       $RPM_BUILD_ROOT%{contentdir}/htdocs/* \
-       $RPM_BUILD_ROOT%{contentdir}/cgi-bin/* 
+rm -rf %{buildroot}%{_libdir}/httpd/modules/*.exp \
+	%{buildroot}%{contentdir}/htdocs/* \
+	%{buildroot}%{contentdir}/cgi-bin/* 
 
 # Make suexec a+rw so it can be stripped.  %%files lists real permissions
-chmod 755 $RPM_BUILD_ROOT%{_sbindir}/suexec
+chmod 755 %{buildroot}%{_sbindir}/suexec
 
 %pre
 # Add the "apache" user
@@ -207,9 +217,9 @@ chmod 755 $RPM_BUILD_ROOT%{_sbindir}/suexec
 %preun
 if [ $1 = 0 ]; then
 	/sbin/service httpd stop > /dev/null 2>&1
-        /sbin/service htcacheclean stop > /dev/null 2>&1
+	/sbin/service htcacheclean stop > /dev/null 2>&1
 	/sbin/chkconfig --del httpd
-        /sbin/chkconfig --del htcacheclean
+	/sbin/chkconfig --del htcacheclean
 fi
 
 %post -n mod_ssl
@@ -238,7 +248,7 @@ fi
 
 %check
 # Check the built modules are all PIC
-if readelf -d $RPM_BUILD_ROOT%{_libdir}/httpd/modules/*.so | grep TEXTREL; then
+if readelf -d %{buildroot}%{_libdir}/httpd/modules/*.so | grep TEXTREL; then
    : modules contain non-relocatable code
    exit 1
 fi
@@ -254,7 +264,7 @@ for mpm in %{mpms}; do
 done
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

@@ -46,16 +46,16 @@
 ################################################################################
 
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
-%global pkgname	phpMyAdmin
+%global pkgname phpMyAdmin
 
 # If php-mcrypt is available, it should be preferred. Otherwise the pure
 # phpseclib alternative alternative can be used externally or internally.
-%global mcrypt	1
-%global seclib	0
+%global mcrypt  1
+%global seclib  0
 
 # Having below mentioned separate projects externally or only internally?
-%global gettext	1
-%global tcpdf	1
+%global gettext 1
+%global tcpdf   1
 
 ################################################################################
 
@@ -579,7 +579,7 @@ sed -e "/'blowfish_secret'/s/MUSTBECHANGEDONINSTALL/$RANDOM$RANDOM$RANDOM$RANDOM
 - Moved doc files to the doc dir
 
 * Tue Apr 04 2006 Mike McGrath <imlinux@gmail.com> 2.8.0.2-2
-- Moved everything to %{_datadir}
+- Moved everything to datadir
 - Moved config file to /etc/
 - Used description from phpMyAdmin project info
 

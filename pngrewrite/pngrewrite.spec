@@ -64,10 +64,11 @@ post-processing PNG files before putting them on a web site.
 %setup -qcn %{name}-%{version}
 
 %build
-rm -rf %{buildroot}
 %{__make} %{?_smp_mflags}
 
 %install
+rm -rf %{buildroot}
+
 install -dm 755 %{buildroot}%{_bindir}
 install -pm 755 %{name} %{buildroot}%{_bindir}/%{name}
 

@@ -33,9 +33,6 @@
 %define mysql_sock     %(mysql_config --socket 2>/dev/null || echo /var/lib/mysql/mysql.sock)
 %define mysql_config   %{_root_libdir}/mysql/mysql_config
 
-# Regression (disable if tests takes a long time and you not want to wait)
-%{!?runselftest: %{expand: %%define runselftest 0}}
-
 # Enable systemd
 %if 0%{?fedora} >= 14 || 0%{?rhel} >= 7
 %define with_systemd 1
@@ -208,9 +205,12 @@ Group:            Development/Languages
 Summary:          Command-line interface for PHP
 
 Requires:         %{name}-common%{?_isa} = %{version}-%{release}
-Provides:         php-cgi = %{version}-%{release}, php-cgi%{?_isa} = %{version}-%{release}
-Provides:         php-pcntl, php-pcntl%{?_isa}
-Provides:         php-readline, php-readline%{?_isa}
+Provides:         php-cgi = %{version}-%{release}
+Provides:         php-cgi%{?_isa} = %{version}-%{release}
+Provides:         php-pcntl = %{version}-%{release}
+Provides:         php-pcntl%{?_isa} = %{version}-%{release}
+Provides:         php-readline = %{version}-%{release}
+Provides:         php-readline%{?_isa} = %{version}-%{release}
 Provides:         php-cli = %{version}-%{release}
 Provides:         php-cli%{?_isa} = %{version}-%{release}
 
@@ -284,49 +284,124 @@ License:          PHP and BSD and ASL 1.0
 Provides:         php(api) = %{apiver}%{isasuffix}
 Provides:         php(zend-abi) = %{zendver}%{isasuffix}
 
-Provides:         %{name}-bz2, %{name}-bz2%{?_isa}
-Provides:         %{name}-calendar, %{name}-calendar%{?_isa}
-Provides:         %{name}-core = %{version}, %{name}-core%{?_isa} = %{version}
-Provides:         %{name}-ctype, %{name}-ctype%{?_isa}
-Provides:         %{name}-curl, %{name}-curl%{?_isa}
-Provides:         %{name}-date, %{name}-date%{?_isa}
-Provides:         %{name}-ereg, %{name}-ereg%{?_isa}
-Provides:         %{name}-exif, %{name}-exif%{?_isa}
-Provides:         %{name}-fileinfo, %{name}-fileinfo%{?_isa}
-Provides:         %{name}-pecl-Fileinfo = %{fileinfover}, %{name}-pecl-Fileinfo%{?_isa} = %{fileinfover}
-Provides:         %{name}-pecl(Fileinfo) = %{fileinfover}, %{name}-pecl(Fileinfo)%{?_isa} = %{fileinfover}
-Provides:         %{name}-filter, %{name}-filter%{?_isa}
-Provides:         %{name}-ftp, %{name}-ftp%{?_isa}
-Provides:         %{name}-gettext, %{name}-gettext%{?_isa}
-Provides:         %{name}-gmp, %{name}-gmp%{?_isa}
-Provides:         %{name}-hash, %{name}-hash%{?_isa}
-Provides:         %{name}-mhash = %{version}, %{name}-mhash%{?_isa} = %{version}
-Provides:         %{name}-iconv, %{name}-iconv%{?_isa}
-Provides:         %{name}-json, %{name}-json%{?_isa}
-Provides:         %{name}-pecl-json = %{jsonver}, %{name}-pecl-json%{?_isa} = %{jsonver}
-Provides:         %{name}-pecl(json) = %{jsonver}, %{name}-pecl(json)%{?_isa} = %{jsonver}
-Provides:         %{name}-libxml, %{name}-libxml%{?_isa}
-Provides:         %{name}-openssl, %{name}-openssl%{?_isa}
-Provides:         %{name}-pecl-phar = %{pharver}, %{name}-pecl-phar%{?_isa} = %{pharver}
-Provides:         %{name}-pecl(phar) = %{pharver}, %{name}-pecl(phar)%{?_isa} = %{pharver}
-Provides:         %{name}-phar, %{name}-phar%{?_isa}
-Provides:         %{name}-pcre, %{name}-pcre%{?_isa}
-Provides:         %{name}-reflection, %{name}-reflection%{?_isa}
-Provides:         %{name}-session, %{name}-session%{?_isa}
-Provides:         %{name}-shmop, %{name}-shmop%{?_isa}
-Provides:         %{name}-simplexml, %{name}-simplexml%{?_isa}
-Provides:         %{name}-sockets, %{name}-sockets%{?_isa}
-Provides:         %{name}-spl, %{name}-spl%{?_isa}
-Provides:         %{name}-standard = %{version}, %{name}-standard%{?_isa} = %{version}
-Provides:         %{name}-tokenizer, %{name}-tokenizer%{?_isa}
+Provides:         %{name}-bz2 = %{version}
+Provides:         %{name}-bz2%{?_isa} = %{version}
+
+Provides:         %{name}-calendar = %{version}
+Provides:         %{name}-calendar%{?_isa} = %{version}
+
+Provides:         %{name}-core = %{version}
+Provides:         %{name}-core%{?_isa} = %{version}
+
+Provides:         %{name}-ctype = %{version}
+Provides:         %{name}-ctype%{?_isa} = %{version}
+
+Provides:         %{name}-curl = %{version}
+Provides:         %{name}-curl%{?_isa} = %{version}
+
+Provides:         %{name}-date = %{version}
+Provides:         %{name}-date%{?_isa} = %{version}
+
+Provides:         %{name}-ereg = %{version}
+Provides:         %{name}-ereg%{?_isa} = %{version}
+
+Provides:         %{name}-exif = %{version}
+Provides:         %{name}-exif%{?_isa} = %{version}
+
+Provides:         %{name}-fileinfo = %{version}
+Provides:         %{name}-fileinfo%{?_isa} = %{version}
+
+Provides:         %{name}-pecl-Fileinfo = %{fileinfover}
+Provides:         %{name}-pecl-Fileinfo%{?_isa} = %{fileinfover}
+
+Provides:         %{name}-pecl(Fileinfo) = %{fileinfover}
+Provides:         %{name}-pecl(Fileinfo)%{?_isa} = %{fileinfover}
+
+Provides:         %{name}-filter = %{version}
+Provides:         %{name}-filter%{?_isa} = %{version}
+
+Provides:         %{name}-ftp = %{version}
+Provides:         %{name}-ftp%{?_isa} = %{version}
+
+Provides:         %{name}-gettext = %{version}
+Provides:         %{name}-gettext%{?_isa} = %{version}
+
+Provides:         %{name}-gmp = %{version}
+Provides:         %{name}-gmp%{?_isa} = %{version}
+
+Provides:         %{name}-hash = %{version}
+Provides:         %{name}-hash%{?_isa} = %{version}
+
+Provides:         %{name}-mhash = %{version}
+Provides:         %{name}-mhash%{?_isa} = %{version}
+
+Provides:         %{name}-iconv = %{version}
+Provides:         %{name}-iconv%{?_isa} = %{version}
+
+Provides:         %{name}-json = %{version}
+Provides:         %{name}-json%{?_isa} = %{version}
+
+Provides:         %{name}-pecl-json = %{jsonver}
+Provides:         %{name}-pecl-json%{?_isa} = %{jsonver}
+
+Provides:         %{name}-pecl(json) = %{jsonver}
+Provides:         %{name}-pecl(json)%{?_isa} = %{jsonver}
+
+Provides:         %{name}-libxml = %{version}
+Provides:         %{name}-libxml%{?_isa} = %{version}
+
+Provides:         %{name}-openssl = %{version}
+Provides:         %{name}-openssl%{?_isa} = %{version}
+
+Provides:         %{name}-pecl-phar = %{pharver}
+Provides:         %{name}-pecl-phar%{?_isa} = %{pharver}
+
+Provides:         %{name}-pecl(phar) = %{pharver}
+Provides:         %{name}-pecl(phar)%{?_isa} = %{pharver}
+
+Provides:         %{name}-phar = %{version}
+Provides:         %{name}-phar%{?_isa} = %{version}
+
+Provides:         %{name}-pcre = %{version}
+Provides:         %{name}-pcre%{?_isa} = %{version}
+
+Provides:         %{name}-reflection = %{version}
+Provides:         %{name}-reflection%{?_isa} = %{version}
+
+Provides:         %{name}-session = %{version}
+Provides:         %{name}-session%{?_isa} = %{version}
+
+Provides:         %{name}-shmop = %{version}
+Provides:         %{name}-shmop%{?_isa} = %{version}
+
+Provides:         %{name}-simplexml = %{version}
+Provides:         %{name}-simplexml%{?_isa} = %{version}
+
+Provides:         %{name}-sockets = %{version}
+Provides:         %{name}-sockets%{?_isa} = %{version}
+
+Provides:         %{name}-spl = %{version}
+Provides:         %{name}-spl%{?_isa} = %{version}
+
+Provides:         %{name}-standard = %{version}
+Provides:         %{name}-standard%{?_isa} = %{version}
+
+Provides:         %{name}-tokenizer = %{version}
+Provides:         %{name}-tokenizer%{?_isa} = %{version}
 
 %if %{with_zip}
-Provides:         %{name}-zip, %{name}-zip%{?_isa}
-Provides:         %{name}-pecl-zip = %{zipver}, %{name}-pecl-zip%{?_isa} = %{zipver}
-Provides:         %{name}-pecl(zip) = %{zipver}, %{name}-pecl(zip)%{?_isa} = %{zipver}
+Provides:         %{name}-zip = %{version}
+Provides:         %{name}-zip%{?_isa} = %{version}
+
+Provides:         %{name}-pecl-zip = %{zipver}
+Provides:         %{name}-pecl-zip%{?_isa} = %{zipver}
+
+Provides:         %{name}-pecl(zip) = %{zipver}
+Provides:         %{name}-pecl(zip)%{?_isa} = %{zipver}
 %endif
 
-Provides:         %{name}-zlib, %{name}-zlib%{?_isa}
+Provides:         %{name}-zlib = %{version}
+Provides:         %{name}-zlib%{?_isa} = %{version}
 
 %description common
 The %{name}-common package contains files used by both the %{name}
@@ -409,18 +484,22 @@ Provides:         php-pdo-abi = %{pdover}%{isasuffix}
 Provides:         php(pdo-abi) = %{pdover}%{isasuffix}
 
 %if 0%{?fedora} >= 11 || 0%{?rhel} >= 6
-Provides:         php-sqlite3, php-sqlite3%{?_isa}
+Provides:         php-sqlite3 = %{version}
+Provides:         php-sqlite3%{?_isa} = %{version}
 %endif
 
-Provides:         php-pdo_sqlite, php-pdo_sqlite3%{?_isa}
+Provides:         php-pdo_sqlite = %{version}
+Provides:         php-pdo_sqlite3%{?_isa} = %{version}
 Provides:         php-pdo = %{version}-%{release}
 Provides:         php-pdo%{?_isa} = %{version}-%{release}
 
 %if 0%{?fedora} >= 11 || 0%{?rhel} >= 6
-Provides:         %{name}-sqlite3, %{name}-sqlite3%{?_isa}
+Provides:         %{name}-sqlite3 = %{version}
+Provides:         %{name}-sqlite3%{?_isa} = %{version}
 %endif
 
-Provides:         %{name}-pdo_sqlite, %{name}-pdo_sqlite%{?_isa}
+Provides:         %{name}-pdo_sqlite = %{version}
+Provides:         %{name}-pdo_sqlite%{?_isa} = %{version}
 
 %description pdo
 The %{name}-pdo package contains a dynamic shared object that will add
@@ -448,16 +527,18 @@ BuildRequires:    mysql-devel < 5.1
 
 Requires:         %{name}-pdo%{?_isa}
 
-Provides:         php_database
+Provides:         php_database = %{version}-%{release}
 Provides:         php-mysqli = %{version}-%{release}
 Provides:         php-mysqli%{?_isa} = %{version}-%{release}
-Provides:         php-pdo_mysql, php-pdo_mysql%{?_isa}
+Provides:         php-pdo_mysql = %{version}-%{release}
+Provides:         php-pdo_mysql%{?_isa} = %{version}-%{release}
 Provides:         php-mysql = %{version}-%{release}
 Provides:         php-mysql%{?_isa} = %{version}-%{release}
 
 Provides:         %{name}-mysqli = %{version}-%{release}
 Provides:         %{name}-mysqli%{?_isa} = %{version}-%{release}
-Provides:         %{name}-pdo_mysql, php%{name}pdo_mysql%{?_isa}
+Provides:         %{name}-pdo_mysql = %{version}-%{release}
+Provides:         php%{name}pdo_mysql%{?_isa} = %{version}-%{release}
 
 Conflicts:        %{name}-mysqlnd
 
@@ -478,20 +559,28 @@ License:          PHP
 
 Requires:         %{name}-pdo%{?_isa} = %{version}-%{release}
 
-Provides:         php_database
+Provides:         php_database = %{version}-%{release}
+
 Provides:         php-mysql = %{version}-%{release}
 Provides:         php-mysql%{?_isa} = %{version}-%{release}
+
 Provides:         php-mysqli = %{version}-%{release}
 Provides:         php-mysqli%{?_isa} = %{version}-%{release}
-Provides:         php-pdo_mysql, php-pdo_mysql%{?_isa}
+
+Provides:         php-pdo_mysql = %{version}-%{release}
+Provides:         php-pdo_mysql%{?_isa} = %{version}-%{release}
+
 Provides:         php-mysqlnd = %{version}-%{release}
 Provides:         php-mysqlnd%{?_isa} = %{version}-%{release}
 
 Provides:         %{name}-mysql = %{version}-%{release}
 Provides:         %{name}-mysql%{?_isa} = %{version}-%{release}
+
 Provides:         %{name}-mysqli = %{version}-%{release}
 Provides:         %{name}-mysqli%{?_isa} = %{version}-%{release}
-Provides:         %{name}-pdo_mysql, %{name}-pdo_mysql%{?_isa}
+
+Provides:         %{name}-pdo_mysql = %{version}-%{release}
+Provides:         %{name}-pdo_mysql%{?_isa} = %{version}-%{release}
 
 %if ! %{with_libmysql}
 Obsoletes:        %{name}-mysql < %{version}-%{release}
@@ -515,12 +604,16 @@ BuildRequires:    krb5-devel, openssl-devel, postgresql-devel
 
 Requires:         %{name}-pdo%{?_isa} = %{version}-%{release}
 
-Provides:         php_database
-Provides:         php-pdo_pgsql, php-pdo_pgsql%{?_isa}
+Provides:         php_database = %{version}-%{release}
+
+Provides:         php-pdo_pgsql = %{version}-%{release}
+Provides:         php-pdo_pgsql%{?_isa} = %{version}-%{release}
+
 Provides:         php-pgsql = %{version}-%{release}
 Provides:         php-pgsql%{?_isa} = %{version}-%{release}
 
-Provides:         %{name}-pdo_pgsql, %{name}-pdo_pgsql%{?_isa}
+Provides:         %{name}-pdo_pgsql = %{version}-%{release}
+Provides:         %{name}-pdo_pgsql%{?_isa} = %{version}-%{release}
 
 %description pgsql
 The %{name}-pgsql add PostgreSQL database support to PHP.
@@ -539,17 +632,25 @@ License:          PHP
 
 Requires:         %{name}-common%{?_isa} = %{version}-%{release}
 
-Provides:         php-posix, php-posix%{?_isa}
-Provides:         php-sysvsem, php-sysvsem%{?_isa}
-Provides:         php-sysvshm, php-sysvshm%{?_isa}
-Provides:         php-sysvmsg, php-sysvmsg%{?_isa}
+Provides:         php-posix = %{version}-%{release}
+Provides:         php-posix%{?_isa} = %{version}-%{release}
+Provides:         php-sysvsem = %{version}-%{release}
+Provides:         php-sysvsem%{?_isa} = %{version}-%{release}
+Provides:         php-sysvshm = %{version}-%{release}
+Provides:         php-sysvshm%{?_isa} = %{version}-%{release}
+Provides:         php-sysvmsg = %{version}-%{release}
+Provides:         php-sysvmsg%{?_isa} = %{version}-%{release}
 Provides:         php-process = %{version}-%{release}
 Provides:         php-process%{?_isa} = %{version}-%{release}
 
-Provides:         %{name}-posix, %{name}-posix%{?_isa}
-Provides:         %{name}-sysvsem, %{name}-sysvsem%{?_isa}
-Provides:         %{name}-sysvshm, %{name}-sysvshm%{?_isa}
-Provides:         %{name}-sysvmsg, %{name}-sysvmsg%{?_isa}
+Provides:         %{name}-posix = %{version}-%{release}
+Provides:         %{name}-posix%{?_isa} = %{version}-%{release}
+Provides:         %{name}-sysvsem = %{version}-%{release}
+Provides:         %{name}-sysvsem%{?_isa} = %{version}-%{release}
+Provides:         %{name}-sysvshm = %{version}-%{release}
+Provides:         %{name}-sysvshm%{?_isa} = %{version}-%{release}
+Provides:         %{name}-sysvmsg = %{version}-%{release}
+Provides:         %{name}-sysvmsg%{?_isa} = %{version}-%{release}
 
 %description process
 The %{name}-process package contains dynamic shared objects which add
@@ -567,12 +668,14 @@ Requires:         %{name}-pdo%{?_isa} = %{version}-%{release}
 
 BuildRequires:    unixODBC-devel
 
-Provides:         php_database
-Provides:         php-pdo_odbc, php-pdo_odbc%{?_isa}
+Provides:         php_database = %{version}-%{release}
+Provides:         php-pdo_odbc = %{version}-%{release}
+Provides:         php-pdo_odbc%{?_isa} = %{version}-%{release}
 Provides:         php-odbc = %{version}-%{release}
 Provides:         php-odbc%{?_isa} = %{version}-%{release}
 
-Provides:         %{name}-pdo_odbc, %{name}-pdo_odbc%{?_isa}
+Provides:         %{name}-pdo_odbc = %{version}-%{release}
+Provides:         %{name}-pdo_odbc%{?_isa} = %{version}-%{release}
 
 %description odbc
 The %{name}-odbc package contains a dynamic shared object that will add
@@ -612,16 +715,18 @@ BuildRequires:    firebird-devel
 
 Requires:         %{name}-pdo%{?_isa} = %{version}-%{release}
 
-Provides:         php_database
+Provides:         php_database = %{version}-%{release}
 Provides:         php-firebird = %{version}-%{release}
 Provides:         php-firebird%{?_isa} = %{version}-%{release}
-Provides:         php-pdo_firebird, php-pdo_firebird%{?_isa}
+Provides:         php-pdo_firebird = %{version}-%{release}
+Provides:         php-pdo_firebird%{?_isa} = %{version}-%{release}
 Provides:         php-interbase = %{version}-%{release}
 Provides:         php-interbase%{?_isa} = %{version}-%{release}
 
 Provides:         %{name}-firebird = %{version}-%{release}
 Provides:         %{name}-firebird%{?_isa} = %{version}-%{release}
-Provides:         %{name}-pdo_firebird, %{name}-pdo_firebird%{?_isa}
+Provides:         %{name}-pdo_firebird = %{version}-%{release}
+Provides:         %{name}-pdo_firebird%{?_isa} = %{version}-%{release}
 
 %description interbase
 The %{name}-interbase package contains a dynamic shared object that will add
@@ -667,21 +772,33 @@ BuildRequires:    libxslt-devel >= 1.0.18-1, libxml2-devel >= 2.4.14-1
 
 Requires:         %{name}-common%{?_isa} = %{version}-%{release}
 
-Provides:         php-dom, php-dom%{?_isa}
-Provides:         php-xsl, php-xsl%{?_isa}
-Provides:         php-domxml, php-domxml%{?_isa}
-Provides:         php-wddx, php-wddx%{?_isa}
-Provides:         php-xmlreader, php-xmlreader%{?_isa}
-Provides:         php-xmlwriter, php-xmlwriter%{?_isa}
+Provides:         php-dom = %{version}-%{release}
+Provides:         php-dom%{?_isa} = %{version}-%{release}
+Provides:         php-xsl = %{version}-%{release}
+Provides:         php-xsl%{?_isa} = %{version}-%{release}
+Provides:         php-domxml = %{version}-%{release}
+Provides:         php-domxml%{?_isa} = %{version}-%{release}
+Provides:         php-wddx = %{version}-%{release}
+Provides:         php-wddx%{?_isa} = %{version}-%{release}
+Provides:         php-xmlreader = %{version}-%{release}
+Provides:         php-xmlreader%{?_isa} = %{version}-%{release}
+Provides:         php-xmlwriter = %{version}-%{release}
+Provides:         php-xmlwriter%{?_isa} = %{version}-%{release}
 Provides:         php-xml = %{version}-%{release}
 Provides:         php-xml%{?_isa} = %{version}-%{release}
 
-Provides:         %{name}-dom, %{name}-dom%{?_isa}
-Provides:         %{name}-xsl, %{name}-xsl%{?_isa}
-Provides:         %{name}-domxml, %{name}-domxml%{?_isa}
-Provides:         %{name}-wddx, %{name}-wddx%{?_isa}
-Provides:         %{name}-xmlreader, %{name}-xmlreader%{?_isa}
-Provides:         %{name}-xmlwriter, %{name}-xmlwriter%{?_isa}
+Provides:         %{name}-dom = %{version}-%{release}
+Provides:         %{name}-dom%{?_isa} = %{version}-%{release}
+Provides:         %{name}-xsl = %{version}-%{release}
+Provides:         %{name}-xsl%{?_isa} = %{version}-%{release}
+Provides:         %{name}-domxml = %{version}-%{release}
+Provides:         %{name}-domxml%{?_isa} = %{version}-%{release}
+Provides:         %{name}-wddx = %{version}-%{release}
+Provides:         %{name}-wddx%{?_isa} = %{version}-%{release}
+Provides:         %{name}-xmlreader = %{version}-%{release}
+Provides:         %{name}-xmlreader%{?_isa} = %{version}-%{release}
+Provides:         %{name}-xmlwriter = %{version}-%{release}
+Provides:         %{name}-xmlwriter%{?_isa} = %{version}-%{release}
 
 %description xml
 The %{name}-xml package contains dynamic shared objects which add support
@@ -819,12 +936,14 @@ Requires:         %{name}-pdo%{?_isa} = %{version}-%{release}
 
 BuildRequires:    freetds-devel
 
-Provides:         php_database
-Provides:         php-pdo_dblib, php-pdo_dblib%{?_isa}
+Provides:         php_database = %{version}-%{release}
+Provides:         php-pdo_dblib = %{version}-%{release}
+Provides:         php-pdo_dblib%{?_isa} = %{version}-%{release}
 Provides:         php-mssql = %{version}-%{release}
 Provides:         php-mssql%{?_isa} = %{version}-%{release}
 
-Provides:         %{name}-pdo_dblib, %{name}-pdo_dblib%{?_isa}
+Provides:         %{name}-pdo_dblib = %{version}-%{release}
+Provides:         %{name}-pdo_dblib%{?_isa} = %{version}-%{release}
 
 %description mssql
 The %{name}-mssql package contains a dynamic shared object that will
@@ -1024,7 +1143,7 @@ if test "x${vzend}" != "x%{zendver}"; then
 fi
 
 # Safety check for PDO ABI version change
-vpdo=`sed -n '/#define PDO_DRIVER_API/{s/.*[ 	]//;p}' ext/pdo/php_pdo_driver.h`
+vpdo=`sed -n '/#define PDO_DRIVER_API/{s/.*[ \t]//;p}' ext/pdo/php_pdo_driver.h`
 if test "x${vpdo}" != "x%{pdover}"; then
    : Error: Upstream PDO ABI version is now ${vpdo}, expecting %{pdover}.
    : Update the pdover macro and rebuild.
@@ -1468,8 +1587,8 @@ sed -e 's:/var/lib:%{_localstatedir}/lib:' \
 mv %{buildroot}%{_sysconfdir}/php-fpm.conf.default .
 %if %{with_tmpfiles}
 # tmpfiles.d
-install -m 755 -d %{buildroot}%{_prefix}/lib/tmpfiles.d
-install -m 644 php-fpm.tmpfiles %{buildroot}%{_prefix}/lib/tmpfiles.d/php-fpm.conf
+install -m 755 -d %{buildroot}%{_sysconfdir}/tmpfiles.d
+install -m 644 php-fpm.tmpfiles %{buildroot}%{_sysconfdir}/tmpfiles.d/php-fpm.conf
 %endif
 %if %{with_systemd}
 sed -e "s/daemonise = yes/daemonise = no/" \
@@ -1680,6 +1799,7 @@ fi
 ################################################################################
 
 %files
+%defattr(-,root,root,-)
 %{_httpd_moddir}/libphp5.so
 %if %{with_zts}
 %{_httpd_moddir}/libphp5-zts.so
@@ -1693,6 +1813,7 @@ fi
 %{_httpd_contentdir}/icons/php.gif
 
 %files common -f files.common
+%defattr(-,root,root,-)
 %doc CODING_STANDARDS CREDITS EXTENSIONS LICENSE NEWS README*
 %doc Zend/ZEND_* TSRM_LICENSE regex_COPYRIGHT
 %doc libmagic_LICENSE
@@ -1712,6 +1833,7 @@ fi
 %dir %{_datadir}/php
 
 %files cli
+%defattr(-,root,root,-)
 %{_bindir}/php
 %{_bindir}/php-cgi
 %{_bindir}/phar.phar
@@ -1726,12 +1848,14 @@ fi
 
 %if %{with_phpdbg}
 %files phpdbg
+%defattr(-,root,root,-)
 %{_bindir}/phpdbg
 %{_mandir}/man1/phpdbg.1*
 %endif
 
 %if %{with_fpm}
 %files fpm
+%defattr(-,root,root,-)
 %doc php-fpm.conf.default
 %doc fpm_LICENSE
 %config(noreplace) %{_sysconfdir}/php-fpm.conf
@@ -1740,7 +1864,7 @@ fi
 %config(noreplace) %{_sysconfdir}/sysconfig/php-fpm
 
 %if %{with_tmpfiles}
-%{_prefix}/lib/tmpfiles.d/php-fpm.conf
+%{_sysconfdir}/tmpfiles.d/php-fpm.conf
 %endif
 %if %{with_systemd}
 %{_unitdir}/php-fpm.service
@@ -1758,6 +1882,7 @@ fi
 %endif
 
 %files devel
+%defattr(-,root,root,-)
 %{_bindir}/php-config
 %{_includedir}/php
 %{_libdir}/php/build
@@ -1771,10 +1896,12 @@ fi
 %{_mandir}/man1/php-config.1*
 
 %files embedded
+%defattr(-,root,root,-)
 %{_libdir}/libphp5.so
 %{_libdir}/libphp5-%{embed_version}.so
 
 %files opcache
+%defattr(-,root,root,-)
 %attr(755,root,root) %{_libdir}/php/modules/opcache.so
 %config(noreplace) %{_sysconfdir}/php.d/opcache.ini
 %config(noreplace) %{_sysconfdir}/php.d/opcache-default.blacklist
@@ -1803,17 +1930,20 @@ fi
 %files xmlrpc -f files.xmlrpc
 
 %files mbstring -f files.mbstring
+%defattr(-,root,root,-)
 %doc libmbfl_LICENSE
 %doc oniguruma_COPYING
 %doc ucgendat_LICENSE
 
 %files gd -f files.gd
+%defattr(-,root,root,-)
 %doc libgd_README
 %doc libgd_COPYING
 
 %files soap -f files.soap
 
 %files bcmath -f files.bcmath
+%defattr(-,root,root,-)
 %doc libbcmath_COPYING
 
 %files dba -f files.dba

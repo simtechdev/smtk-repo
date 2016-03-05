@@ -43,7 +43,7 @@
 %define service_name         %{name}
 %define service_home         %{_cachedir}/%{service_name}
 
-%define open_ssl_ver         1.0.2f
+%define open_ssl_ver         1.0.2g
 %define psol_ver             1.9.32.13
 %define pagespeed_ver        %{psol_ver}-beta
 %define pagespeed_fullver    release-%{pagespeed_ver}
@@ -57,7 +57,7 @@
 Summary:              Rocket-fast web server
 Name:                 nginx
 Version:              1.9.10
-Release:              1%{?dist}
+Release:              2%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
 Vendor:               Nginx / Google / CloudFlare
@@ -456,26 +456,29 @@ fi
 ###############################################################################
 
 %changelog
-* Wed Feb 17 2016 Gleb <yum@gongled.me> - 1.9.10-1
+* Tue Mar 01 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-2
+- OpenSSL updated to 1.0.2g 
+
+* Wed Feb 17 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-1
 - Dependencies updated to latest versions 
 
-* Wed Jan 27 2016 Gleb <yum@gongled.me> - 1.9.10-0
+* Wed Jan 27 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-0
 - Nginx updated to 1.9.10
 
-* Sun Dec 13 2015 Gleb <yum@gongled.me> - 1.9.9-0
+* Sun Dec 13 2015 Gleb Goncharov <yum@gongled.me> - 1.9.9-0
 - Nginx updated to 1.9.9
 
-* Fri Dec 04 2015 Gleb <yum@gongled.me> - 1.9.7-0
+* Fri Dec 04 2015 Gleb Goncharov <yum@gongled.me> - 1.9.7-0
 - Nginx updated to 1.9.7 
 
-* Thu Nov 19 2015 Gleb <yum@gongled.me> - 1.9.6-1
+* Thu Nov 19 2015 Gleb Goncharov <yum@gongled.me> - 1.9.6-1
 - Increase autoindex dir length. 
 
-* Mon Nov 16 2015 Gleb <yum@gongled.me> - 1.9.6-0
+* Mon Nov 16 2015 Gleb Goncharov <yum@gongled.me> - 1.9.6-0
 - Nginx updated to 1.9.6 
 
-* Sun Aug 02 2015 Gleb <yum@gongled.me> - 1.9.3-1
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 1.9.3-1
 - Add additional configurations and preferences.
 
-* Sun Aug 02 2015 Gleb <yum@gongled.me> - 1.9.3-0
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 1.9.3-0
 - Nginx updated to 1.9.3

@@ -61,11 +61,14 @@ Bundle of optimization tools for
 
 ################################################################################
 
+%prep
+
 %build
-%{__rm} -rf %{buildroot}
 touch README
 
 %install
+%{__rm} -rf %{buildroot}
+
 install -dm 755 %{buildroot}%{_loc_datarootdir}/%{name}
 install -pm 644 README %{buildroot}%{_loc_datarootdir}/%{name}/README
 

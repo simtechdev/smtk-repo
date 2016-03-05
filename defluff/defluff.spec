@@ -72,9 +72,10 @@ squeeze out a few more bits.
 %setup -qcn %{name}-%{version}
 
 %build
-rm -rf %{buildroot}
 
 %install
+rm -rf %{buildroot}
+
 install -dm 755 %{buildroot}%{_bindir}
 install -pm 755 %{name} %{buildroot}%{_bindir}/
 

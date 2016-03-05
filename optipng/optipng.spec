@@ -66,14 +66,12 @@ and corrections.
 ################################################################################
 
 %prep
-%setup
+%setup -q
 
 %build
-%{__rm} -rf %{buildroot}
-
-./configure --prefix=%{_prefix} \
-    --exec-prefix=%{_exec_prefix} \
-    --with-system-zlib
+%{configure} --prefix=%{_prefix} \
+             --exec-prefix=%{_exec_prefix} \
+             --with-system-zlib
 
 %{__make} %{?_smp_mflags}
 

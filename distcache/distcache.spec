@@ -6,12 +6,15 @@ Release: 23
 License: LGPLv2
 Group: System Environment/Daemons
 URL: http://www.distcache.org/
+
 Source0: http://downloads.sourceforge.net/distcache/%{name}-%{version}.tar.bz2
+Source1: dc_server.init
+Source2: dc_client.init
+
 Patch0: distcache-1.4.5-setuid.patch
 Patch1: distcache-1.4.5-libdeps.patch
 Patch2: distcache-1.4.5-limits.patch
-Source1: dc_server.init
-Source2: dc_client.init
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: automake >= 1.7, autoconf >= 2.50, libtool, openssl-devel
 Requires(post): /sbin/chkconfig, /sbin/ldconfig, shadow-utils
@@ -49,21 +52,21 @@ popd
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-make -C ssl install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+make -C ssl install DESTDIR=%{buildroot}
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
-install -p -m 755 $RPM_SOURCE_DIR/dc_server.init \
-        $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dc_server
-install -p -m 755 $RPM_SOURCE_DIR/dc_client.init \
-        $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/dc_client
+mkdir -p %{buildroot}%{_sysconfdir}/rc.d/init.d
+install -p -m 755 %{SOURCE1} \
+        %{buildroot}%{_sysconfdir}/rc.d/init.d/dc_server
+install -p -m 755 %{SOURCE2} \
+        %{buildroot}%{_sysconfdir}/rc.d/init.d/dc_client
 
-mkdir -p $RPM_BUILD_ROOT%{_sbindir}
+mkdir -p %{buildroot}%{_sbindir}
 
 # Unpackaged files
-rm -f $RPM_BUILD_ROOT%{_bindir}/{nal_test,piper} \
-      $RPM_BUILD_ROOT%{_libdir}/lib*.la
+rm -f %{buildroot}%{_bindir}/{nal_test,piper} \
+      %{buildroot}%{_libdir}/lib*.la
 
 %post
 /sbin/chkconfig --add dc_server
@@ -84,7 +87,7 @@ fi
 %postun -p /sbin/ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

@@ -67,12 +67,13 @@ will degrade your images, its goal is to degrade them as little as possible.
 %setup -qn %{name}-%{version}
 
 %build
-rm -rf %{buildroot}
 pushd scripts
 %{__make} %{?_smp_mflags}
 popd
 
 %install
+rm -rf %{buildroot}
+
 install -dm 755 %{buildroot}%{_bindir}
 install -pm 755 %{short_name} %{buildroot}%{_bindir}/%{short_name}
 

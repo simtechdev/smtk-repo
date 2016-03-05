@@ -74,10 +74,9 @@ than other optimizers by 5–10%.
 %setup -qn %{name}-%{release_ver}-linux-static
 
 %build
-rm -rf %{buildroot}
 
 %install
-%{__tar} xvfz %{SOURCE0}
+rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_bindir}
 
