@@ -2,7 +2,7 @@
 
 Spec files and patches for GONGLED repository. It works on CentOS/RHEL 6.x.
 
-#### RPMLint Status
+## RPMLint Status
 
 | Repository | Status |
 |------------|--------|
