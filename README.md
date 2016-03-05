@@ -2,12 +2,12 @@
 
 Spec files and patches for GONGLED repository. It works on CentOS/RHEL 6.x.
 
-## RPMLint Status
+## Status
 
 | Repository | Status |
 |------------|--------|
-| Stable | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(stable))](https://jenkins.gongled.me/job/gongled-repo%20(stable)/) | 
-| Unstable | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(unstable))](https://jenkins.gongled.me/job/gongled-repo%20(unstable)) | 
+| Release | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(stable))](https://jenkins.gongled.me/job/gongled-repo%20(stable)/) | 
+| Testing | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(unstable))](https://jenkins.gongled.me/job/gongled-repo%20(unstable)) | 
 
 ## Quick start
 
