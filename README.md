@@ -6,8 +6,8 @@ Spec files and patches for GONGLED repository. It works on CentOS/RHEL 6.x.
 
 | Repository | Status |
 |------------|--------|
-| Release | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(stable))](https://jenkins.gongled.me/job/gongled-repo%20(stable)/) | 
-| Testing | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(unstable))](https://jenkins.gongled.me/job/gongled-repo%20(unstable)) | 
+| [Release](https://release.yum.gongled.me/6/SRPMS/repoview/) | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(stable))](https://jenkins.gongled.me/job/gongled-repo%20(stable)/) | 
+| [Testing](https://testing.yum.gongled.me/6/SRPMS/repoview/) | [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo%20(unstable))](https://jenkins.gongled.me/job/gongled-repo%20(unstable)) | 
 
 ## Quick start
 
