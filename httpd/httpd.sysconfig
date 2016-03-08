@@ -1,0 +1,5 @@
+BINARY="/usr/sbin/httpd"
+CONF_FILE="/etc/httpd/conf/httpd.conf"
+LOG_DIR="/var/log/httpd"
+OPTIONS="-DFOREGROUND"
+

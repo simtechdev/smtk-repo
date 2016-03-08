@@ -1,0 +1,150 @@
+#!/bin/bash
+
+# httpd        Startup script for httpd
+
+# chkconfig: - 85 15
+# processname: httpd
+# config: /etc/httpd/httpd.conf
+# config: /etc/sysconfig/httpd
+# pidfile: /var/run/httpd.pid
+# description: httpd is an HTTP web server
+
+### BEGIN INIT INFO
+# Provides: httpd
+# Required-Start: $local_fs $remote_fs $network
+# Required-Stop: $local_fs $remote_fs $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start and stop httpd
+### END INIT INFO
+
+###############################################################################
+
+source /etc/init.d/kaosv
+
+###############################################################################
+
+binary=${BINARY:-/usr/sbin/httpd}
+conf_file=${CONF_FILE:-/etc/httpd/conf/httpd.conf}
+log_dir=${LOG_DIR:-/var/log/httpd}
+
+kv[prog_name]="httpd"
+kv[search_pattern]="${kv[prog_name]} -f $conf_file"
+kv[pid_file]="/var/run/httpd.pid"
+kv[real_user]="apache"
+kv[oom_adj]="$OOM_DISABLE"
+
+kv.readSysconfig
+
+###############################################################################
+
+kv.addCommand "start"         "Start ${kv[prog_name]} webserver"
+kv.addCommand "stop"          "Stop ${kv[prog_name]} webserver"
+kv.addCommand "restart"       "Restart (stop+start) ${kv[prog_name]} webserver"
+kv.addCommand "status"        "Show current status of ${kv[prog_name]}"
+kv.addCommand "reload"        "Graceful reload config of ${kv[prog_name]}" "reload"
+kv.addCommand "check"         "Validate config" "check"
+
+kv.addCommandAlias "check"    "configtest"
+kv.addCommandAlias "reload"   "reopen"
+
+kv.addHandler "start"   "startServiceHandler"
+kv.addHandler "stop"    "stopServiceHandler"
+
+###############################################################################
+
+check() {
+  kv.showProcessMessage "Checking ${kv[prog_name]} config"
+
+  testServiceConfig true
+
+  local status=$?
+
+  kv.showStatusMessage "$status"
+
+  if [[ $status -ne 0 ]] ; then
+    kv.show "-------------------------------------------------------------------------------" $GREY
+    testServiceConfig $1
+    kv.show "-------------------------------------------------------------------------------" $GREY
+    return $ACTION_ERROR
+  fi
+
+  return $ACTION_OK
+}
+
+reload() {
+  if ! kv.statusIs "$STATUS_WORKS" ; then
+    kv.show "You must start service before this command usage." $BROWN
+    return $ACTION_ERROR
+  fi
+
+  check
+
+  [[ $? -ne $ACTION_OK ]] && return $ACTION_ERROR
+
+  kv.showProcessMessage "Reloading config for ${kv[prog_name]}"
+
+  reloadServiceConfig
+
+  local status=$?
+
+  kv.showStatusMessage "$status"
+
+  [[ $status -eq $ACTION_OK ]] && kv.log "service config reloaded by ${kv[real_user]}."
+
+  return $status
+}
+
+reloadServiceConfig() {
+  kv.run "$binary -f $conf_file -k graceful"
+
+  local status=$?
+
+  [[ $status -eq $ACTION_OK ]] && return $ACTION_OK || return $ACTION_ERROR
+}
+
+testServiceConfig() {
+  local quiet="$1"
+
+  if [[ $quiet ]] ; then
+    $binary -f $conf_file -t &> /dev/null
+  else
+    $binary -f $conf_file -t
+  fi
+
+  local status=$?
+
+  [[ -f ${kv[pid_file]} && ! -s ${kv[pid_file]} ]] && kv.removePid
+
+  [[ $status -eq $ACTION_OK ]] && return $ACTION_OK || return $ACTION_ERROR
+}
+
+###############################################################################
+
+startServiceHandler() {
+
+  kv.daemonize "$binary" "-f $conf_file $OPTIONS"
+
+  if kv.getStartStatus ; then
+    kv.log "service started by ${kv[real_user]}."
+    return $ACTION_OK
+  fi
+
+  return $ACTION_ERROR
+}
+
+stopServiceHandler() {
+
+  kv.run "$binary -f $conf_file -k stop"
+
+  if kv.getStopStatus ; then
+    kv.log "service stopped by ${kv[real_user]}."
+    return $ACTION_OK
+  fi
+
+  return $ACTION_ERROR
+}
+
+###############################################################################
+
+kv.go $@
