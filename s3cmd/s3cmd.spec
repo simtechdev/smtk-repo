@@ -92,20 +92,6 @@ rm -rf %{buildroot}
 ########################################################################################
 
 %changelog
-* Thu Feb 23 2016 Gleb Goncharov <yum@gongled.ru> - 1.6.1-0
-- Updated to latest release
+* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.6.1-0
+- Updated to latest release 
 
-* Thu Oct 01 2015 Anton Novojilov <andy@essentialkaos.com> - 1.6.0-0
-- Updated to latest release
-
-* Thu Mar 05 2015 Anton Novojilov <andy@essentialkaos.com> - 1.5.2-0
-- Updated to latest release
-
-* Tue Jan 27 2015 Anton Novojilov <andy@essentialkaos.com> - 1.5.0-0
-- Updated to latest release
-
-* Wed Aug 20 2014 Anton Novojilov <andy@essentialkaos.com> - 1.5.0-rc1
-- Updated to release candidate 1
-
-* Sat Dec 21 2013 Anton Novojilov <andy@essentialkaos.com> - 1.5.0-b1
-- Initial build

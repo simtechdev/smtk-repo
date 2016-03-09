@@ -48,7 +48,7 @@ URL:             http://entropymine.com/imageworsener
 
 Source0:         https://github.com/jsummers/%{name}/archive/%{version}.tar.gz 
 
-BuildRequires:   binutils, make, gcc, libjpeg-turbo-devel
+BuildRequires:   binutils, make, gcc, libjpeg-turbo-devel, libpng-devel
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

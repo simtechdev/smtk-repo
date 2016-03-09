@@ -52,7 +52,7 @@ URL:             https://github.com/xenolf/%{name}
 
 Source0:         https://github.com/xenolf/%{name}/releases/download/v%{version}/%{name}_linux_amd64.tar.xz 
 
-BuildArch:       x86_64
+ExclusiveArch:   x86_64
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root
 

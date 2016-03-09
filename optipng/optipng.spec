@@ -69,9 +69,9 @@ and corrections.
 %setup -q
 
 %build
-%{configure} --prefix=%{_prefix} \
-             --exec-prefix=%{_exec_prefix} \
-             --with-system-zlib
+./configure --prefix=%{_prefix} \
+            --exec-prefix=%{_exec_prefix} \
+            --with-system-zlib
 
 %{__make} %{?_smp_mflags}
 

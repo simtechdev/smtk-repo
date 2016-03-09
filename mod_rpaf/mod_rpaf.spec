@@ -38,8 +38,6 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sun Aug 23 2009 Frolov Denis <d.frolov81 at mail.ru> 0.6-2
-- Add path patch
+* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> - 0.6-0
+- Initial build.
 
-* Mon May 27 2008 Frolov Denis <d.frolov81 at mail.ru> 0.6-1
-- Initial build for Red Hat Club Repository

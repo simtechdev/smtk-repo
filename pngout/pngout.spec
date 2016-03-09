@@ -54,7 +54,7 @@ URL:             http://www.jonof.id.au/pngout
 
 Source0:         http://static.jonof.id.au/dl/kenutils/%{name}-%{release_ver}-linux-static.tar.gz
 
-BuildArch:       %{release_arch}
+ExclusiveArch:   %{release_arch}
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

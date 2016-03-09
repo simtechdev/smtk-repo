@@ -64,7 +64,7 @@ BuildRequires:  python-setuptools
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
-BuildArch:      x86_64
+ExclusiveArch:  x86_64
 
 Requires:       python-tornado
 Requires:       python-TornadIO2

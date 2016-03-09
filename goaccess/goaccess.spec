@@ -97,9 +97,3 @@ rm -rf %{buildroot}
 %changelog
 * Wed Mar 09 2016 Gleb Goncharov <yum@gongled.me> - 0.9.8-0
 - Updated to latest release
-
-* Sun Jan 17 2016 Gleb Goncharov <yum@gongled.me> - 0.9.7-0
-- Updated to latest release
-
-* Sat Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 0.9.2-1
-- Updated to latest release

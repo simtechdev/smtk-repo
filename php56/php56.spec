@@ -1230,7 +1230,7 @@ touch configure.in
 CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing -Wno-pointer-sign"
 export CFLAGS
 
-# Install extension modules in %{_libdir}/php/modules.
+# Install extension modules
 EXTENSION_DIR=%{_libdir}/php/modules; export EXTENSION_DIR
 
 # Set PEAR_INSTALLDIR to ensure that the hard-coded include_path

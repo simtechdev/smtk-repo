@@ -69,7 +69,7 @@ BuildRequires:  python-devel
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
-BuildArch:      x86_64
+ExclusiveArch:  x86_64
 
 Requires:       python-importlib
 Requires:       python-ipaddr

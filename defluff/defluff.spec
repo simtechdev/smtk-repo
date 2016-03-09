@@ -37,7 +37,7 @@
 %ifarch x86_64
 %define release_arch      x86_64
 %else
-%define release_arch      i686
+%define release_arch      i386 
 %endif
 
 ###############################################################################
@@ -52,7 +52,7 @@ URL:             http://encode.ru/threads/1214-defluff-a-deflate-huffman-optimiz
 
 Source0:         http://source.gongled.me/%{name}/%{name}-%{version}.%{release_arch}.zip
 
-BuildArch:       %{release_arch}
+ExclusiveArch:   %{release_arch}
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

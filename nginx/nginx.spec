@@ -104,12 +104,22 @@ BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u}
 
 Requires:             initscripts >= 8.36 openssl zlib
 Requires:             gd libXpm libxslt
+%if 0%{?rhel} <= 6
 Requires:             libluajit
+%endif
+%if 0%{?rhel} == 7
+Requires:             luajit
+%endif
 Requires:             kaosv
 
 BuildRequires:        make gcc-c++ zlib-devel pcre-devel perl
 BuildRequires:        openssl-devel make
+%if 0%{?rhel} <= 6
 BuildRequires:        libluajit-devel
+%endif
+%if 0%{?rhel} == 7
+BuildRequires:        luajit-devel
+%endif
 
 Requires(pre):        shadow-utils
 Requires(post):       chkconfig

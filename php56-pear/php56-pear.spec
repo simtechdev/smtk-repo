@@ -282,8 +282,6 @@ fi
 %{_mandir}/man1/pecl.1*
 %{_mandir}/man1/peardev.1*
 %{_mandir}/man5/pear.conf.5*
-#%{?scl: %{_root_bindir}/%{scl_prefix}pear}
-#%{?scl: %{_root_bindir}/%{scl_prefix}pecl}
 
 ################################################################################
 

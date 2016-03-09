@@ -64,7 +64,8 @@ BuildRequires:  glibc-devel
 BuildRequires:  make
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}
-BuildArch:      x86_64
+
+ExclusiveArch:  x86_64
 
 Provides:       %{name} = %{version}
 
