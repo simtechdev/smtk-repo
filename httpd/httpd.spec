@@ -57,7 +57,7 @@
 Summary:              Apache HTTP Server 
 Name:                 httpd
 Version:              %{httpd_version} 
-Release:              0%{?dist}
+Release:              1%{?dist}
 License:              Apache License, Version 2.0
 Group:                System Environment/Daemons
 URL:                  http://httpd.apache.org/
@@ -79,7 +79,7 @@ Requires:             gawk, findutils, openldap, kaosv >= 2.7.0
 Requires(post):       /sbin/chkconfig, /bin/mktemp, /bin/rm, /bin/mv
 Requires(post):       sh-utils, textutils, /usr/sbin/useradd
 
-Provides:             httpd-mmn = %{mmn}
+Provides:             httpd-mmn = %{httpd_mmn}
 
 Conflicts:            thttpd
 
@@ -152,7 +152,7 @@ Security (TLS) protocols.
 httpd_vmmn=`echo MODULE_MAGIC_NUMBER_MAJOR | cpp -include include/ap_mmn.h | sed -n '/^2/p'`
 
 if test "x${httpd_vmmn}" != "x%{httpd_mmn}"; then
-    : Error: Upstream MMN is now ${vmmn}, packaged MMN is %{mmn}.
+    : Error: Upstream MMN is now ${httpd_vmmn}, packaged MMN is %{httpd_mmn}.
     : Update the 'httpd_mmn' macro and rebuild.
     exit 1
 fi
