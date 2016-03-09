@@ -64,7 +64,7 @@
 %define _httpd_moddir      %{_libdir}/httpd/modules
 %define _root_httpd_moddir %{_root_libdir}/httpd/modules
 
-%if 0%{?fedora} >= 18 || 0%{?rhel} >= 7
+%if 0%{?fedora} >= 18 || 0%{?rhel} >= 6
 # httpd/2.4
 %define _httpd_apxs        %{_root_bindir}/apxs
 %define _httpd_modconfdir  %{_root_sysconfdir}/httpd/conf.modules.d
