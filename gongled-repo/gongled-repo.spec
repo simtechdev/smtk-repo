@@ -47,7 +47,7 @@
 
 Summary:        GONGLED repository for CentOS/RHEL
 Name:           gongled-repo
-Version:        6.8
+Version:        6
 Release:        0%{?dist}
 License:        MIT
 Group:          Development/Libraries
@@ -102,8 +102,5 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
-* Sun Jan 31 2016 Gleb Goncharov <yum@gongled.me> - 6.8-0
-- Added HTTPS support for release repo
-
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 6.0-0
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 6-0
 - Initial build.
