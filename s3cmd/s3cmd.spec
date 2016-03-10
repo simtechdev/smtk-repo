@@ -29,7 +29,11 @@
 %define _rpmstatedir      %{_sharedstatedir}/rpm-state
 %define _pkgconfigdir     %{_libdir}/pkgconfig
 
-%define _python_lib_dir   %{_libdir32}/python2.6/site-packages
+########################################################################################
+
+%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+%{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+
 %define shortname         s3
 
 ########################################################################################
@@ -87,7 +91,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc README.md NEWS LICENSE
 %{_bindir}/*
-%{_python_lib_dir}/*
+%{python2_sitelib}/*
 
 ########################################################################################
 
