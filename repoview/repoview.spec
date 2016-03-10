@@ -26,10 +26,7 @@ Group:              Applications/System
 URL:                http://essentialkaos.com
 Vendor:             ESSENTIALKAOS
 
-Source0:            %{name}.py
-Source1:            %{name}-generator
-Source2:            %{name}.8
-Source3:            templates 
+Source0:            %{name}-%{version}.tar.gz
 
 BuildArch:          noarch
 BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -47,6 +44,7 @@ browsing.
 ########################################################################################
 
 %prep
+%setup -q -n %{name}-%{version}
 
 %build
 
@@ -57,11 +55,11 @@ install -dm 755 %{buildroot}%{_datadir}/%{name}
 install -dm 755 %{buildroot}%{_bindir}
 install -dm 755 %{buildroot}%{_mandir}/man8
 
-install -pm 755 %{SOURCE0} %{buildroot}%{_bindir}/%{name}
-install -pm 644 %{SOURCE1} %{buildroot}%{_bindir}/%{name}-generator
-install -pm 644 %{SOURCE2} %{buildroot}%{_mandir}/man8/%{name}.8
+install -pm 755 %{name}.py %{buildroot}%{_bindir}/%{name}
+install -pm 644 %{name}-generator %{buildroot}%{_bindir}/%{name}-generator
+install -pm 644 %{name}.8 %{buildroot}%{_mandir}/man8/%{name}.8
 
-cp -rp %{SOURCE3} %{buildroot}%{_datadir}/%{name}/
+cp -ar templates %{buildroot}%{_datadir}/%{name}/
 
 %post 
 if [[ $1 -eq 1 ]] ; then
