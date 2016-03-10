@@ -46,8 +46,8 @@
 ################################################################################
 
 Summary:        GONGLED repository for CentOS/RHEL
-Name:           gongled-repo
-Version:        6
+Name:           gongled-release
+Version:        0.1
 Release:        0%{?dist}
 License:        MIT
 Group:          Development/Libraries
@@ -102,5 +102,5 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 6-0
+* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 0.1-0
 - Initial build.
