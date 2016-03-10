@@ -26,7 +26,7 @@ Group:              Applications/System
 URL:                http://essentialkaos.com
 Vendor:             ESSENTIALKAOS
 
-Source0:            %{name}-%{version}.tar.gz
+Source0:            https://source.gongled.me/%{name}/%{name}-%{version}.tar.gz
 
 BuildArch:          noarch
 BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
