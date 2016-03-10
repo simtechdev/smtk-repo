@@ -6,19 +6,18 @@
 
 Summary:              Simple app for automatization of everything
 Name:                 sloth-ci
-Version:              2.0.2
+Version:              2.0.7
 Release:              0%{?dist}
 URL:                  http://sloth-ci.com
 License:              MIT
 Group:                Development/Libraries
 
-Source:               https://pypi.python.org/packages/source/s/%{name}/%{name}-%{version}.zip
+Source0:              https://pypi.python.org/packages/source/s/%{name}/%{name}-%{version}.tar.gz
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildArch:            noarch
 
-%if 0%{?rhel} == 6
 Requires:             python-CherryPy
 Requires:             python-routes
 Requires:             PyYAML
@@ -26,7 +25,6 @@ Requires:             python-requests
 Requires:             python-cliar
 Requires:             python-colorama
 Requires:             python-tabulate
-%endif
 
 ################################################################################
 
@@ -64,6 +62,9 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ########################################################################################
 
 %changelog
+* Thu Mar 10 2016 Gleb Goncharov <yum@gongled.ru> - 2.0.7-0
+- Updated to latest version
+
 * Wed Feb 24 2016 Gleb Goncharov <yum@gongled.ru> - 2.0.2-0
 - Initial build
 
