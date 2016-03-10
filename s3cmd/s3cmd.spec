@@ -1,5 +1,13 @@
 ########################################################################################
 
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+
+%if 0%{?rhel} == 5
+%define __python /usr/bin/python26
+%endif
+
+########################################################################################
+
 %define _posixroot        /
 %define _root             /root
 %define _bin              /bin
@@ -30,9 +38,6 @@
 %define _pkgconfigdir     %{_libdir}/pkgconfig
 
 ########################################################################################
-
-%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
-%{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 
 %define shortname         s3
 
@@ -91,7 +96,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc README.md NEWS LICENSE
 %{_bindir}/*
-%{python2_sitelib}/*
+%{python_sitelib}/*
 
 ########################################################################################
 
