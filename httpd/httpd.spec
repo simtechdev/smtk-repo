@@ -64,7 +64,7 @@
 Summary:              Apache HTTP Server 
 Name:                 httpd
 Version:              %{httpd_version} 
-Release:              1%{?dist}
+Release:              2%{?dist}
 License:              Apache License, Version 2.0
 Group:                System Environment/Daemons
 URL:                  http://httpd.apache.org/
@@ -73,6 +73,10 @@ Source0:              http://www.apache.org/dist/%{name}/%{name}-%{version}.tar.
 Source1:              %{name}.init
 Source2:              %{name}.sysconfig
 Source3:              %{name}.conf
+
+Source10:             %{name}-extra-info.conf
+Source11:             %{name}-extra-languages.conf
+Source12:             %{name}-extra-ssl.conf
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -303,6 +307,8 @@ rm -rf %{buildroot}%{_libdir}/httpd/modules/*.exp \
 install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig
 install -dm 755 %{buildroot}%{_sysconfdir}/rc.d/init.d
 install -dm 755 %{buildroot}%{_sysconfdir}/logrotate.d
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/vhost.d
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/xtra
 install -dm 755 %{buildroot}%{httpd_webroot}/html
 install -dm 755 %{buildroot}%{_localstatedir}/lib/dav
 install -dm 755 %{buildroot}%{_localstatedir}/cache/mod_ssl
@@ -323,6 +329,13 @@ install -pm 644 %{SOURCE3} \
                 %{buildroot}%{_sysconfdir}/%{name}/conf/%{name}.conf
 install -pm 644 build/rpm/httpd.logrotate \
                 %{buildroot}/etc/logrotate.d/httpd
+
+install -pm 664 %{SOURCE10} \
+                %{buildroot}%{_sysconfdir}/%{name}/conf/extra/%{name}-info.conf
+install -pm 664 %{SOURCE11} \
+                %{buildroot}%{_sysconfdir}/%{name}/conf/extra/%{name}-languages.conf
+install -pm 664 %{SOURCE12} \
+                %{buildroot}%{_sysconfdir}/%{name}/conf/extra/%{name}-ssl.conf
 
 chmod 755 %{buildroot}%{_sbindir}/suexec
 
@@ -370,7 +383,9 @@ fi
 %{_sysconfdir}/httpd/modules
 %{_sysconfdir}/httpd/logs
 %{_sysconfdir}/httpd/run
-%dir %{_sysconfdir}/httpd/conf
+%dir %{_sysconfdir}/%{name}/conf
+%dir %{_sysconfdir}/%{name}/xtra
+%dir %{_sysconfdir}/%{name}/vhost.d
 %config(noreplace) %{_sysconfdir}/httpd/conf/httpd.conf
 %config(noreplace) %{_sysconfdir}/httpd/conf/magic
 %config(noreplace) %{_sysconfdir}/httpd/conf/mime.types
@@ -489,6 +504,9 @@ fi
 ###############################################################################
 
 %changelog
+* Fri Mar 11 2016 Gleb Goncharov <yum@gongled.ru> - 2.2.31-2
+- Added custom configs 
+
 * Tue Mar 08 2016 Gleb Goncharov <yum@gongled.ru> - 2.2.31-1
 - Added kaosv, sysconfig and httpd.conf 
 
