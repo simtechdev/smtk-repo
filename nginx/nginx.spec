@@ -282,6 +282,7 @@ install -dm 755 %{buildroot}%{_datadir}/%{name}
 %{__rm} -rf %{buildroot}%{_sysconfdir}/%{name}/html
 
 install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/vhost.d
 
 install -dm 755 %{buildroot}%{_logdir}/%{name}
 install -dm 755 %{buildroot}%{_rundir}/%{name}
@@ -428,6 +429,7 @@ fi
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/ssl
 %dir %{_sysconfdir}/%{name}/conf.d
+%dir %{_sysconfdir}/%{name}/vhost.d
 %dir %{_logdir}/nginx
 
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
