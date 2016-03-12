@@ -307,6 +307,8 @@ rm -rf %{buildroot}%{_libdir}/httpd/modules/*.exp \
 install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig
 install -dm 755 %{buildroot}%{_sysconfdir}/rc.d/init.d
 install -dm 755 %{buildroot}%{_sysconfdir}/logrotate.d
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/conf.modules.d
 install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/vhost.d
 install -dm 755 %{buildroot}%{_sysconfdir}/%{name}/xtra
 install -dm 755 %{buildroot}%{httpd_webroot}/html
@@ -380,10 +382,12 @@ fi
 %doc ABOUT_APACHE README CHANGES LICENSE NOTICE
 
 %dir %{_sysconfdir}/httpd
-%{_sysconfdir}/httpd/modules
-%{_sysconfdir}/httpd/logs
-%{_sysconfdir}/httpd/run
+%{_sysconfdir}/%{name}/modules
+%{_sysconfdir}/%{name}/logs
+%{_sysconfdir}/%{name}/run
 %dir %{_sysconfdir}/%{name}/conf
+%dir %{_sysconfdir}/%{name}/conf.d
+%dir %{_sysconfdir}/%{name}/conf.modules.d
 %dir %{_sysconfdir}/%{name}/xtra
 %dir %{_sysconfdir}/%{name}/vhost.d
 %config(noreplace) %{_sysconfdir}/httpd/conf/httpd.conf
