@@ -50,7 +50,7 @@ Group:           Applications/Multimedia
 License:         Freeware
 URL:             http://encode.ru/threads/1214-defluff-a-deflate-huffman-optimizer
 
-Source0:         http://source.gongled.me/%{name}/%{name}-%{version}.%{release_arch}.zip
+Source0:         https://source.gongled.me/%{name}/%{name}-%{version}.%{release_arch}.zip
 
 ExclusiveArch:   %{release_arch}
 

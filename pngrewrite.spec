@@ -42,7 +42,7 @@ Group:           Applications/Multimedia
 License:         zlib/libpng
 URL:             http://entropymine.com/jason/pngrewrite
 
-Source0:         http://entropymine.com/jason/%{name}/%{name}-%{version}.zip 
+Source0:         http://entropymine.com/jason/%{name}/%{name}-%{version}.zip
 
 BuildRequires:   make, gcc, binutils, libpng-devel
 

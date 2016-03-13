@@ -1580,10 +1580,10 @@ sed -e 's:/var/run:%{_localstatedir}/run:' \
     -e 's:/var/log:%{_localstatedir}/log:' \
     -e 's:/etc:%{_sysconfdir}:' \
     -i %{buildroot}%{_sysconfdir}/php-fpm.conf
-install -m 644 %{SOURCE5} %{buildroot}%{_sysconfdir}/php-fpm.d/www.conf
+install -m 644 %{SOURCE5} %{buildroot}%{_sysconfdir}/php-fpm.d/www.conf.default
 sed -e 's:/var/lib:%{_localstatedir}/lib:' \
     -e 's:/var/log:%{_localstatedir}/log:' \
-    -i %{buildroot}%{_sysconfdir}/php-fpm.d/www.conf
+    -i %{buildroot}%{_sysconfdir}/php-fpm.d/www.conf.default
 mv %{buildroot}%{_sysconfdir}/php-fpm.conf.default .
 %if %{with_tmpfiles}
 # tmpfiles.d
@@ -1859,7 +1859,7 @@ fi
 %doc php-fpm.conf.default
 %doc fpm_LICENSE
 %config(noreplace) %{_sysconfdir}/php-fpm.conf
-%config(noreplace) %{_sysconfdir}/php-fpm.d/www.conf
+%config(noreplace) %{_sysconfdir}/php-fpm.d/www.conf.default
 %config(noreplace) %{_root_sysconfdir}/logrotate.d/php-fpm
 %config(noreplace) %{_sysconfdir}/sysconfig/php-fpm
 
