@@ -63,7 +63,7 @@ BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u}
 
 Requires:             openssl >= 1.0.1e, kaosv >= 2.7.0, logrotate
 
-BuildRequires:        openssl-devel >= 1.0.1e, grep
+BuildRequires:        openssl-devel >= 1.0.1e, libcap-devel, grep
 
 ###############################################################################
 
