@@ -56,6 +56,7 @@
 
 Summary:              Rocket-fast web server
 Name:                 nginx
+Epoch:                1
 Version:              1.9.10
 Release:              2%{?dist}
 License:              2-clause BSD-like license
