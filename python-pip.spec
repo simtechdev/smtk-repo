@@ -21,7 +21,7 @@
 
 Summary:            Tool for installing and managing Python packages
 Name:               %{full_name}
-Version:            8.1.0
+Version:            8.1.1
 Release:            0%{?dist}
 License:            MIT
 Group:              Development/Libraries
@@ -72,6 +72,9 @@ It’s a replacement for easy_install.
 ## Changelog ###################################################################
 
 %changelog
+* Sun Mar 20 2016 Gleb Goncharov <yum@gongled.me> - 8.1.1-0
+- Updated to latest stable release
+
 * Thu Mar 10 2016 Gleb Goncharov <yum@gongled.me> - 8.1.0-0
 - Updated to latest stable release
 
