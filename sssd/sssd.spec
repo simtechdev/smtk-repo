@@ -1,3 +1,5 @@
+###############################################################################
+
 %global rhel6_minor %(%{__grep} -o "6.[0-9]*" /etc/redhat-release |%{__sed} -s 's/6.//')
 %global rhel7_minor %(%{__grep} -o "7.[0-9]*" /etc/redhat-release |%{__sed} -s 's/7.//')
 
@@ -6,6 +8,8 @@
 %{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 %endif
+
+###############################################################################
 
 # Fedora and RHEL 6+
 # we don't want to provide private python extension libs
@@ -553,7 +557,7 @@ Development libraries for the SSSD libwbclient implementation.
 %build
 autoreconf -ivf
 
-%configure \
+%{configure} \
     --with-test-dir=/dev/shm \
     --with-db-path=%{dbpath} \
     --with-mcache-path=%{mcpath} \
@@ -576,13 +580,7 @@ autoreconf -ivf
     %{?experimental}
 
 make %{?_smp_mflags} all
-
 make %{?_smp_mflags} docs
-
-#%check
-#export CK_TIMEOUT_MULTIPLIER=10
-#make %{?_smp_mflags} check VERBOSE=yes
-#unset CK_TIMEOUT_MULTIPLIER
 
 %install
 rm -rf $RPM_BUILD_ROOT
