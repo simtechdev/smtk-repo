@@ -1,5 +1,9 @@
 ###############################################################################
 
+# rpmbuilder:qa-rpaths 0x0001,0x0002
+
+###############################################################################
+
 %define python_version %(%{__python} -c "import sys; sys.stdout.write(sys.version[:3])")
 
 ###############################################################################
@@ -42,26 +46,27 @@
 
 ###############################################################################
 
-Summary:              Next generation logging application 
-Name:                 syslog-ng
-Version:              3.7.2
-Release:              0%{?dist}
-License:              GPL 
-Group:                System Environment/Daemons
-URL:                  http://www.balabit.com
+Summary:            Next generation logging application
+Name:               syslog-ng
+Version:            3.7.2
+Release:            0%{?dist}
+License:            GPL
+Group:              System Environment/Daemons
+URL:                http://www.balabit.com
 
-Source0:              https://github.com/balabit/%{name}/releases/download/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:              %{name}.sysconfig
-Source2:              %{name}.init
+Source0:            https://github.com/balabit/%{name}/releases/download/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source1:            %{name}.sysconfig
+Source2:            %{name}.init
 
-BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:             kaosv
+Requires:           kaosv eventlog hiredis libnet GeoIP pcre openssl json-c
 
-BuildRequires:        bison flex gcc-c++ glib2-devel pkgconfig pcre-devel
-BuildRequires:        openssl-devel libnet-devel eventlog-devel libhiredis-devel
+BuildRequires:      bison flex gcc-c++ glib2-devel pkgconfig pcre-devel
+BuildRequires:      openssl-devel libnet-devel eventlog-devel
+BuildRequires:      hiredis-devel json-c-devel
 
-Provides:             syslog = %{version}-%{release}
+Provides:           %{name} = %{version}-%{release}
 
 ###############################################################################
 
@@ -80,33 +85,34 @@ single, central log server.
 %{configure} --sysconfdir=%{_sysconfdir}/%{name} \
              --disable-python \
              --enable-spoof-source \
+             --enable-json \
              --enable-redis
+
 %{__make} %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
+
 %{make_install} DESTDIR="%{buildroot}"
 
 install -dm 755 %{buildroot}%{_sysconfdir}/%{name}
 install -dm 755 %{buildroot}%{_sysconfdir}/logrotate.d
-install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig
 install -dm 755 %{buildroot}%{_initrddir}
 
 install -pm 644 %{SOURCE1} \
                 %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+
 install -pm 755 %{SOURCE2} \
                 %{buildroot}%{_initrddir}/%{name}
+
 install -pm 644 contrib/rhel-packaging/%{name}.logrotate \
                 %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
-
-%check
 
 %clean
 rm -rf %{buildroot}
 
 ###############################################################################
-
-%pre
 
 %post
 if [[ $1 -eq 1 ]] ; then
@@ -138,7 +144,9 @@ fi
 %{_bindir}/pdbtool
 %{_bindir}/update-patterndb
 %{_libdir}/*
+%ifarch x86_64
 %{_libdir32}/%{name}/*
+%endif
 %{_includedir}/%{name}/*
 %{_datadir}/*
 
@@ -146,5 +154,5 @@ fi
 
 %changelog
 * Mon Mar 21 2016 Gleb Goncharov <yum@gongled.me> - 3.7.2-0
-- Initial build 
+- Initial build
 
