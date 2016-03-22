@@ -92,7 +92,7 @@
 
 %define __service         %{_sbin}/service
 %define __chkconfig       %{_sbin}/chkconfig
-%define __ldconfig        %{_sbindir}/ldconfig
+%define __ldconfig        %{_sbin}/ldconfig
 %define __useradd         %{_sbindir}/useradd
 %define __groupadd        %{_sbindir}/groupadd
 %define __getent          %{_bindir}/getent
@@ -100,8 +100,8 @@
 ###############################################################################
 
 %define service_user      %{name}
-%define service_group     %{name}
-%define service_name      %{name}
+%define service_group     root 
+%define service_name      root
 %define service_home      /
 
 %define sssdstatedir      %{_localstatedir}/lib/sss
@@ -117,7 +117,7 @@
 Summary:            System Security Services Daemon 
 Name:               sssd
 Version:            1.13.3
-Release:            0%{?dist}
+Release:            1%{?dist}
 License:            GPLv3+
 Group:              Applications/System
 URL:                http://fedorahosted.org/sssd
@@ -802,13 +802,13 @@ rm -rf %{buildroot}
 %endif
 
 %dir %{_libexecdir}/%{service_name}
-%{_libexecdir}/%{service_name}/%{name}_be
-%{_libexecdir}/%{service_name}/%{name}_nss
-%{_libexecdir}/%{service_name}/%{name}_pam
-%{_libexecdir}/%{service_name}/%{name}_autofs
-%{_libexecdir}/%{service_name}/%{name}_ssh
-%{_libexecdir}/%{service_name}/%{name}_sudo
-%{_libexecdir}/%{service_name}/p11_child
+%{_libexecdir}/%{name}/%{name}_be
+%{_libexecdir}/%{name}/%{name}_nss
+%{_libexecdir}/%{name}/%{name}_pam
+%{_libexecdir}/%{name}/%{name}_autofs
+%{_libexecdir}/%{name}/%{name}_ssh
+%{_libexecdir}/%{name}/%{name}_sudo
+%{_libexecdir}/%{name}/p11_child
 
 %if (0%{?install_pcscd_polkit_rule} == 1)
 %{_datadir}/polkit-1/rules.d/*
@@ -877,9 +877,9 @@ rm -rf %{buildroot}
 %files krb5-common
 %defattr(-,root,root,-)
 %doc COPYING
-%attr(755,sssd,sssd) %dir %{pubconfpath}/krb5.include.d
-%attr(4750,root,sssd) %{_libexecdir}/%{service_name}/ldap_child
-%attr(4750,root,sssd) %{_libexecdir}/%{service_name}/krb5_child
+%attr(755,%{service_user},%{service_group}) %dir %{pubconfpath}/krb5.include.d
+%attr(4750,root,%{service_group}) %{_libexecdir}/%{service_name}/ldap_child
+%attr(4750,root,%{service_group}) %{_libexecdir}/%{service_name}/krb5_child
 
 %files krb5 -f sssd_krb5.lang
 %defattr(-,root,root,-)
@@ -890,22 +890,22 @@ rm -rf %{buildroot}
 %files common-pac
 %defattr(-,root,root,-)
 %doc COPYING
-%{_libexecdir}/%{service_name}/sssd_pac
+%{_libexecdir}/%{service_name}/%{name}_pac
 
-%files ipa -f sssd_ipa.lang
+%files ipa -f %{name}_ipa.lang
 %defattr(-,root,root,-)
 %doc COPYING
-%attr(700,sssd,sssd) %dir %{keytabdir}
+%attr(700,%{service_user},%{service_group}) %dir %{keytabdir}
 %{_libdir}/%{name}/libsss_ipa.so
-%attr(4750,root,sssd) %{_libexecdir}/%{service_name}/selinux_child
-%{_mandir}/man5/sssd-ipa.5*
+%attr(4750,root,%{service_user}) %{_libexecdir}/%{service_name}/selinux_child
+%{_mandir}/man5/%{name}-ipa.5*
 
 %files ad -f sssd_ad.lang
 %defattr(-,root,root,-)
 %doc COPYING
 %{_libdir}/%{name}/libsss_ad.so
 %{_libexecdir}/%{service_name}/gpo_child
-%{_mandir}/man5/sssd-ad.5*
+%{_mandir}/man5/%{name}-ad.5*
 
 %files proxy
 %defattr(-,root,root,-)
@@ -1171,6 +1171,6 @@ fi
 ###############################################################################
 
 %changelog
-* Tue Mar 22 2016 Gleb Goncharov <yum@gongled.ru> - 1.13.3-0
+* Tue Mar 22 2016 Gleb Goncharov <yum@gongled.ru> - 1.13.3-1
 - Initial build 
 
