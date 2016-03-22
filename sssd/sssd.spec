@@ -123,6 +123,7 @@ Group:              Applications/System
 URL:                http://fedorahosted.org/sssd
 
 Source0:            https://fedorahosted.org/released/%{name}/%{name}-%{version}.tar.gz
+Source1:            %{name}.init
 
 BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -707,11 +708,16 @@ sed -i -e 's:/usr/bin/python:/usr/bin/python3:' src/tools/sss_obfuscate
 
 /usr/lib/rpm/find-lang.sh %{buildroot} %{name}
 
-install -dm 755 %{buildroot}/%{_sysconfdir}/logrotate.d
-install -dm 755 %{buildroot}/%{_sysconfdir}/rwtab.d
+install -dm 755 %{buildroot}%{_initrddir}
+install -dm 755 %{buildroot}%{_sysconfdir}/logrotate.d
+install -dm 755 %{buildroot}%{_sysconfdir}/rwtab.d
 
 install -pm 644 src/examples/rwtab %{buildroot}%{_sysconfdir}/rwtab.d/sssd
 install -pm 644 src/examples/logrotate %{buildroot}%{_sysconfdir}/logrotate.d/sssd
+
+%if (0%{?use_systemd} == 0)
+install -pm 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+%endif
 
 find %{buildroot} -name "*.la" -exec rm -f {} \;
 
@@ -845,8 +851,8 @@ rm -rf %{buildroot}
 %attr(711,%{service_user},%{service_group}) %dir %{_sysconfdir}/%{name}
 %ghost %attr(0600,%{service_user},%{service_group}) %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %if (0%{?use_systemd} == 1)
-%attr(755,root,root) %dir %{_sysconfdir}/systemd/system/sssd.service.d
-%config(noreplace) %{_sysconfdir}/systemd/system/sssd.service.d/journal.conf
+%attr(755,root,root) %dir %{_sysconfdir}/systemd/system/%{name}.service.d
+%config(noreplace) %{_sysconfdir}/systemd/system/%{name}.service.d/journal.conf
 %endif
 %config(noreplace) %{_sysconfdir}/logrotate.d/sssd
 %config(noreplace) %{_sysconfdir}/rwtab.d/sssd
