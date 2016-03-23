@@ -44,8 +44,8 @@
 
 Summary:         Let's Encrypt client and ACME library
 Name:            lego
-Version:         0.2.0
-Release:         1%{?dist}
+Version:         0.3.0
+Release:         0%{?dist}
 Group:           Development/Libraries
 License:         MIT
 URL:             https://github.com/xenolf/%{name}
@@ -94,6 +94,9 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
+* Wed Mar 23 2016 Gleb Goncharov <yum@gongled.me> - 0.3.0-0
+- Updated to latest release.
+
 * Sun Jan 31 2016 Gleb Goncharov <yum@gongled.me> - 0.2.0-1
 - Added certificates path 
 
