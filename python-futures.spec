@@ -43,7 +43,7 @@
 
 Summary:            Backport of the concurrent.futures package from Python 3.2
 Name:               python-%{pkgname}
-Version:            3.0.3
+Version:            3.0.4
 Release:            0%{?dist}
 License:            BSD
 Group:              Development/Libraries
@@ -88,5 +88,9 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
+* Wed Mar 23 2016 Gleb Goncharov <yum@gongled.me> - 3.0.4-0
+- Updated to latest version 
+
 * Fri Oct 23 2015 Gleb Goncharov <yum@gongled.me> - 3.0.3-1
 - Initial build
+
