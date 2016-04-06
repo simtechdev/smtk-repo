@@ -46,7 +46,8 @@
 ################################################################################
 
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
-%global pkgname phpMyAdmin
+%define pkgname phpMyAdmin
+%define php_prefix php56
 
 # If php-mcrypt is available, it should be preferred. Otherwise the pure
 # phpseclib alternative alternative can be used externally or internally.
@@ -55,12 +56,12 @@
 
 # Having below mentioned separate projects externally or only internally?
 %global gettext 1
-%global tcpdf   1
+%global tcpdf   0
 
 ################################################################################
 
 Summary:        Handle the administration of MySQL over the World Wide Web
-Name:           phpMyAdmin
+Name:           phpMyAdmin56
 Version:        4.5.5.1
 Release:        0%{?dist}
 License:        GPLv2+
@@ -71,18 +72,18 @@ Source0:        https://files.phpmyadmin.net/%{pkgname}/%{version}/%{pkgname}-%{
 Source1:        phpMyAdmin-config.inc.php
 Source2:        phpMyAdmin.htaccess
 
-%if 0%{?rhel} != 5
-Requires:       php(language) >= 5.2.17, php-filter, php-xmlwriter
-%else
-Requires:       php(api) >= 20090626, php-xml >= 5.2.0
-%endif
+Requires:       php(api) = 20131106
 
-Requires:       php-bz2, php-ctype, php-curl, php-date, php-gd >= 5.2.0, php-hash, php-iconv
-Requires:       php-json, php-libxml, php-mbstring >= 5.2.0, php-mysql >= 5.2.0, php-mysqli, php-pcre
-Requires:       php-session, php-simplexml, php-spl, php-zip, php-zlib
+Requires:       %{php_prefix}-filter, %{php_prefix}-xml
+Requires:       %{php_prefix}-bz2, %{php_prefix}-ctype, %{php_prefix}-curl, %{php_prefix}-date
+Requires:       %{php_prefix}-gd, %{php_prefix}-hash, %{php_prefix}-iconv
+Requires:       %{php_prefix}-json, %{php_prefix}-libxml, %{php_prefix}-mbstring
+Requires:       %{php_prefix}-mysql, %{php_prefix}-mysqli, %{php_prefix}-pcre
+Requires:       %{php_prefix}-session, %{php_prefix}-simplexml, %{php_prefix}-spl
+Requires:       %{php_prefix}-zip, %{php_prefix}-zlib
 
 %if 0%{?mcrypt}
-Requires:       php-mcrypt >= 5.2.0
+Requires:       %{php_prefix}-mcrypt
 %else
 %if 0%{?seclib}
 Requires:       php-phpseclib-crypt-aes
@@ -90,19 +91,15 @@ Requires:       php-phpseclib-crypt-aes
 %endif
 
 %if 0%{?gettext}
-Requires:       php-php-gettext
+Requires:       %{php_prefix}-gettext
 %endif
 
 %if 0%{?tcpdf}
 Requires:       php-tcpdf, php-tcpdf-dejavu-sans-fonts
 %endif
-%if 0%{?rhel} == 5
 
-Provides:       phpMyAdmin = %{version}-%{release}, phpMyAdmin3 = %{version}-%{release}
-Obsoletes:      phpMyAdmin3 < %{version}-%{release}
-%endif
-
-Provides:       phpmyadmin = %{version}-%{release}
+Provides:       %{pkgname} = %{version}-%{release}
+Provides:       %{name} = %{version}-%{release}
 
 BuildArch:      noarch
 
