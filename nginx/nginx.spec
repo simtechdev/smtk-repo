@@ -44,12 +44,8 @@
 %define service_home         %{_cachedir}/%{service_name}
 
 %define open_ssl_ver         1.0.2g
-%define psol_ver             1.9.32.13
-%define pagespeed_ver        %{psol_ver}-beta
-%define pagespeed_fullver    release-%{pagespeed_ver}
-%define pagespeed_cache_path %{service_home}/pagespeed
 
-%define lua_module_ver       0.10.0
+%define lua_module_ver        0.10.2
 %define mh_module_ver        0.29
 
 ###############################################################################
@@ -57,8 +53,8 @@
 Summary:              Rocket-fast web server
 Name:                 nginx
 Epoch:                1
-Version:              1.9.10
-Release:              2%{?dist}
+Version:              1.9.14
+Release:              0%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
 Vendor:               Nginx / Google / CloudFlare
@@ -74,14 +70,12 @@ Source5:              upstream.conf
 Source10:             error-40X.conf
 Source11:             error-50X.conf
 
-Source20:             pagespeed.conf
-Source21:             pagespeed_enabled.conf
-Source22:             ssl.conf
-Source23:             common.conf
-Source24:             fastcgi_params.conf
-Source25:             fastcgi_params_ssl.conf
-Source26:             proxy_params.conf
-Source27:             proxy_params_ssl.conf
+Source20:             ssl.conf
+Source21:             common.conf
+Source22:             fastcgi_params.conf
+Source23:             fastcgi_params_ssl.conf
+Source24:             proxy_params.conf
+Source25:             proxy_params_ssl.conf
 
 Source40:             %{name}-index.html
 Source41:             %{name}-401.html
@@ -91,11 +85,9 @@ Source44:             %{name}-502.html
 Source45:             %{name}-50X.html
 Source46:             %{name}-maintenance.html
 
-Source60:             https://github.com/pagespeed/ngx_pagespeed/archive/%{pagespeed_fullver}.zip
-Source61:             https://dl.google.com/dl/page-speed/psol/%{psol_ver}.tar.gz
-Source62:             http://www.openssl.org/source/openssl-%{open_ssl_ver}.tar.gz
-Source63:             https://github.com/openresty/headers-more-nginx-module/archive/v%{mh_module_ver}.tar.gz
-Source64:             https://github.com/chaoslawful/lua-nginx-module/archive/v%{lua_module_ver}.tar.gz
+Source60:             http://www.openssl.org/source/openssl-%{open_ssl_ver}.tar.gz
+Source61:             https://github.com/openresty/headers-more-nginx-module/archive/v%{mh_module_ver}.tar.gz
+Source62:             https://github.com/chaoslawful/lua-nginx-module/archive/v%{lua_module_ver}.tar.gz
 
 Patch0:               %{name}.patch
 Patch1:               mime.patch
@@ -145,32 +137,22 @@ Not stripped version of nginx with the debugging log support
 ###############################################################################
 
 %prep
-%setup -q -n nginx-%{version}
+%setup -q -n %{name}-%{version}
 
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
 %build
-%{__unzip}    %{SOURCE60}
-%{__tar} xzvf %{SOURCE61} -C ngx_pagespeed-%{pagespeed_fullver}
+%{__tar} xzvf %{SOURCE60}
+%{__tar} xzvf %{SOURCE61}
 %{__tar} xzvf %{SOURCE62}
-%{__tar} xzvf %{SOURCE63}
-%{__tar} xzvf %{SOURCE64}
-
-# Fixed bug with ngx_pagespeed comilation on i386
-%ifarch %ix86
-  %define optflags -O2 -g -march=i686
-%endif
 
 # Renaming and moving docs
 %{__mv} CHANGES    NGINX-CHANGES
 %{__mv} CHANGES.ru NGINX-CHANGES.ru
 %{__mv} LICENSE    NGINX-LICENSE
 %{__mv} README     NGINX-README
-
-%{__mv} ngx_pagespeed-%{pagespeed_fullver}/LICENSE    ./PAGESPEED-LICENSE
-%{__mv} ngx_pagespeed-%{pagespeed_fullver}/README.md  ./PAGESPEED-README.md
 
 %{__mv} lua-nginx-module-%{lua_module_ver}/README.markdown ./LUAMODULE-README.markdown
 %{__mv} lua-nginx-module-%{lua_module_ver}/Changes         ./LUAMODULE-CHANGES
@@ -213,9 +195,8 @@ Not stripped version of nginx with the debugging log support
         --with-openssl-opt=no-krb5 \
         --with-openssl=openssl-%{open_ssl_ver} \
         --with-threads \
-        --add-module=ngx_pagespeed-%{pagespeed_fullver} \
-        --add-module=lua-nginx-module-%{lua_module_ver} \
         --add-module=headers-more-nginx-module-%{mh_module_ver} \
+        --add-module=lua-nginx-module-%{lua_module_ver} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 %{__make} %{?_smp_mflags}
@@ -259,9 +240,8 @@ Not stripped version of nginx with the debugging log support
         --with-openssl-opt=no-krb5 \
         --with-openssl=openssl-%{open_ssl_ver} \
         --with-threads \
-        --add-module=ngx_pagespeed-%{pagespeed_fullver} \
-        --add-module=lua-nginx-module-%{lua_module_ver} \
         --add-module=headers-more-nginx-module-%{mh_module_ver} \
+        --add-module=lua-nginx-module-%{lua_module_ver} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 %{__make} %{?_smp_mflags}
@@ -289,7 +269,6 @@ install -dm 755 %{buildroot}%{_logdir}/%{name}
 install -dm 755 %{buildroot}%{_rundir}/%{name}
 install -dm 755 %{buildroot}%{_cachedir}/%{name}
 install -dm 755 %{buildroot}%{_datadir}/%{name}/html
-install -dm 755 %{buildroot}%{pagespeed_cache_path}
 
 # Install html pages
 install -pm 644 %{SOURCE40} \
@@ -335,6 +314,7 @@ install -pm 644 %{SOURCE10} \
                 %{buildroot}%{_sysconfdir}/%{name}/xtra/
 install -pm 644 %{SOURCE11} \
                 %{buildroot}%{_sysconfdir}/%{name}/xtra/
+
 install -pm 644 %{SOURCE20} \
                 %{buildroot}%{_sysconfdir}/%{name}/xtra/
 install -pm 644 %{SOURCE21} \
@@ -346,10 +326,6 @@ install -pm 644 %{SOURCE23} \
 install -pm 644 %{SOURCE24} \
                 %{buildroot}%{_sysconfdir}/%{name}/xtra/
 install -pm 644 %{SOURCE25} \
-                %{buildroot}%{_sysconfdir}/%{name}/xtra/
-install -pm 644 %{SOURCE26} \
-                %{buildroot}%{_sysconfdir}/%{name}/xtra/
-install -pm 644 %{SOURCE27} \
                 %{buildroot}%{_sysconfdir}/%{name}/xtra/
 
 install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig
@@ -422,21 +398,17 @@ fi
 %files
 %defattr(-,root,root)
 %doc NGINX-CHANGES NGINX-CHANGES.ru NGINX-LICENSE NGINX-README
-%doc PAGESPEED-LICENSE PAGESPEED-README.md
 %doc LUAMODULE-README.markdown LUAMODULE-CHANGES
 
 %{_sbindir}/%{name}
 
 %dir %{_sysconfdir}/%{name}
-%dir %{_sysconfdir}/%{name}/ssl
 %dir %{_sysconfdir}/%{name}/conf.d
 %dir %{_sysconfdir}/%{name}/vhost.d
 %dir %{_logdir}/nginx
 
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/upstream.conf
-%config(noreplace) %{_sysconfdir}/%{name}/xtra/pagespeed.conf
-%config(noreplace) %{_sysconfdir}/%{name}/xtra/pagespeed_enabled.conf
 %config(noreplace) %{_sysconfdir}/%{name}/xtra/fastcgi_*.conf
 %config(noreplace) %{_sysconfdir}/%{name}/xtra/proxy_*.conf
 %config %{_sysconfdir}/%{name}/xtra/error-*.conf
@@ -449,6 +421,7 @@ fi
 %config %{_sysconfdir}/%{name}/win-utf
 
 %{_sysconfdir}/%{name}/html
+%{_sysconfdir}/%{name}/ssl
 
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
@@ -460,7 +433,6 @@ fi
 
 %attr(0755,%{service_user},%{service_group}) %dir %{_cachedir}/%{name}
 %attr(0755,%{service_user},%{service_group}) %dir %{_logdir}/%{name}
-%attr(0755,%{service_user},%{service_group}) %dir %{pagespeed_cache_path}
 
 %files debug
 %defattr(-,root,root)
@@ -469,6 +441,9 @@ fi
 ###############################################################################
 
 %changelog
+* Fri Apr 08 2016 Gleb Goncharov <yum@gongled.me> - 1.9.14-0
+- Nginx updated to 1.9.14 
+
 * Tue Mar 01 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-2
 - OpenSSL updated to 1.0.2g 
 
