@@ -1,40 +1,95 @@
+###############################################################################
 
-Summary: Distributed SSL session cache
-Name: distcache
-Version: 1.4.5
-Release: 23
-License: LGPLv2
-Group: System Environment/Daemons
-URL: http://www.distcache.org/
+%define _posixroot        /
+%define _root             /root
+%define _bin              /bin
+%define _sbin             /sbin
+%define _srv              /srv
+%define _home             /home
+%define _opt              /opt
+%define _lib32            %{_posixroot}lib
+%define _lib64            %{_posixroot}lib64
+%define _libdir32         %{_prefix}%{_lib32}
+%define _libdir64         %{_prefix}%{_lib64}
+%define _logdir           %{_localstatedir}/log
+%define _rundir           %{_localstatedir}/run
+%define _lockdir          %{_localstatedir}/lock/subsys
+%define _cachedir         %{_localstatedir}/cache
+%define _spooldir         %{_localstatedir}/spool
+%define _crondir          %{_sysconfdir}/cron.d
+%define _loc_prefix       %{_prefix}/local
+%define _loc_exec_prefix  %{_loc_prefix}
+%define _loc_bindir       %{_loc_exec_prefix}/bin
+%define _loc_libdir       %{_loc_exec_prefix}/%{_lib}
+%define _loc_libdir32     %{_loc_exec_prefix}/%{_lib32}
+%define _loc_libdir64     %{_loc_exec_prefix}/%{_lib64}
+%define _loc_libexecdir   %{_loc_exec_prefix}/libexec
+%define _loc_sbindir      %{_loc_exec_prefix}/sbin
+%define _loc_bindir       %{_loc_exec_prefix}/bin
+%define _loc_datarootdir  %{_loc_prefix}/share
+%define _loc_includedir   %{_loc_prefix}/include
+%define _loc_mandir       %{_loc_datarootdir}/man
+%define _rpmstatedir      %{_sharedstatedir}/rpm-state
+%define _pkgconfigdir     %{_libdir}/pkgconfig
 
-Source0: http://downloads.sourceforge.net/distcache/%{name}-%{version}.tar.bz2
-Source1: dc_server.init
-Source2: dc_client.init
+%define __service         %{_sbin}/service
+%define __chkconfig       %{_sbin}/chkconfig
+%define __ldconfig        %{_sbin}/ldconfig
+%define __useradd         %{_sbindir}/useradd
+%define __groupadd        %{_sbindir}/groupadd
+%define __getent          %{_bindir}/getent
 
-Patch0: distcache-1.4.5-setuid.patch
-Patch1: distcache-1.4.5-libdeps.patch
-Patch2: distcache-1.4.5-limits.patch
+###############################################################################
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: automake >= 1.7, autoconf >= 2.50, libtool, openssl-devel
-Requires(post): /sbin/chkconfig, /sbin/ldconfig, shadow-utils
-Requires(preun): /sbin/service, /sbin/chkconfig
+%define service_user     distcache
+%define service_group    distcache
+%define service_home     /
+
+###############################################################################
+
+Summary:           Distributed SSL session cache
+Name:              distcache
+Version:           1.4.5
+Release:           0%{?dist}
+License:           LGPLv2
+Group:             System Environment/Daemons
+URL:               http://www.distcache.org/
+
+Source0:           http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Source1:           dc_server.init
+Source2:           dc_client.init
+
+Patch0:            %{name}-%{version}-setuid.patch
+Patch1:            %{name}-%{version}-libdeps.patch
+Patch2:            %{name}-%{version}-limits.patch
+
+BuildRoot:         %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:     automake >= 1.7, autoconf >= 2.50, libtool, openssl-devel
+
+Requires(post):    /sbin/chkconfig, /sbin/ldconfig, shadow-utils
+Requires(preun):   /sbin/service, /sbin/chkconfig
+
+###############################################################################
 
 %description
 The distcache package provides a variety of functionality for
 enabling a network-based session caching system, primarily for
 (though not restricted to) SSL/TLS session caching.
 
+###############################################################################
+
 %package devel
-Group: Development/Libraries
-Summary: Development tools for distcache distributed session cache
-Requires: distcache = %{version}-%{release}
+Summary:           Development tools for distcache distributed session cache
+Group:             Development/Libraries
+Requires:          %{name} = %{version}-%{release}
 
 %description devel
 This package includes the libraries that implement the necessary
 network functionality, the session caching protocol, and APIs for
 applications wishing to use a distributed session cache, or indeed
 even to implement a storage mechanism for a session cache server.
+
+###############################################################################
 
 %prep
 %setup -q
@@ -44,50 +99,57 @@ even to implement a storage mechanism for a session cache server.
 
 %build
 libtoolize --force --copy && aclocal && autoconf
-automake -aic --gnu || : automake ate my hamster
+automake -aic || : automake failed
 pushd ssl
-autoreconf -i || : let it fail too
+autoreconf -i || : autoreconf failed
 popd
+
 %configure --enable-shared --disable-static
-make %{?_smp_mflags}
+%{__make} %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
-make -C ssl install DESTDIR=%{buildroot}
+%{make_install} DESTDIR=%{buildroot}
+%{__make} -C ssl install DESTDIR=%{buildroot}
 
-mkdir -p %{buildroot}%{_sysconfdir}/rc.d/init.d
-install -p -m 755 %{SOURCE1} \
+install -dm 755 %{buildroot}%{_sysconfdir}/rc.d/init.d
+
+install -pm 755 %{SOURCE1} \
         %{buildroot}%{_sysconfdir}/rc.d/init.d/dc_server
-install -p -m 755 %{SOURCE2} \
+install -pm 755 %{SOURCE2} \
         %{buildroot}%{_sysconfdir}/rc.d/init.d/dc_client
 
-mkdir -p %{buildroot}%{_sbindir}
-
-# Unpackaged files
 rm -f %{buildroot}%{_bindir}/{nal_test,piper} \
       %{buildroot}%{_libdir}/lib*.la
 
-%post
-/sbin/chkconfig --add dc_server
-/sbin/chkconfig --add dc_client
-/sbin/ldconfig
-# Add the "distcache" user
-/usr/sbin/useradd -c "Distcache" -u 94 \
-        -s /sbin/nologin -r -d / distcache 2> /dev/null || :
-
-%preun
-if [ $1 = 0 ]; then
-    /sbin/service dc_server stop > /dev/null 2>&1
-    /sbin/service dc_client stop > /dev/null 2>&1
-    /sbin/chkconfig --del dc_server
-    /sbin/chkconfig --del dc_client
-fi
-
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf %{buildroot}
+
+###############################################################################
+
+%pre
+getent group %{service_group} >/dev/null || groupadd -r %{service_group}
+getent passwd %{service_user} >/dev/null || useradd -r -g %{service_group} -s /sbin/nologin -d %{service_home} %{service_user}
+exit 0
+
+%post
+if [[ $1 -eq 1 ]] ; then
+    %{__chkconfig} --add dc_server
+    %{__chkconfig} --add dc_client
+    %{__ldconfig} 
+fi
+
+%preun
+if [[ $1 -eq 0 ]]; then
+    %{__service} dc_server stop > /dev/null 2>&1
+    %{__service} dc_client stop > /dev/null 2>&1
+    %{__chkconfig} --del dc_server
+    %{__chkconfig} --del dc_client
+fi
+
+%postun -p %{__ldconfig} 
+
+###############################################################################
 
 %files
 %defattr(-,root,root,-)
@@ -102,136 +164,14 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/distcache
+%{_includedir}/%{name}
 %{_includedir}/libnal
 %{_libdir}/*.so
 %{_mandir}/man2/*
 
+###############################################################################
+
 %changelog
-* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.4.5-23
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
-
-* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.4.5-22
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
-
-* Fri Aug 21 2009 Tomas Mraz <tmraz@redhat.com> - 1.4.5-21
-- rebuilt with new openssl
-
-* Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.4.5-20
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
-
-* Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.4.5-19
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
-
-* Thu Jan 15 2009 Tomas Mraz <tmraz@redhat.com> 1.4.5-18
-- rebuild with new openssl
-- have to run autoreconf in the ssl subdir due to new libtool
-
-* Wed Feb 13 2008 Joe Orton <jorton@redhat.com> 1.4.5-17
-- fix libnal build
-
-* Wed Dec  5 2007 Joe Orton <jorton@redhat.com> 1.4.5-16
-- rebuild for new OpenSSL
-
-* Wed Aug 22 2007 Joe Orton <jorton@redhat.com> 1.4.5-15
-- fix License, BuildRoot, Source0, drop .la files, detabify
-
-* Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 1.4.5-14.1
-- rebuild
-
-* Wed Jun  7 2006 Jeremy Katz <katzj@redhat.com> - 1.4.5-14
-- rebuild for -devel deps
-
-* Thu Mar  2 2006 Joe Orton <jorton@redhat.com> 1.4.5-13
-- avoid uid collision with exim (#182091)
-
-* Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 1.4.5-12.2.1
-- bump again for double-long bug on ppc(64)
-
-* Tue Feb 07 2006 Jesse Keating <jkeating@redhat.com> - 1.4.5-12.2
-- rebuilt for new gcc4.1 snapshot and glibc changes
-
-* Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
-- rebuilt
-
-* Wed Nov  9 2005 Tomas Mraz <tmraz@redhat.com> 1.4.5-12
-- rebuilt with new openssl
-
-* Fri Jul 29 2005 Joe Orton <jorton@redhat.com> 1.4.5-11
-- add distcache user in post script, uid 93
-- run daemons as distcache user rather than nobody
-
-* Thu Jul 28 2005 Joe Orton <jorton@redhat.com> 1.4.5-10
-- fix broken deps
-
-* Tue Jul 26 2005 Joe Orton <jorton@redhat.com> 1.4.5-9
-- add epoch and release to devel->main dependency
-- don't build static libraries
-
-* Fri May  6 2005 Joe Orton <jorton@redhat.com> 1.4.5-8
-- make libdistcache{,server} depend on libnal
-- add scriplet requirements
-
-* Tue Mar  1 2005 Tomas Mraz <tmraz@redhat.com> 1.4.5-7
-- rebuild with openssl-0.9.7e
-
-* Tue Aug 31 2004 Joe Orton <jorton@redhat.com> 1.4.5-6
-- move ldconfig from preun to postun (#131289)
-
-* Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
-- rebuilt
-
-* Mon May 17 2004 Joe Orton <jorton@redhat.com> 1.4.5-4
-- run ldconfig in %%post and %%postun
-
-* Sun May  2 2004 Joe Orton <jorton@redhat.com> 1.4.5-3
-- add BuildRequires: openssl-devel (#122265)
-
-* Tue Apr 13 2004 Joe Orton <jorton@redhat.com> 1.4.5-2
-- dc_client: go setuid later (#120711)
-
-* Tue Apr  6 2004 Joe Orton <jorton@redhat.com> 1.4.5-1
-- update to 1.4.5 (#119135)
-- include sslswamp
-- build shared libraries
-
-* Tue Mar 02 2004 Elliot Lee <sopwith@redhat.com>
-- rebuilt
-
-* Sat Feb 21 2004 Florian La Roche <Florian.LaRoche@redhat.de>
-- mv /etc/init.d -> /etc/rc.d/init.d
-
-* Fri Feb 13 2004 Elliot Lee <sopwith@redhat.com>
-- rebuilt
-
-* Sun Jan 25 2004 Joe Orton <jorton@redhat.com> 0.4.2-9
-- add BuildRequires (#114115)
-- add config lines to init scripts
-
-* Tue Jan 20 2004 Joe Orton <jorton@redhat.com> 0.4.2-8
-- rebuild
-
-* Fri Nov 28 2003 Joe Orton <jorton@redhat.com> 0.4.2-7
-- sync with upstream: use -sock{owner,perms} in dc_client
-
-* Wed Nov 26 2003 Joe Orton <jorton@redhat.com> 0.4.2-6
-- set socket owner and permissions in dc_client
-
-* Wed Nov 26 2003 Joe Orton <jorton@redhat.com> 0.4.2-5
-- rebuild in new environment
-
-* Tue Nov 18 2003 Joe Orton <jorton@redhat.com> 0.4.2-4
-- fix %%preun to allow --erase to succeed (#110115)
-
-* Thu Jul 31 2003 Joe Orton <jorton@redhat.com> 0.4.2-3
-- add dc_client init script
-- pass -sessions to dc_server
-
-* Wed Jul  2 2003 Joe Orton <jorton@redhat.com> 0.4.2-2
-- have dc_server drop to 'nobody' user after bind()
-- add init script for dc_server
-- build everything using -fPIC
-
-* Mon Jun  9 2003 Joe Orton <jorton@redhat.com> 0.4.2-1
-- Initial build.
+* Sat Apr 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.4.5-0
+- Initial build 
 
