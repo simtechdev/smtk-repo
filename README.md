@@ -1,6 +1,7 @@
 ## About
 
 [![Build Status](https://jenkins.gongled.me/buildStatus/icon?job=gongled-repo)](https://jenkins.gongled.me/job/gongled-repo/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/gongled/gongled-repo/blob/master/LICENSE) 
 
 Spec files and patches for GONGLED repository. It works on CentOS/RHEL 6.x/7.x.
 
