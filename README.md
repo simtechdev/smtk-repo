@@ -23,5 +23,5 @@ yum install -y https://release.yum.gongled.me/gongled-release-7.noarch.rpm
 
 ## License
 
-MIT
+[MIT](https://github.com/gongled/gongled-repo/blob/master/LICENSE)
 
