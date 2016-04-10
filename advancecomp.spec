@@ -48,6 +48,8 @@ BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:   gcc-c++, zlib-devel
 
+Provides:        %{name} = %{version}-%{release}
+
 ################################################################################
 
 %description
@@ -67,7 +69,7 @@ The main features are :
 
 %install
 %{__rm} -rf %{buildroot}
-%makeinstall
+%{make_install}
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -83,8 +85,8 @@ The main features are :
 ################################################################################
 
 %changelog
-* Thu Dec 31 2015 Gleb Goncharov <inbox@gongled.me> - 1.20-0
-- Updates to release 1.20.
+* Sat Apr 09 2016 Gleb Goncharov <inbox@gongled.me> - 1.20-0 
+- Updated to release 1.20.
 
 * Mon Aug 14 2006 Dag Wieers <dag@wieers.com> - 1.15-1 - 7981/dag
 - Updated to release 1.15.
