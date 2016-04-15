@@ -62,13 +62,10 @@ install -dm 755 %{buildroot}%{_loc_datarootdir}/smtk-repo/testing
 
 install -pm 644 *.repo \
                 %{buildroot}%{_sysconfdir}/yum.repos.d/
-
 install -pm 644 RPM-GPG-KEY-SIMTECH \
                 %{buildroot}%{_sysconfdir}/pki/rpm-gpg
-
 install -pm 664 mirrors/release/* \
                 %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
-
 install -pm 664 mirrors/testing/* \
                 %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
 
