@@ -13,3 +13,4 @@ Makefile
 *.pdf
 *.swp
 *.bak
+!smtk-repo/*
