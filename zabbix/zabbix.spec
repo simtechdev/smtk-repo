@@ -77,8 +77,8 @@ Patch2:               fping3-sourceip-option.patch
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:        mysql-devel postgresql-devel net-snmp-devel openldap-devel gnutls-devel 
-BuildRequires:        iksemel-devel unixODBC-devel libxml2-devel curl-devel >= 7.13.1 
+BuildRequires:        mysql-devel postgresql-devel net-snmp-devel openldap-devel gnutls-devel
+BuildRequires:        iksemel-devel unixODBC-devel libxml2-devel curl-devel >= 7.13.1
 BuildRequires:        OpenIPMI-devel >= 2 libssh2-devel >= 1.0.0 sqlite-devel
 %if 0%{?rhel} >= 7
 BuildRequires:        systemd
@@ -327,7 +327,7 @@ Zabbix web frontend for PostgreSQL
 ################################################################################
 
 %prep
-%setup0 -q -n zabbix-%{version}
+%setup -q -n zabbix-%{version}
 
 %patch0 -p1
 %patch1 -p1
@@ -809,6 +809,10 @@ fi
 
 ################################################################################
 
+%files
+%defattr(-,root,root,-)
+# no files for you
+
 %files agent
 %defattr(-,root,root,-)
 %doc %{_docdir}/zabbix-agent-%{version}/
@@ -977,12 +981,12 @@ fi
 
 %changelog
 * Fri Mar 18 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.1-1
-- 'update-alternatives' for zabbix-proxy doesn't work properly. Fixed. 
-- added zabbix-proxy-sqlite3 
+- 'update-alternatives' for zabbix-proxy doesn't work properly. Fixed.
+- added zabbix-proxy-sqlite3
 
 * Thu Mar 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.1-0
-- Updated to latest version 
+- Updated to latest version
 
-* Wed Feb 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.0-0 
+* Wed Feb 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.0-0
 - Initial build
 

@@ -50,7 +50,7 @@ Group:           Development/Libraries
 License:         MIT
 URL:             https://github.com/xenolf/%{name}
 
-Source0:         https://github.com/xenolf/%{name}/releases/download/v%{version}/%{name}_linux_amd64.tar.xz 
+Source0:         %{name}.tar.bz2
 
 ExclusiveArch:   x86_64
 
@@ -66,19 +66,31 @@ Let's Encrypt client and ACME library written in Go.
 ###############################################################################
 
 %prep
-%setup -q -c -n %{name}-%{version}
-
+%setup -qn %{name}
 
 %build
+export GOPATH=$(pwd)
 
+mkdir -p {src,bin}
+
+mv github.com src
+mv golang.org src
+mv google.golang.org src
+mv gopkg.in src
+
+pushd src/github.com/xenolf/%{name}
+go build
+popd
+
+mv src/github.com/xenolf/%{name}/%{name} bin/%{name}
 
 %install
-%{__rm} -rf %{buildroot}
+rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_bindir}
 install -dm 755 %{buildroot}%{_sysconfdir}/%{name}
 
-install -pm 755 %{name} %{buildroot}%{_bindir}/
+install -pm 755 bin/%{name} %{buildroot}%{_bindir}/
 
 %clean
 rm -rf %{buildroot}
@@ -87,7 +99,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSES.txt
 %{_bindir}/%{name}
 %{_sysconfdir}/%{name}
 

@@ -20,5 +20,5 @@ yum install -y https://release.yum.smtk.st/smtk-release-7.noarch.rpm
 
 ## License
 
-MIT
+[MIT](https://github.com/simtechdev/smtk-repo/blob/master/LICENSE)
 
