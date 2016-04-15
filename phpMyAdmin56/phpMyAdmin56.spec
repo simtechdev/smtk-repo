@@ -204,22 +204,22 @@ sed -e "/'blowfish_secret'/s/MUSTBECHANGEDONINSTALL/$RANDOM$RANDOM$RANDOM$RANDOM
 ################################################################################
 
 %changelog
-* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> 4.5.5.1-0
+* Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 4.5.5.1-0
 - Upgrade to 4.5.5.1
 
-* Tue Feb 23 2016 Gleb Goncharov <yum@gongled.ru> 4.5.5-0
+* Tue Feb 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 4.5.5-0
 - Upgrade to 4.5.5
 
-* Sun Feb 07 2016 Gleb Goncharov <yum@gongled.ru> 4.5.4.1-0
+* Sun Feb 07 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 4.5.4.1-0
 - Upgrade to 4.5.4.1
 
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.ru> 4.5.3.1-0
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> 4.5.3.1-0
 - Upgrade to 4.5.3.1
 
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.ru> 4.4.12-1
+* Sun Aug 02 2015 Gleb Goncharov <ggoncharov@simtechdev.com> 4.4.12-1
 - Minor fixes.
 
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.ru> 4.4.12-0
+* Sun Aug 02 2015 Gleb Goncharov <ggoncharov@simtechdev.com> 4.4.12-0
 - Upgrade to 4.4.12.0
 
 * Thu May 14 2015 Robert Scheck <robert@fedoraproject.org> 4.0.10.10-1

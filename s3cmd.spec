@@ -65,8 +65,8 @@ Provides:        %{name} = %{version}-%{release}
 ########################################################################################
 
 %description
-S3cmd lets you copy files from/to Amazon S3 (Simple Storage Service) using a simple 
-to use command line client. Supports rsync-like backup, GPG encryption, and more. Also 
+S3cmd lets you copy files from/to Amazon S3 (Simple Storage Service) using a simple
+to use command line client. Supports rsync-like backup, GPG encryption, and more. Also
 supports management of Amazons CloudFront content delivery network.
 
 ########################################################################################
@@ -101,6 +101,6 @@ rm -rf %{buildroot}
 ########################################################################################
 
 %changelog
-* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.6.1-0
-- Updated to latest release 
+* Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.6.1-0
+- Updated to latest release
 

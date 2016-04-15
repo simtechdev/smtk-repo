@@ -69,16 +69,16 @@ Requires:          apr-devel, db4-devel, expat-devel
 Requires:          %{name} = %{version}-%{release}
 
 %description devel
-This package provides the support files which can be used to 
-build applications using the APR utility library.  The mission 
-of the Apache Portable Runtime (APR) is to provide a free 
+This package provides the support files which can be used to
+build applications using the APR utility library.  The mission
+of the Apache Portable Runtime (APR) is to provide a free
 library of C data structures and routines.
 
 ###############################################################################
 
 %package dbm
 Summary:           APR utility library DBM driver
-Group:             Development/Libraries 
+Group:             Development/Libraries
 
 BuildRequires:     db4-devel
 Requires:          %{name} = %{version}-%{release}
@@ -273,6 +273,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Sat Apr 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.5.4-0
-- Initial build 
-                                                                                
+* Sat Apr 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.5.4-0
+- Initial build
+

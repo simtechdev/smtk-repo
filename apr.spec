@@ -70,9 +70,9 @@ Summary:         APR library development kit
 Requires:        %{name} = %{version}
 
 %description devel
-This package provides the support files which can be used to 
+This package provides the support files which can be used to
 build applications using the APR library.  The mission of the
-Apache Portable Runtime (APR) is to provide a free library of 
+Apache Portable Runtime (APR) is to provide a free library of
 C data structures and routines.
 
 ###############################################################################
@@ -94,7 +94,7 @@ C data structures and routines.
 %{__make} dox
 
 %install
-rm -rf %{buildroot} 
+rm -rf %{buildroot}
 
 %{make_install} DESTDIR=%{buildroot}
 rm -f %{buildroot}%{_libdir}/apr.exp
@@ -134,6 +134,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Sat Apr 09 2016 Gleb Goncharov <yum@gongled.ru> 1.5.2-0
-- Initial build 
+* Sat Apr 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 1.5.2-0
+- Initial build
 

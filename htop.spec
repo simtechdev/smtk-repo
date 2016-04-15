@@ -47,7 +47,7 @@ htop is an interactive process viewer for Linux.
 ###############################################################################
 
 %changelog
-* Fri Feb 12 2016 Gleb Goncharov <yum@gongled.ru> - 2.0.0-0
+* Fri Feb 12 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.0.0-0
 - Updated to version 2.0.0
 
 * Sun May 25 2014 Anton Novojilov <andy@essentialkaos.com> - 1.0.3-0

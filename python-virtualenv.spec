@@ -29,7 +29,7 @@ licensed under an MIT-style permissive license.
 
 %prep
 %setup -q -n virtualenv-%{version}
-%{__sed} -i -e "1s|#!/usr/bin/env python||" virtualenv.py 
+%{__sed} -i -e "1s|#!/usr/bin/env python||" virtualenv.py
 
 %build
 # Build code
@@ -64,6 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.10.1-0
+* Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.10.1-0
 - Initial build.
 

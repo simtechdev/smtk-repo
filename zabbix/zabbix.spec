@@ -980,13 +980,13 @@ fi
 ################################################################################
 
 %changelog
-* Fri Mar 18 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.1-1
+* Fri Mar 18 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.1-1
 - 'update-alternatives' for zabbix-proxy doesn't work properly. Fixed.
 - added zabbix-proxy-sqlite3
 
-* Thu Mar 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.1-0
+* Thu Mar 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.1-0
 - Updated to latest version
 
-* Wed Feb 17 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.0-0
+* Wed Feb 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.0-0
 - Initial build
 

@@ -61,7 +61,7 @@ install -pm 644 %{name}.8 %{buildroot}%{_mandir}/man8/%{name}.8
 
 cp -ar templates %{buildroot}%{_datadir}/%{name}/
 
-%post 
+%post
 if [[ $1 -eq 1 ]] ; then
   ln -s %{_bindir}/%{name} %{_bindir}/%{name}
   ln -s %{_datadir}/%{name}/templates/kaos \
@@ -88,8 +88,8 @@ rm -rf %{buildroot}
 ########################################################################################
 
 %changelog
-* Sat Feb 27 2016 Gleb Goncharov <yum@gongled.ru> - 0.6.6-9
-- Removed '-kaos' prefix from themes (link on project is present) 
+* Sat Feb 27 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.6.6-9
+- Removed '-kaos' prefix from themes (link on project is present)
 
 * Thu Feb 25 2016 Anton Novojilov <andy@essentialkaos.com> - 0.6.6-8
 - Fixed some bugs in CSS

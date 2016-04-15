@@ -5,7 +5,7 @@ Name:           ansible-lint
 Version:        2.3.9
 Release:        0%{?dist}
 License:        MIT
-Group:          Development/Libraries 
+Group:          Development/Libraries
 URL:            https://github.com/willthames/ansible-lint
 
 Source:         https://pypi.python.org/packages/source/a/%{name}/%{name}-%{version}.tar.gz
@@ -21,7 +21,7 @@ Provides:       %{name} = %{verion}-%{release}
 ########################################################################################
 
 %description
-ansible-lint checks playbooks for practices and behaviour that could potentially 
+ansible-lint checks playbooks for practices and behaviour that could potentially
 be improved.
 
 ########################################################################################
@@ -49,5 +49,5 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ########################################################################################
 
 %changelog
-* Tue Mar 08 2016 Gleb Goncharov <yum@gongled.ru> - 2.3.9-0
+* Tue Mar 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.3.9-0
 - Initial build

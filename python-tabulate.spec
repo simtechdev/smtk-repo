@@ -28,11 +28,11 @@ Provides:       %{name} = %{verion}-%{release}
 Pretty-print tabular data in Python, a library and a command-line utility.
 
 The main use cases of the library are:
-* printing small tables without hassle: just one function call, 
+* printing small tables without hassle: just one function call,
   formatting is guided by the data itself
-* authoring tabular data for lightweight plain-text markup: 
+* authoring tabular data for lightweight plain-text markup:
   multiple output formats suitable for further editing or transformation
-* readable presentation of mixed textual and numeric data: 
+* readable presentation of mixed textual and numeric data:
   smart column alignment, configurable number formatting, alignment by a decimal point
 
 ########################################################################################
@@ -60,6 +60,6 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ########################################################################################
 
 %changelog
-* Wed Feb 24 2016 Gleb Goncharov <yum@gongled.ru> - 0.7.5-0
+* Wed Feb 24 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.7.5-0
 - Initial build
 

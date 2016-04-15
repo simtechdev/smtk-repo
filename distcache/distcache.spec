@@ -136,7 +136,7 @@ exit 0
 if [[ $1 -eq 1 ]] ; then
     %{__chkconfig} --add dc_server
     %{__chkconfig} --add dc_client
-    %{__ldconfig} 
+    %{__ldconfig}
 fi
 
 %preun
@@ -147,7 +147,7 @@ if [[ $1 -eq 0 ]]; then
     %{__chkconfig} --del dc_client
 fi
 
-%postun -p %{__ldconfig} 
+%postun -p %{__ldconfig}
 
 ###############################################################################
 
@@ -172,6 +172,6 @@ fi
 ###############################################################################
 
 %changelog
-* Sat Apr 09 2016 Gleb Goncharov <yum@gongled.ru> - 1.4.5-0
-- Initial build 
+* Sat Apr 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.4.5-0
+- Initial build
 

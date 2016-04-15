@@ -61,9 +61,9 @@
 
 ###############################################################################
 
-Summary:              Apache HTTP Server 
+Summary:              Apache HTTP Server
 Name:                 httpd
-Version:              %{httpd_version} 
+Version:              %{httpd_version}
 Release:              2%{?dist}
 License:              Apache License, Version 2.0
 Group:                System Environment/Daemons
@@ -365,13 +365,13 @@ exit 0
 
 %post
 if [[ $1 -eq 1 ]] ; then
-  /sbin/chkconfig --add httpd 
+  /sbin/chkconfig --add httpd
 fi
 
 %preun
 if [[ $1 -eq 0 ]] ; then
   %{__service} httpd stop > /dev/null 2>&1
-  %{__chkconfig} --del httpd 
+  %{__chkconfig} --del httpd
 fi
 
 ###############################################################################
@@ -508,12 +508,12 @@ fi
 ###############################################################################
 
 %changelog
-* Fri Mar 11 2016 Gleb Goncharov <yum@gongled.ru> - 2.2.31-2
-- Added custom configs 
+* Fri Mar 11 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.2.31-2
+- Added custom configs
 
-* Tue Mar 08 2016 Gleb Goncharov <yum@gongled.ru> - 2.2.31-1
-- Added kaosv, sysconfig and httpd.conf 
+* Tue Mar 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.2.31-1
+- Added kaosv, sysconfig and httpd.conf
 
-* Tue Mar 08 2016 Gleb Goncharov <yum@gongled.ru> - 2.2.31-0
-- Initial build. 
+* Tue Mar 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.2.31-0
+- Initial build.
 

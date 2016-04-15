@@ -130,7 +130,7 @@ fi
 %preun
 if [[ $1 -eq 0 ]] ; then
     %{__service} %{service_name} stop
-    %{__chkconfig} --del %{service_name} 
+    %{__chkconfig} --del %{service_name}
 fi
 
 %clean
@@ -141,7 +141,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc FAQ INSTALL BUGS AUDIT Changelog LICENSE README README.security REWARD
-%doc SPEED TODO BENCHMARKS COPYING SECURITY/ EXAMPLE/ TUNING SIZE 
+%doc SPEED TODO BENCHMARKS COPYING SECURITY/ EXAMPLE/ TUNING SIZE
 %dir %{_sysconfdir}/%{name}
 %attr(600,root,root) %dir %{_logdir}/%{name}
 %attr(555,%{service_user},%{service_group}) %dir %{service_home}
@@ -157,10 +157,10 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Sun Mar 27 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.3-1
+* Sun Mar 27 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.3-1
 - Removed 'tcp_wrappers' option
 - Added 'userlist_file' option
 
-* Sun Mar 13 2016 Gleb Goncharov <yum@gongled.ru> - 3.0.3-0
+* Sun Mar 13 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.3-0
 - Initial build
 

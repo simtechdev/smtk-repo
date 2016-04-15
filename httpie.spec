@@ -92,7 +92,7 @@ sed -i 's/requests>=2.0.0/requests>=1.1.0/' setup.py
 ###############################################################################
 
 %changelog
-* Thu Mar 31 2016 Gleb Goncharov <yum@gongled.ru> - 0.9.3-0
+* Thu Mar 31 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.9.3-0
 - Updated to latest release
 
 * Tue Jul 29 2014 Anton Novojilov <andy@essentialkaos.com> - 0.8.0-0

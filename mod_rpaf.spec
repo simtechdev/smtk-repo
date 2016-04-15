@@ -1,5 +1,5 @@
 Name:           mod_rpaf
-Version:        0.8.4 
+Version:        0.8.4
 Release:        0%{?dist}
 Summary:        Reverse proxy add forward module for Apache
 
@@ -38,6 +38,6 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Wed Mar 09 2016 Gleb Goncharov <yum@gongled.ru> - 0.6-0
+* Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.6-0
 - Initial build.
 
