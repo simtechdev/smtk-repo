@@ -193,7 +193,7 @@ easy for developers to write dynamically generated web pages. PHP also
 offers built-in database integration for several commercial and
 non-commercial database management systems, so writing a
 database-enabled webpage with PHP is fairly simple. The most common
-use of PHP coding is probably as a replacement for CGI scripts. 
+use of PHP coding is probably as a replacement for CGI scripts.
 
 The %{name} package contains the module (often referred to as mod_php)
 which adds support for the PHP language to Apache HTTP Server.
@@ -215,7 +215,7 @@ Provides:         php-cli = %{version}-%{release}
 Provides:         php-cli%{?_isa} = %{version}-%{release}
 
 %description cli
-The %{name}-cli package contains the command-line interface 
+The %{name}-cli package contains the command-line interface
 executing PHP scripts, /usr/bin/php, and the CGI interface.
 
 ################################################################################
@@ -504,7 +504,7 @@ Provides:         %{name}-pdo_sqlite%{?_isa} = %{version}
 %description pdo
 The %{name}-pdo package contains a dynamic shared object that will add
 a database access abstraction layer to PHP.  This module provides
-a common interface for accessing MySQL, PostgreSQL or other 
+a common interface for accessing MySQL, PostgreSQL or other
 databases.
 
 ################################################################################
@@ -1272,8 +1272,8 @@ ln -sf ../configure
 %if %{with_dtrace}
     --enable-dtrace \
 %endif
-    $* 
-if test $? != 0; then 
+    $*
+if test $? != 0; then
   tail -500 config.log
   : configure failed
   exit 1
@@ -1973,8 +1973,8 @@ fi
 ################################################################################
 
 %changelog
-* Sat Mar 13 2016 Gleb Goncharov <yum@gongled.me> - 5.6.19-0
+* Sat Mar 13 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.19-0
 - Updated to latest version
 
-* Sat Jan 16 2016 Gleb Goncharov <yum@gongled.me> - 5.6.17-0
+* Sat Jan 16 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.17-0
 - Initial build

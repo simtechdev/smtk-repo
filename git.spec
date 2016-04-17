@@ -272,12 +272,12 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Tue Mar 29 2016 Gleb Goncharov <yum@gongled.me> - 2.8.0-0
+* Tue Mar 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.8.0-0
 - Updated to latest release
 
-* Fri Mar 18 2016 Gleb Goncharov <yum@gongled.me> - 2.7.4-0
+* Fri Mar 18 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.7.4-0
 - Updated to latest release
 
-* Tue Feb 23 2016 Gleb Goncharov <yum@gongled.me> - 2.7.2-0
+* Tue Feb 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.7.2-0
 - Updated to latest release
 

@@ -34,9 +34,9 @@
 
 ###############################################################################
 
-Summary:         Optimizer for PNG images 
+Summary:         Optimizer for PNG images
 Name:            pngrewrite
-Version:         1.4.0 
+Version:         1.4.0
 Release:         0%{?dist}
 Group:           Applications/Multimedia
 License:         zlib/libpng
@@ -53,9 +53,9 @@ Provides:        %{name} = %{version}-%{release}
 ###############################################################################
 
 %description
-Pngrewrite is command-line utility that reduces the unnecessarily large 
-palettes that some programs write into PNG files. It also optimizes 
-transparency data, and reduces the bits-per-pixel if possible. Handy for 
+Pngrewrite is command-line utility that reduces the unnecessarily large
+palettes that some programs write into PNG files. It also optimizes
+transparency data, and reduces the bits-per-pixel if possible. Handy for
 post-processing PNG files before putting them on a web site.
 
 ###############################################################################
@@ -84,6 +84,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Thu Dec 31 2015 Gleb Goncharov <yum@gongled.me> - 1.4.0-0
-- Initial build 
+* Thu Dec 31 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.4.0-0
+- Initial build
 

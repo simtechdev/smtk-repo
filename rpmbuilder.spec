@@ -49,8 +49,8 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 1.0.3-0
-- Updated to latest version 
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.3-0
+- Updated to latest version
 
 * Thu Aug 06 2015 Anton Novojilov <andy@essentialkaos.com> - 1.0.2-0
 - Double bell replaced by single bell after log build

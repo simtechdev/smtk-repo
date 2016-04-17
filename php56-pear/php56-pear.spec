@@ -109,7 +109,7 @@ cp %{SOURCE1} %{SOURCE30} %{SOURCE31} %{SOURCE32} %{SOURCE33} .
 %build
 
 %install
-%{__rm} -rf %{buildroot} 
+%{__rm} -rf %{buildroot}
 
 export PHP_PEAR_SYSCONF_DIR=%{_sysconfdir}
 export PHP_PEAR_SIG_KEYDIR=%{_sysconfdir}/pearkeys
@@ -161,7 +161,7 @@ install -m 644 -c %{SOURCE13} \
            %{buildroot}%{_root_sysconfdir}/rpm/macros.%{_name}
 
 # apply patches on installed PEAR tree
-pushd %{buildroot}%{peardir} 
+pushd %{buildroot}%{peardir}
  pushd PEAR
  popd
 popd
@@ -286,5 +286,5 @@ fi
 ################################################################################
 
 %changelog
-* Sun Jan 17 2016 Gleb Goncharov <yum@gongled.me> 1:1.10.1-0
+* Sun Jan 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 1:1.10.1-0
 - Initial build

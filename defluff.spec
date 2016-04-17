@@ -37,7 +37,7 @@
 %ifarch x86_64
 %define release_arch      x86_64
 %else
-%define release_arch      i386 
+%define release_arch      i386
 %endif
 
 ###############################################################################
@@ -61,7 +61,7 @@ Provides:        %{name} = %{version}-%{release}
 ###############################################################################
 
 %description
-It repeats the huffman coding step of the deflate process, trying to find a 
+It repeats the huffman coding step of the deflate process, trying to find a
 representation that is as short as possible. Since most deflate implementations
 are optimized for speed, they don't try that hard, and defluff is often able to
 squeeze out a few more bits.
@@ -91,6 +91,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Thu Dec 31 2015 Gleb Goncharov <yum@gongled.me> - 0.3.2-0
-- Initial build 
+* Thu Dec 31 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.3.2-0
+- Initial build
 

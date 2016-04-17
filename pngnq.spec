@@ -34,7 +34,7 @@
 
 ################################################################################
 
-Summary:         Tool for quantizing PNG images in RGBA format 
+Summary:         Tool for quantizing PNG images in RGBA format
 Name:            pngnq
 Version:         1.1
 Release:         0%{?dist}
@@ -49,8 +49,8 @@ BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root
 ################################################################################
 
 %description
-Pngnq is an adaptation by Stuart Coyle of Greg Roelf's pnqquant using Anthony 
-Dekker's neuquant algorithm. The neuquant algorithm uses a neural network to 
+Pngnq is an adaptation by Stuart Coyle of Greg Roelf's pnqquant using Anthony
+Dekker's neuquant algorithm. The neuquant algorithm uses a neural network to
 optimize the color map selection. This is fast and quite accurate, giving good
 results on many types of images.
 
@@ -82,5 +82,5 @@ results on many types of images.
 ################################################################################
 
 %changelog
-* Thu Dec 31 2015 Gleb Goncharov <yum@gongled.me> - 1.1-0
-- Initial build 
+* Thu Dec 31 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.1-0
+- Initial build

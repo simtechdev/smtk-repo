@@ -151,5 +151,5 @@ fi
 ################################################################################
 
 %changelog
-* Fri Jan 22 2016 Gleb Goncharov <yum@gongled.me> - 2.2.7-0
-- Initial build. 
+* Fri Jan 22 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.2.7-0
+- Initial build.

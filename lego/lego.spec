@@ -105,11 +105,11 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Wed Mar 23 2016 Gleb Goncharov <yum@gongled.me> - 0.3.0-0
+* Wed Mar 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.3.0-0
 - Updated to latest release.
 
-* Sun Jan 31 2016 Gleb Goncharov <yum@gongled.me> - 0.2.0-1
-- Added certificates path 
+* Sun Jan 31 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.2.0-1
+- Added certificates path
 
-* Fri Jan 22 2016 Gleb Goncharov <yum@gongled.me> - 0.2.0-0
-- Initial build 
+* Fri Jan 22 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.2.0-0
+- Initial build

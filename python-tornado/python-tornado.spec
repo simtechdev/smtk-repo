@@ -269,5 +269,5 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
-* Fri Oct 23 2015 Gleb Goncharov <yum@gongled.me> - 4.2.1-1
+* Fri Oct 23 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.2.1-1
 - Initial build

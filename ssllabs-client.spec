@@ -100,11 +100,11 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Fri Jan 15 2016 Gleb Goncharov <yum@gongled.me> - 1.0.8-0
-- Updated to latest version 
+* Fri Jan 15 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.8-0
+- Updated to latest version
 
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 1.0.5-0
-- Updated to latest version 
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.5-0
+- Updated to latest version
 
 * Sat Nov 14 2015 Anton Novojilov <andy@essentialkaos.com> - 1.0.4-0
 - Small minor fixes

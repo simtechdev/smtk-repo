@@ -52,8 +52,8 @@ Provides:         php-pecl-igbinary%{?_isa} = %{version}
 %description
 Igbinary is a drop in replacement for the standard PHP serializer.
 
-Instead of time and space consuming textual representation, 
-igbinary stores PHP data structures in a compact binary form. 
+Instead of time and space consuming textual representation,
+igbinary stores PHP data structures in a compact binary form.
 Savings are significant when using memcached or similar memory
 based storages for serialized data.
 
@@ -187,6 +187,6 @@ fi
 ################################################################################
 
 %changelog
-* Sun Jan 17 2016 Gleb Goncharov <yum@gongled.me> - 1.2.1-0
+* Sun Jan 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.2.1-0
 - Initial build
 

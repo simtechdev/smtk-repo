@@ -441,32 +441,32 @@ fi
 ###############################################################################
 
 %changelog
-* Fri Apr 08 2016 Gleb Goncharov <yum@gongled.me> - 1.9.14-0
-- Nginx updated to 1.9.14 
+* Fri Apr 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.14-0
+- Nginx updated to 1.9.14
 
-* Tue Mar 01 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-2
-- OpenSSL updated to 1.0.2g 
+* Tue Mar 01 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.10-2
+- OpenSSL updated to 1.0.2g
 
-* Wed Feb 17 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-1
-- Dependencies updated to latest versions 
+* Wed Feb 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.10-1
+- Dependencies updated to latest versions
 
-* Wed Jan 27 2016 Gleb Goncharov <yum@gongled.me> - 1.9.10-0
+* Wed Jan 27 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.10-0
 - Nginx updated to 1.9.10
 
-* Sun Dec 13 2015 Gleb Goncharov <yum@gongled.me> - 1.9.9-0
+* Sun Dec 13 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.9-0
 - Nginx updated to 1.9.9
 
-* Fri Dec 04 2015 Gleb Goncharov <yum@gongled.me> - 1.9.7-0
-- Nginx updated to 1.9.7 
+* Fri Dec 04 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.7-0
+- Nginx updated to 1.9.7
 
-* Thu Nov 19 2015 Gleb Goncharov <yum@gongled.me> - 1.9.6-1
-- Increase autoindex dir length. 
+* Thu Nov 19 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.6-1
+- Increase autoindex dir length.
 
-* Mon Nov 16 2015 Gleb Goncharov <yum@gongled.me> - 1.9.6-0
-- Nginx updated to 1.9.6 
+* Mon Nov 16 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.6-0
+- Nginx updated to 1.9.6
 
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 1.9.3-1
+* Sun Aug 02 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.3-1
 - Add additional configurations and preferences.
 
-* Sun Aug 02 2015 Gleb Goncharov <yum@gongled.me> - 1.9.3-0
+* Sun Aug 02 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.3-0
 - Nginx updated to 1.9.3

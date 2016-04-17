@@ -39,14 +39,14 @@ BuildRequires:      python-devel python-setuptools-devel
 Provides:           %{short_name} = %{version}-%{release}
 
 %description
-pip is a tool for installing and managing Python packages, 
-such as those found in the Python Package Index. 
+pip is a tool for installing and managing Python packages,
+such as those found in the Python Package Index.
 It’s a replacement for easy_install.
 
 ## Build & Install #############################################################
 
 %prep
-%setup -qn %{short_name}-%{version} 
+%setup -qn %{short_name}-%{version}
 %{__sed} -i '1d' %{short_name}/__init__.py
 
 %build
@@ -72,16 +72,16 @@ It’s a replacement for easy_install.
 ## Changelog ###################################################################
 
 %changelog
-* Sun Mar 20 2016 Gleb Goncharov <yum@gongled.me> - 8.1.1-0
+* Sun Mar 20 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 8.1.1-0
 - Updated to latest stable release
 
-* Thu Mar 10 2016 Gleb Goncharov <yum@gongled.me> - 8.1.0-0
+* Thu Mar 10 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 8.1.0-0
 - Updated to latest stable release
 
-* Tue Feb 23 2016 Gleb Goncharov <yum@gongled.me> - 8.0.2-0
+* Tue Feb 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 8.0.2-0
 - Updated to latest stable release
 
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 7.1.2-0
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 7.1.2-0
 - Updated to latest stable release
 
 * Wed Jan 22 2014 Anton Novojilov <andy@essentialkaos.com> - 1.5.1-0

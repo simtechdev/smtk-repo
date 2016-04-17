@@ -60,7 +60,7 @@ fi
 ###############################################################################
 
 %changelog
-* Sat Jan 16 2016 Gleb Goncharov <yum@gongled.me> - 2.1-0
+* Sat Jan 16 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.1-0
 - Mouse-mode has been rewritten.
 - 'default-terminal' is now a session option.
 - The c0-* options for rate-limiting have been removed.
@@ -77,7 +77,7 @@ fi
 - If a session/window target is prefixed with '=' then only an exact match
   is considered.
 - 'move-window' understands '-a'.
-- 'update-environment' understands '-E' when attach-session is used on an 
+- 'update-environment' understands '-E' when attach-session is used on an
   already attached client.
 - 'show-environment' understands '-s' to output Bourne-compatible commands.
 - New option: 'history-file' to save/restore command prompt history.

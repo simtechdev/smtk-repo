@@ -97,5 +97,5 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ################################################################################
 
 %changelog
-* Sat Aug 1 2015 Gleb Goncharov <yum@gongled.me> - 0.0.4-0
+* Sat Aug 1 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.0.4-0
 - Initial build

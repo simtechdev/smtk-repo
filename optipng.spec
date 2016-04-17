@@ -83,7 +83,7 @@ and corrections.
 %{__install} -dm 755 %{buildroot}%{_loc_mandir}/%{release_manpage}
 
 %{__mv} %{buildroot}%{release_mandir}/%{name}.1.gz \
-    %{buildroot}%{_loc_mandir}/%{release_manpage}/%{name}.1.gz 
+    %{buildroot}%{_loc_mandir}/%{release_manpage}/%{name}.1.gz
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -99,7 +99,7 @@ and corrections.
 ################################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 0.7.5-0
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.7.5-0
 - Updated to latest version
 
 * Fri Apr 16 2010 Steve Huff <shuff@vecna.org> - 0.6.4-1 - 8772/shuff

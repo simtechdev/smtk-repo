@@ -38,7 +38,7 @@
 
 ###############################################################################
 
-Summary:         Raster image scaling and processing utility. 
+Summary:         Raster image scaling and processing utility.
 Name:            imageworsener
 Version:         1.3.0
 Release:         0%{?dist}
@@ -46,7 +46,7 @@ Group:           Applications/Multimedia
 License:         GPLv3+
 URL:             http://entropymine.com/imageworsener
 
-Source0:         https://github.com/jsummers/%{name}/archive/%{version}.tar.gz 
+Source0:         https://github.com/jsummers/%{name}/archive/%{version}.tar.gz
 
 BuildRequires:   binutils, make, gcc, libjpeg-turbo-devel, libpng-devel
 
@@ -57,8 +57,8 @@ Provides:        %{name} = %{version}-%{release}
 ###############################################################################
 
 %description
-ImageWorsener is a raster image scaling and processing utility. All nontrivial 
-automated image processing causes a loss of information. While ImageWorsener 
+ImageWorsener is a raster image scaling and processing utility. All nontrivial
+automated image processing causes a loss of information. While ImageWorsener
 will degrade your images, its goal is to degrade them as little as possible.
 
 ###############################################################################
@@ -89,6 +89,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 1.0.0-0
-- Initial build 
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.0-0
+- Initial build
 

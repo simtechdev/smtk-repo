@@ -44,7 +44,7 @@
 
 ###############################################################################
 
-Summary:         Optimizer for PNG images 
+Summary:         Optimizer for PNG images
 Name:            pngout
 Version:         2015.03.19
 Release:         0%{?dist}
@@ -63,8 +63,8 @@ Provides:        %{name} = %{version}-%{release}
 ###############################################################################
 
 %description
-Freeware command line optimizer for PNG images written by Ken Silverman. 
-The transformation is lossless, meaning that the resulting image is visually 
+Freeware command line optimizer for PNG images written by Ken Silverman.
+The transformation is lossless, meaning that the resulting image is visually
 identical to the source image. This program can often get higher compression
 than other optimizers by 5–10%.
 
@@ -94,6 +94,6 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <yum@gongled.me> - 1.0.0-0
-- Initial build 
+* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.0-0
+- Initial build
 

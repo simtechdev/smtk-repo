@@ -4,13 +4,13 @@
 
 %define php_inidir     %{_sysconfdir}/php.d
 %define php_incldir    %{_includedir}/php
-%define php_ztsincldir %{_includedir}/php-zts 
+%define php_ztsincldir %{_includedir}/php-zts
 %define php_extdir     %{_libdir}/php/modules
 
 %define php_core_api   20131106
 %define php_zend_api   20131226
 
-%define basepkg        php56 
+%define basepkg        php56
 %define pecl_name      apcu
 
 %define with_zts       0%{?__ztsphp:1}
@@ -174,6 +174,6 @@ fi
 ################################################################################
 
 %changelog
-* Sun Jan 17 2016 Gleb Goncharov <yum@gongled.me> - 4.0.10-0
-- Initial build 
+* Sun Jan 17 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.0.10-0
+- Initial build
 

@@ -88,9 +88,9 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
-* Wed Mar 23 2016 Gleb Goncharov <yum@gongled.me> - 3.0.4-0
-- Updated to latest version 
+* Wed Mar 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.4-0
+- Updated to latest version
 
-* Fri Oct 23 2015 Gleb Goncharov <yum@gongled.me> - 3.0.3-1
+* Fri Oct 23 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 3.0.3-1
 - Initial build
 

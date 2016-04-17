@@ -140,8 +140,8 @@ fi
 ################################################################################
 
 %changelog
-* Tue Mar 01 2016 Gleb Goncharov <yum@gongled.me> - 2.0.1.0-0
+* Tue Mar 01 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.0.1.0-0
 - Updated to latest version
 
-* Sun Jan 31 2016 Gleb Goncharov <yum@gongled.me> - 2.0.0.1-0
+* Sun Jan 31 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 2.0.0.1-0
 - Initial build
