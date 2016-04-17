@@ -32,7 +32,19 @@ Vendor:          Simtech
 Group:           Development/Tools
 URL:             https://simtechdev.com
 
-Source0:         %{name}-%{version}.tar.gz
+Source0:         smtk-release.repo
+Source1:         smtk-testing.repo
+Source2:         RPM-GPG-KEY-SIMTECH
+
+Source10:        release.i386.mirrors
+Source11:        release.i686.mirrors
+Source12:        release.source.mirrors
+Source13:        release.x86_64.mirrors
+
+Source20:        testing.i386.mirrors
+Source21:        testing.i686.mirrors
+Source22:        testing.source.mirrors
+Source23:        testing.x86_64.mirrors
 
 BuildArch:       noarch
 
@@ -48,7 +60,7 @@ This package contains yum repo file for access to Simtech repository.
 ##########################################################################
 
 %prep
-%setup -q
+
 %build
 
 %install
@@ -60,16 +72,29 @@ install -dm 755 %{buildroot}%{_loc_datarootdir}/smtk-repo
 install -dm 755 %{buildroot}%{_loc_datarootdir}/smtk-repo/release
 install -dm 755 %{buildroot}%{_loc_datarootdir}/smtk-repo/testing
 
-install -pm 644 *.repo \
+install -pm 644 %{SOURCE0} \
                 %{buildroot}%{_sysconfdir}/yum.repos.d/
-
-install -pm 644 RPM-GPG-KEY-SIMTECH \
+install -pm 644 %{SOURCE1} \
+                %{buildroot}%{_sysconfdir}/yum.repos.d/
+install -pm 644 %{SOURCE2} \
                 %{buildroot}%{_sysconfdir}/pki/rpm-gpg
 
-install -pm 664 mirrors/release/* \
+install -pm 664 %{SOURCE10} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+install -pm 664 %{SOURCE11} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+install -pm 664 %{SOURCE12} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+install -pm 664 %{SOURCE13} \
                 %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
 
-install -pm 664 mirrors/testing/* \
+install -pm 664 %{SOURCE20} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+install -pm 664 %{SOURCE21} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+install -pm 664 %{SOURCE22} \
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+install -pm 664 %{SOURCE23} \
                 %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
 
 %post
@@ -89,7 +114,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/yum.repos.d/*
 %{_sysconfdir}/pki/rpm-gpg/*
-%{_loc_datarootdir}/smtk-repo/*
+%{_loc_datarootdir}/%{name}/*
 
 ##########################################################################
 
