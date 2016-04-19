@@ -1,6 +1,6 @@
 ########################################################################################
 
-%define package_name      jinja2
+%define package_name      Jinja2
 
 ########################################################################################
 
@@ -12,7 +12,7 @@ License:        BSD
 Group:          Development/Libraries 
 URL:            http://jinja.pocoo.org/
 
-Source:         https://github.com/mitsuhiko/%{package_name}/archive/%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/J/%{package_name}/%{package_name}-%{version}.tar.gz
 
 BuildRequires:  python-devel python-setuptools
 

@@ -77,6 +77,7 @@ Patch2:               fping3-sourceip-option.patch
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:        gcc-c++ make
 BuildRequires:        mysql-devel postgresql-devel net-snmp-devel openldap-devel gnutls-devel
 BuildRequires:        iksemel-devel unixODBC-devel libxml2-devel curl-devel >= 7.13.1
 BuildRequires:        OpenIPMI-devel >= 2 libssh2-devel >= 1.0.0 sqlite-devel
