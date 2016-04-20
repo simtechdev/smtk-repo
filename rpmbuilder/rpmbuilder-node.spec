@@ -78,6 +78,8 @@ Package creates user for remote package building with rpmbuilder.
 getent group %{user_name} >/dev/null || groupadd -r %{user_name}
 getent passwd %{user_name} >/dev/null || useradd -r -g %{user_name} -d %{_home}/%{user_name} -s /bin/bash %{user_name}
 
+%build
+
 %install
 %{__rm} -rf %{buildroot}
 
