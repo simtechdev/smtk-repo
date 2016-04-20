@@ -1,6 +1,6 @@
 ## About
 
-Spec files and patches for SMTK repository. It works on CentOS/RHEL 6.x/7.x.
+Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 
 ## Status
 
