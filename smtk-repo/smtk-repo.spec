@@ -80,22 +80,22 @@ install -pm 644 %{SOURCE2} \
                 %{buildroot}%{_sysconfdir}/pki/rpm-gpg
 
 install -pm 664 %{SOURCE10} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/i386.mirrors
 install -pm 664 %{SOURCE11} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/i686.mirrors
 install -pm 664 %{SOURCE12} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/source.mirrors
 install -pm 664 %{SOURCE13} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/release/x86_64.mirrors
 
 install -pm 664 %{SOURCE20} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/i386.mirrors
 install -pm 664 %{SOURCE21} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/i686.mirrors
 install -pm 664 %{SOURCE22} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/source.mirrors
 install -pm 664 %{SOURCE23} \
-                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/
+                %{buildroot}%{_loc_datarootdir}/smtk-repo/testing/x86_64.mirrors
 
 %post
 if [[ -f %{fmconfig} ]] ; then
