@@ -71,7 +71,7 @@ Package creates user for remote package building with rpmbuilder.
 
 ###############################################################################
 
-%prep -q
+%prep
 
 %pre
 getent group %{user_name} >/dev/null || groupadd -r %{user_name}
