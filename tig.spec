@@ -45,7 +45,7 @@ BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -
 
 Requires:           git ncurses glibc
 
-BuildRequires:      make autoconf asciidoc xmlto ncurses-devel
+BuildRequires:      gcc-c++ make autoconf asciidoc xmlto ncurses-devel
 
 Provides:           %{name} = %{version}-%{release}
 
