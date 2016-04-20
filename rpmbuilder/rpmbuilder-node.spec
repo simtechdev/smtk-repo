@@ -63,7 +63,6 @@ BuildArch:       noarch
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires:        rpm >= 4.8.0 rpm-build rpmdevtools rpmlint kaosv
-Requires:        atrpms-repo epel-repo
 
 ###############################################################################
 
