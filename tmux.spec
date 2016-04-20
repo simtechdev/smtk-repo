@@ -16,7 +16,7 @@ Source:               https://github.com/%{name}/%{name}/releases/download/%{ver
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:        ncurses-devel libevent-devel >= 1.4.14b
+BuildRequires:        gcc-c++ make ncurses-devel libevent-devel >= 1.4.14b
 
 ###############################################################################
 

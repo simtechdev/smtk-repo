@@ -82,7 +82,7 @@ BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u}
 
 BuildRequires:        gcc >= 3.0 ncurses-devel
 BuildRequires:        apr-devel, apr-util-devel, openldap-devel, db4-devel, expat-devel, findutils
-BuildRequires:        perl, pkgconfig, pcre-devel >= 5.0
+BuildRequires:        perl, pkgconfig, pcre-devel >= 5.0 libuuid-devel
 
 Requires:             apr >= 1.4.2, apr-util >= 1.3.10, pcre >= 5.0
 Requires:             gawk, findutils, openldap, kaosv >= 2.7.0
