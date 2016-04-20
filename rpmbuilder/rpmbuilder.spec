@@ -2,7 +2,7 @@
 
 Summary:         RPM package build helper
 Name:            rpmbuilder
-Version:         1.0.3
+Version:         1.0.7
 Release:         0%{?dist}
 License:         EKOL
 Group:           Applications/System
@@ -44,13 +44,27 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc LICENSE.EN LICENSE.RU
-%{_bindir}
+%{_bindir}/%{name}
+%{_bindir}/rpmunbuilder
 
 ###############################################################################
 
 %changelog
-* Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.3-0
-- Updated to latest version
+* Wed Apr 20 2016 Anton Novojilov <andy@essentialkaos.com> - 1.0.7-0
+- Fixed bug with parsing remote build definition
+
+* Thu Apr 07 2016 Anton Novojilov <andy@essentialkaos.com> - 1.0.6-0
+- Package install feature
+- Code refactoring
+
+* Tue Apr 05 2016 Anton Novojilov <andy@essentialkaos.com> - 1.0.5-0
+- Host key checking disabled by default
+
+* Fri Mar 18 2016 Anton Novojilov <andy@essentialkaos.com> - 1.0.4-0
+- Fixed bug with downloading local files which contains http/ftp/https in name
+
+* Sun Oct 04 2015 Anton Novojilov <andy@essentialkaos.com> - 1.0.3-0
+- Suppressing packing errors
 
 * Thu Aug 06 2015 Anton Novojilov <andy@essentialkaos.com> - 1.0.2-0
 - Double bell replaced by single bell after log build
