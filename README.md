@@ -51,7 +51,7 @@ Done. It works.
     sudo yum -y install golang rpmbuilder terraform
     ```
 
-2. Install [TerraFarm](https://github.com/essentialkaos/terrafarm), configure it properly and launch VMs.
+2. Install [TerraFarm](https://github.com/essentialkaos/terrafarm), configure it properly and launch VMs. You can find useful examples in `.terradata` folder.
 
     ```
     terrafarm create
