@@ -16,6 +16,32 @@ sudo yum install -y https://release.yum.smtk.st/smtk-release-6.noarch.rpm
 sudo yum install -y https://release.yum.smtk.st/smtk-release-7.noarch.rpm
 ```
 
+#### Usage
+
+1. Install the repository and install dependencies.
+
+    ```
+    sudo yum -y install golang rpmbuilder terraform
+    ```
+
+2. Install [TerraFarm](https://github.com/essentialkaos/terrafarm), configure it properly and launch VMs.
+
+    ```
+    terrafarm create
+    ```
+
+    Be patient, it takes from 5 to 10 minutes.
+
+3. Clone the repository, switch into the workspace and run building process.
+
+    ```
+    rpmbuilder name.spec -V -1 -di -r ~/build.nodes.list
+    ```
+
+If you were completed all steps correctly, `rpmbuilder` will test your spec file, 
+connect to the build farm via SSH, install a necessary software, build packages and then 
+download them into your machine.
+
 #### Available mirrors
 
 - [ ] `us.yum.smtk.us` (America/New York)
