@@ -49,6 +49,8 @@ download them into your machine.
 
 #### Status
 
+We use Travis CI to perform spec checking automatically via `rpmlint`.
+
 | Repository | Status |
 |------------|--------|
 | Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
