@@ -18,6 +18,24 @@ sudo yum install -y https://release.yum.smtk.st/smtk-release-7.noarch.rpm
 
 #### Usage
 
+###### Quick start
+
+1. Install the repository and install dependencies.
+
+    ```
+    sudo yum -y install rpmbuilder
+    ```
+
+2. Clone the repository, switch into the workspace and run building process.
+
+    ```
+    rpmbuilder name.spec -V -1 -di
+    ```
+
+Done. It works.
+
+###### Advanced (using TerraFarm)
+
 1. Install the repository and install dependencies.
 
     ```
