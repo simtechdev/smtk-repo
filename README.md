@@ -2,6 +2,15 @@
 
 Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 
+#### Status
+
+We use Travis CI to perform spec checking automatically via `rpmlint`.
+
+| Repository | Status |
+|------------|--------|
+| Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
+| Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
+
 #### Installation
 
 ###### CentOS/RHEL 6.x
@@ -59,15 +68,6 @@ Done. It works.
 If you were completed all steps correctly, `rpmbuilder` will test your spec file, 
 connect to the build farm via SSH, install a necessary software, build packages and then 
 download them into your machine.
-
-#### Status
-
-We use Travis CI to perform spec checking automatically via `rpmlint`.
-
-| Repository | Status |
-|------------|--------|
-| Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
-| Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
 
 #### License
 
