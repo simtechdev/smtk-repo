@@ -49,7 +49,7 @@
 
 Summary:         Configuration package for rpmbuilder node
 Name:            rpmbuilder-node
-Version:         1.0
+Version:         1.0.1
 Release:         0%{?dist}
 License:         EKOL
 Vendor:          ESSENTIALKAOS
@@ -63,6 +63,7 @@ BuildArch:       noarch
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires:        rpm >= 4.8.0 rpm-build rpmdevtools rpmlint kaosv
+Requires:        atrpms-repo epel-repo yum-utils
 
 ###############################################################################
 
@@ -72,12 +73,11 @@ Package creates user for remote package building with rpmbuilder.
 ###############################################################################
 
 %prep
+%build
 
 %pre
 getent group %{user_name} >/dev/null || groupadd -r %{user_name}
 getent passwd %{user_name} >/dev/null || useradd -r -g %{user_name} -d %{_home}/%{user_name} -s /bin/bash %{user_name}
-
-%build
 
 %install
 %{__rm} -rf %{buildroot}
@@ -133,5 +133,8 @@ fi
 ###############################################################################
 
 %changelog
+* Thu Apr 21 2016 Anton Novojilov <andy@essentialkaos.com> - 1.0.1-0
+- yum-utils added to dependencies
+
 * Sat Oct 11 2014 Anton Novojilov <andy@essentialkaos.com> - 1.0-0
 - Unstable release
