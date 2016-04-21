@@ -42,11 +42,6 @@ If you were completed all steps correctly, `rpmbuilder` will test your spec file
 connect to the build farm via SSH, install a necessary software, build packages and then 
 download them into your machine.
 
-#### Available mirrors
-
-- [ ] `us.yum.smtk.us` (America/New York)
-- [x] `eu.yum.smtk.us` (Europe/Amsterdam)
-
 #### Status
 
 We use Travis CI to perform spec checking automatically via `rpmlint`.
