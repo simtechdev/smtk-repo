@@ -1,15 +1,8 @@
 ## About
 
-Spec files and patches for SMTK repository. It works on CentOS/RHEL 6.x/7.x.
+Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 
-#### Status
-
-| Repository | Status |
-|------------|--------|
-| Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
-| Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
-
-#### Quick start
+#### Installation
 
 ###### CentOS/RHEL 6.x
 
@@ -27,6 +20,13 @@ sudo yum install -y https://release.yum.smtk.st/smtk-release-7.noarch.rpm
 
 - [ ] `us.yum.smtk.us` (America/New York)
 - [x] `eu.yum.smtk.us` (Europe/Amsterdam)
+
+#### Status
+
+| Repository | Status |
+|------------|--------|
+| Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
+| Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
 
 #### License
 
