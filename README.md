@@ -16,13 +16,13 @@ We use Travis CI to perform spec checking automatically via `rpmlint`.
 ###### CentOS/RHEL 6.x
 
 ```
-sudo yum install -y https://release.yum.smtk.st/smtk-release-6.noarch.rpm
+sudo yum install -y https://release.yum.smtk.us/smtk-release-6.noarch.rpm
 ```
 
 ###### CentOS/RHEL 7.x
 
 ```
-sudo yum install -y https://release.yum.smtk.st/smtk-release-7.noarch.rpm
+sudo yum install -y https://release.yum.smtk.us/smtk-release-7.noarch.rpm
 ```
 
 #### Usage
