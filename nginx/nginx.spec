@@ -45,7 +45,7 @@
 
 %define open_ssl_ver         1.0.2g
 
-%define lua_module_ver        0.10.2
+%define lua_module_ver       0.10.2
 %define mh_module_ver        0.29
 
 ###############################################################################
@@ -53,7 +53,7 @@
 Summary:              Rocket-fast web server
 Name:                 nginx
 Epoch:                1
-Version:              1.9.14
+Version:              1.9.15
 Release:              0%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
@@ -441,6 +441,9 @@ fi
 ###############################################################################
 
 %changelog
+* Thu Apr 21 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.15-0
+- Nginx updated to 1.9.15
+
 * Fri Apr 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.14-0
 - Nginx updated to 1.9.14
 
