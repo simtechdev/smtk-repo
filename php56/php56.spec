@@ -97,7 +97,7 @@
 
 Summary:          PHP scripting language for creating dynamic web sites
 Name:             php56
-Version:          5.6.19
+Version:          5.6.20
 Release:          0%{?dist}
 License:          PHP and Zend and BSD
 Group:            Development/Languages
@@ -1973,6 +1973,9 @@ fi
 ################################################################################
 
 %changelog
+* Sat Apr 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.20-0
+- Updated to latest version
+
 * Sat Mar 13 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.19-0
 - Updated to latest version
 
