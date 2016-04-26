@@ -1973,11 +1973,6 @@ fi
 ################################################################################
 
 %changelog
-* Sat Apr 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.20-0
+* Tue Apr 26 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.20-0
 - Updated to latest version
 
-* Sat Mar 13 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.19-0
-- Updated to latest version
-
-* Sat Jan 16 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 5.6.17-0
-- Initial build
