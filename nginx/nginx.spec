@@ -53,7 +53,7 @@
 Summary:              Rocket-fast web server
 Name:                 nginx
 Epoch:                1
-Version:              1.9.15
+Version:              1.10.0
 Release:              0%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
@@ -441,6 +441,9 @@ fi
 ###############################################################################
 
 %changelog
+* Wed Apr 27 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.10.0-0
+- Nginx updated to 1.10.0
+
 * Thu Apr 21 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.9.15-0
 - Nginx updated to 1.9.15
 
