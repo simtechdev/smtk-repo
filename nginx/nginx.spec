@@ -101,7 +101,7 @@ Requires:             gd libXpm libxslt
 Requires:             libluajit
 %endif
 %if 0%{?rhel} == 7
-Requires:             luajit
+Requires:             libluajit
 %endif
 Requires:             kaosv
 
@@ -111,7 +111,7 @@ BuildRequires:        openssl-devel make
 BuildRequires:        libluajit-devel
 %endif
 %if 0%{?rhel} == 7
-BuildRequires:        luajit-devel
+BuildRequires:        libluajit-devel
 %endif
 
 Requires(pre):        shadow-utils
