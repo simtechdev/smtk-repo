@@ -18,6 +18,8 @@ BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u}
 
 BuildRequires:        gcc-c++ make ncurses-devel libevent-devel >= 1.4.14b
 
+Requires:             libevent ncurses
+
 ###############################################################################
 
 %description
