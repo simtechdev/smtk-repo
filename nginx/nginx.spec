@@ -57,7 +57,7 @@ Version:              1.10.0
 Release:              0%{?dist}
 License:              2-clause BSD-like license
 Group:                System Environment/Daemons
-Vendor:               Nginx / Google / CloudFlare
+Vendor:               Nginx / Google / CloudFlare / Essential Kaos
 URL:                  http://gongled.ru/
 
 Source0:              http://nginx.org/download/%{name}-%{version}.tar.gz
