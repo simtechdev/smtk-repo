@@ -50,9 +50,11 @@ Group:           Development/Libraries
 License:         MIT
 URL:             https://github.com/xenolf/%{name}
 
-Source0:         %{name}.tar.bz2
+Source0:         %{name}-%{version}.tar.bz2
 
 ExclusiveArch:   x86_64
+
+BuildRequires:   golang >= 1.6
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -66,7 +68,7 @@ Let's Encrypt client and ACME library written in Go.
 ###############################################################################
 
 %prep
-%setup -qn %{name}
+%setup -qn %{name}-%{version}
 
 %build
 export GOPATH=$(pwd)
