@@ -18,7 +18,7 @@ sudo yum install -y https://release.yum.smtk.us/smtk-release-6.noarch.rpm
 sudo yum install -y https://release.yum.smtk.us/smtk-release-7.noarch.rpm
 ```
 
-#### Status
+#### RPMLint status
 
 We use Travis CI to perform spec checking automatically via `rpmlint`.
 
