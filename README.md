@@ -8,23 +8,25 @@ Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 
 #### Installation
 
-###### CentOS/RHEL 6.x
+1. Install EPEL repository
 
-```
-[sudo] yum install -y http://release.yum.kaos.io/6/x86_64/kaos-repo-7.0-0.el6.noarch.rpm
-[sudo] yum install -y https://release.yum.smtk.us/smtk-release-6.noarch.rpm
-```
+    ```
+    [sudo] yum -y install epel-release
+    ```
 
-###### CentOS/RHEL 7.x
+2. Install ESSENTIAL KAOS public repository
 
-```
-[sudo] yum install -y http://release.yum.kaos.io/7/x86_64/kaos-repo-7.0-0.el6.noarch.rpm
-[sudo] yum install -y https://release.yum.smtk.us/smtk-release-7.noarch.rpm
-```
+    ```
+    [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.0-0.el6.noarch.rpm
+    ```
+
+3. Install SIMTECH public repository
+
+    ```
+    [sudo] yum -y -q install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
+    ```
 
 #### RPMLint status
-
-We use Travis CI to perform spec checking automatically via `rpmlint`.
 
 | Repository | Status |
 |------------|--------|
