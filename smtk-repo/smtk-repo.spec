@@ -50,7 +50,7 @@ BuildArch:       noarch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:        epel-release yum-plugin-priorities
+Requires:        epel-release kaos-repo yum-plugin-priorities
 
 Provides:        %{name} = %{version}-%{release}
 

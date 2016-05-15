@@ -42,55 +42,54 @@
 
 ###############################################################################
 
-Summary:         Let's Encrypt client and ACME library
-Name:            lego
-Version:         0.3.0
+Summary:         Terminal session recorder
+Name:            asciinema
+Version:         1.2.0
 Release:         0%{?dist}
-Group:           Development/Libraries
-License:         MIT
-URL:             https://github.com/xenolf/%{name}
+Group:           Applications/System
+License:         GPLv3
+URL:             https://asciinema.org
 
-Source0:         %{name}.tar.bz2
+Source0:         %{name}-%{version}.tar.bz2
 
-ExclusiveArch:   x86_64
+BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires:   golang >= 1.4
 
 Provides:        %{name} = %{version}-%{release}
 
 ###############################################################################
 
 %description
-Let's Encrypt client and ACME library written in Go.
+Asciinema [as-kee-nuh-muh] is a free and open source solution for recording 
+terminal sessions and sharing them on the web.
 
 ###############################################################################
 
 %prep
-%setup -qn %{name}
+%setup -q
 
 %build
 export GOPATH=$(pwd)
 
-mkdir -p {src,bin}
+mkdir -p .src && mv * .src && mv .src src
 
-mv github.com src
-mv golang.org src
-mv google.golang.org src
-mv gopkg.in src
-
-pushd src/github.com/xenolf/%{name}
-go build
+pushd src/github.com/%{name}/%{name}
+    go build
+    cp *.md $GOPATH
+    cp LICENSE $GOPATH
+    cp man/%{name}.1 $GOPATH
+    mv %{name} $GOPATH
 popd
-
-mv src/github.com/xenolf/%{name}/%{name} bin/%{name}
 
 %install
 rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_bindir}
-install -dm 755 %{buildroot}%{_sysconfdir}/%{name}
+install -dm 755 %{buildroot}%{_mandir}
 
-install -pm 755 bin/%{name} %{buildroot}%{_bindir}/
+install -pm 755 %{name} %{buildroot}%{_bindir}/
+install -pm 755 %{name}.1 %{buildroot}%{_mandir}/
 
 %clean
 rm -rf %{buildroot}
@@ -99,17 +98,13 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+%doc CONTRIBUTING.md CHANGELOG.md LICENSE README.md
+%{_mandir}/%{name}.1
 %{_bindir}/%{name}
-%{_sysconfdir}/%{name}
 
 ###############################################################################
 
 %changelog
-* Wed Mar 23 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.3.0-0
-- Updated to latest release.
+* Tue Apr 26 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.2.0-0
+- Initial build.
 
-* Sun Jan 31 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.2.0-1
-- Added certificates path
-
-* Fri Jan 22 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.2.0-0
-- Initial build

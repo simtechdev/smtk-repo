@@ -1,6 +1,6 @@
 [smtk-release]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=http://release.yum.smtk.us/$releasever/$basearch
+baseurl=https://release.yum.smtk.us/$releasever/$basearch
 mirrorlist=file:///usr/local/share/smtk-repo/release/$basearch.mirrors
 failovermethod=priority
 priority=1
@@ -10,7 +10,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-release-i386]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=http://release.yum.smtk.us/$releasever/i386
+baseurl=https://release.yum.smtk.us/$releasever/i386
 mirrorlist=file:///usr/local/share/smtk-repo/release/i386.mirrors
 failovermethod=priority
 priority=1
@@ -20,7 +20,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-release-i686]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=http://release.yum.smtk.us/$releasever/i686
+baseurl=https://release.yum.smtk.us/$releasever/i686
 mirrorlist=file:///usr/local/share/smtk-repo/release/i686.mirrors
 failovermethod=priority
 priority=1
@@ -30,7 +30,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-release-x64]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=http://release.yum.smtk.us/$releasever/x86_64
+baseurl=https://release.yum.smtk.us/$releasever/x86_64
 mirrorlist=file:///usr/local/share/smtk-repo/release/x86_64.mirrors
 failovermethod=priority
 priority=1
@@ -40,7 +40,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-release-src]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=http://release.yum.smtk.us/$releasever/SRPMS
+baseurl=https://release.yum.smtk.us/$releasever/SRPMS
 mirrorlist=file:///usr/local/share/smtk-repo/release/SRPMS.mirrors
 failovermethod=priority
 priority=1
