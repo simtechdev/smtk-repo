@@ -1,5 +1,15 @@
 ## Packaging
 
+Instruction for packagers and contributors.
+  
+  * [Demo](#demo)
+  * [Quick start](#quick-start)
+  * [Advanced (using TerraFarm)](#advanced-using-terrafarm)
+
+#### Demo
+
+[![asciicast](https://asciinema.org/a/43720.png)](https://asciinema.org/a/43720)
+
 #### Quick start
 
 1. Install the repository and install dependencies.
