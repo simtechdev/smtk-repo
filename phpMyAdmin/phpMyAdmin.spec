@@ -47,7 +47,7 @@
 
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
 %define pkgname phpMyAdmin
-%define php_prefix php56
+%define php_prefix php
 
 # If php-mcrypt is available, it should be preferred. Otherwise the pure
 # phpseclib alternative alternative can be used externally or internally.
@@ -61,7 +61,7 @@
 ################################################################################
 
 Summary:        Handle the administration of MySQL over the World Wide Web
-Name:           phpMyAdmin56
+Name:           phpMyAdmin
 Version:        4.5.5.1
 Release:        0%{?dist}
 License:        GPLv2+
@@ -72,7 +72,7 @@ Source0:        https://files.phpmyadmin.net/%{pkgname}/%{version}/%{pkgname}-%{
 Source1:        phpMyAdmin-config.inc.php
 Source2:        phpMyAdmin.htaccess
 
-Requires:       php(api) = 20131106
+# Requires:       php(api) = 20131106
 
 Requires:       %{php_prefix}-filter, %{php_prefix}-xml
 Requires:       %{php_prefix}-bz2, %{php_prefix}-ctype, %{php_prefix}-curl, %{php_prefix}-date

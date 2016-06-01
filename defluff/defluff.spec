@@ -34,14 +34,6 @@
 
 ###############################################################################
 
-%ifarch x86_64
-%define release_arch      x86_64
-%else
-%define release_arch      i386
-%endif
-
-###############################################################################
-
 Summary:         Tool, which works on existing deflate streams
 Name:            defluff
 Version:         0.3.2
@@ -50,9 +42,7 @@ Group:           Applications/Multimedia
 License:         Freeware
 URL:             http://encode.ru/threads/1214-defluff-a-deflate-huffman-optimizer
 
-Source0:         https://source.gongled.me/%{name}/%{name}-%{version}.%{release_arch}.zip
-
-ExclusiveArch:   %{release_arch}
+Source0:         %{name}-%{version}.x86_64.tar.gz
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -69,7 +59,7 @@ squeeze out a few more bits.
 ###############################################################################
 
 %prep
-%setup -qcn %{name}-%{version}
+%setup -qn %{name}-%{version}
 
 %build
 

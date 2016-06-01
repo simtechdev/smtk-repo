@@ -36,12 +36,6 @@
 
 %define release_ver       20150319
 
-%ifarch x86_64
-%define release_arch      x86_64
-%else
-%define release_arch      i686
-%endif
-
 ###############################################################################
 
 Summary:         Optimizer for PNG images
@@ -52,9 +46,7 @@ Group:           Applications/System
 License:         Freeware
 URL:             http://www.jonof.id.au/pngout
 
-Source0:         http://static.jonof.id.au/dl/kenutils/%{name}-%{release_ver}-linux-static.tar.gz
-
-ExclusiveArch:   %{release_arch}
+Source0:         http://static.jonof.id.au/dl/kenutils/%{name}-x86_64-linux-static.tar.gz
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -71,7 +63,7 @@ than other optimizers by 5–10%.
 ###############################################################################
 
 %prep
-%setup -qn %{name}-%{release_ver}-linux-static
+%setup -qn %{name}-linux-static
 
 %build
 
@@ -80,7 +72,7 @@ rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_bindir}
 
-install -pm 755 %{release_arch}/%{name}-static %{buildroot}%{_bindir}/%{name}
+install -pm 755 x86_64/%{name}-static %{buildroot}%{_bindir}/%{name}
 
 %clean
 rm -rf %{buildroot}
