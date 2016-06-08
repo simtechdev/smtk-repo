@@ -1,18 +1,50 @@
-%define v_rc
-%define vd_rc %{?v_rc:-%{?v_rc}}
-%define    _use_internal_dependency_generator 0
-%define __find_provides %{_builddir}/../SOURCES/find-provides
+################################################################################
+
+%define _posixroot	/
+%define _root		/root
+%define _bin		/bin
+%define _sbin		/sbin
+%define _srv		/srv
+%define _home		/home
+%define _opt		/opt
+%define _lib32		%{_posixroot}lib
+%define _lib64		%{_posixroot}lib64
+%define _libdir32	%{_prefix}%{_lib32}
+%define _libdir64	%{_prefix}%{_lib64}
+%define _logdir		%{_localstatedir}/log
+%define _rundir		%{_localstatedir}/run
+%define _lockdir	%{_localstatedir}/lock/subsys
+%define _cachedir	%{_localstatedir}/cache
+%define _spooldir	%{_localstatedir}/spool
+%define _crondir	%{_sysconfdir}/cron.d
+%define _loc_prefix	%{_prefix}/local
+%define _loc_exec_prefix	%{_loc_prefix}
+%define _loc_bindir	%{_loc_exec_prefix}/bin
+%define _loc_libdir	%{_loc_exec_prefix}/%{_lib}
+%define _loc_libdir32	%{_loc_exec_prefix}/%{_lib32}
+%define _loc_libdir64	%{_loc_exec_prefix}/%{_lib64}
+%define _loc_libexecdir	%{_loc_exec_prefix}/libexec
+%define _loc_sbindir	%{_loc_exec_prefix}/sbin
+%define _loc_bindir	%{_loc_exec_prefix}/bin
+%define _loc_datarootdir	%{_loc_prefix}/share
+%define _loc_includedir	%{_loc_prefix}/include
+%define _loc_mandir	%{_loc_datarootdir}/man
+%define _rpmstatedir	%{_sharedstatedir}/rpm-state
+%define _pkgconfigdir	%{_libdir}/pkgconfig
+
+%define	_use_internal_dependency_generator 0
+%define	__find_provides %{_builddir}/../SOURCES/find-provides
+
+#################################################################################
 
 Summary: High-performance HTTP accelerator
 Name: varnish
 Version: 4.1.2
-#Release: 0.20140328%{?v_rc}%{?dist}
-Release: 1%{?v_rc}%{?dist}
+Release: 0%{?dist}
 License: BSD
 Group: System Environment/Daemons
 URL: https://www.varnish-cache.org/
-#Source0: http://repo.varnish-cache.org/source/%{name}-%{version}.tar.gz
-Source0: %{name}-%{version}%{?vd_rc}.tar.gz
+Source0: http://repo.varnish-cache.org/source/%{name}-%{version}.tar.gz
 Source1: varnish.initrc
 Source2: varnish.sysconfig
 Source3: varnish.logrotate
@@ -58,6 +90,8 @@ BuildRequires: systemd-units
 %endif
 Requires: gcc
 
+#################################################################################
+
 %description
 This is Varnish Cache, a high-performance HTTP accelerator.
 
@@ -97,9 +131,10 @@ Group: System Environment/Libraries
 %description docs
 Documentation files for %name
 
+#################################################################################
 
 %prep
-%setup -n varnish-%{version}%{?vd_rc}
+%setup -qn varnish-%{version}%{?vd_rc}
 #%setup -q -n varnish-trunk
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} .
 cp %{SOURCE6} %{SOURCE7} %{SOURCE8} %{SOURCE9} %{SOURCE10} %{SOURCE11} .
@@ -128,14 +163,6 @@ export CFLAGS="$CFLAGS -O2 -g -Wp,-D_FORTIFY_SOURCE=0"
 #	s|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 make %{?_smp_mflags} V=1
-
-%if 0%{?fedora}%{?rhel} != 0 && 0%{?rhel} <= 4 && 0%{?fedora} <= 8
-	# Old style daemon function
-	sed -i 's,--pidfile \$pidfile,,g;
-		s,status -p \$pidfile,status,g;
-		s,killproc -p \$pidfile,killproc,g' \
-	varnish.initrc varnishlog.initrc varnishncsa.initrc
-%endif
 
 # In 4.0 the built docs need to be copied to the current/4.1 location.
 test -d doc/html || cp -pr doc/sphinx/build/html doc/html
@@ -258,7 +285,7 @@ rm -rf %{buildroot}
 %doc doc/changes*.html
 
 %pre
-getent group varnish    >/dev/null || groupadd -r varnish
+getent group varnish >/dev/null || groupadd -r varnish
 getent passwd varnishlog >/dev/null || \
 	useradd -r -g varnish -d /dev/null -s /sbin/nologin \
 		-c "varnishlog user" varnishlog
@@ -312,7 +339,6 @@ fi
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
-%changelog
 %changelog
 * Thu Jul 24 2014 Lasse Karstensen <lkarsten@varnish-software.com> - 4.1.1-1
 - This changelog is not in use. See doc/changes.rst for release notes.
