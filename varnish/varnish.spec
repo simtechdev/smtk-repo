@@ -1,39 +1,42 @@
 ################################################################################
 
-%define _posixroot	/
-%define _root		/root
-%define _bin		/bin
-%define _sbin		/sbin
-%define _srv		/srv
-%define _home		/home
-%define _opt		/opt
-%define _lib32		%{_posixroot}lib
-%define _lib64		%{_posixroot}lib64
-%define _libdir32	%{_prefix}%{_lib32}
-%define _libdir64	%{_prefix}%{_lib64}
-%define _logdir		%{_localstatedir}/log
-%define _rundir		%{_localstatedir}/run
-%define _lockdir	%{_localstatedir}/lock/subsys
-%define _cachedir	%{_localstatedir}/cache
-%define _spooldir	%{_localstatedir}/spool
-%define _crondir	%{_sysconfdir}/cron.d
-%define _loc_prefix	%{_prefix}/local
+%define _posixroot		/
+%define _root			/root
+%define _bin			/bin
+%define _sbin			/sbin
+%define _srv			/srv
+%define _home			/home
+%define _opt			/opt
+%define _lib32			%{_posixroot}lib
+%define _lib64			%{_posixroot}lib64
+%define _libdir32		%{_prefix}%{_lib32}
+%define _libdir64		%{_prefix}%{_lib64}
+%define _logdir			%{_localstatedir}/log
+%define _rundir			%{_localstatedir}/run
+%define _lockdir		%{_localstatedir}/lock/subsys
+%define _cachedir		%{_localstatedir}/cache
+%define _spooldir		%{_localstatedir}/spool
+%define _crondir		%{_sysconfdir}/cron.d
+%define _loc_prefix		%{_prefix}/local
 %define _loc_exec_prefix	%{_loc_prefix}
-%define _loc_bindir	%{_loc_exec_prefix}/bin
-%define _loc_libdir	%{_loc_exec_prefix}/%{_lib}
-%define _loc_libdir32	%{_loc_exec_prefix}/%{_lib32}
-%define _loc_libdir64	%{_loc_exec_prefix}/%{_lib64}
-%define _loc_libexecdir	%{_loc_exec_prefix}/libexec
-%define _loc_sbindir	%{_loc_exec_prefix}/sbin
-%define _loc_bindir	%{_loc_exec_prefix}/bin
+%define _loc_bindir		%{_loc_exec_prefix}/bin
+%define _loc_libdir		%{_loc_exec_prefix}/%{_lib}
+%define _loc_libdir32		%{_loc_exec_prefix}/%{_lib32}
+%define _loc_libdir64		%{_loc_exec_prefix}/%{_lib64}
+%define _loc_libexecdir		%{_loc_exec_prefix}/libexec
+%define _loc_sbindir		%{_loc_exec_prefix}/sbin
+%define _loc_bindir		%{_loc_exec_prefix}/bin
 %define _loc_datarootdir	%{_loc_prefix}/share
-%define _loc_includedir	%{_loc_prefix}/include
-%define _loc_mandir	%{_loc_datarootdir}/man
-%define _rpmstatedir	%{_sharedstatedir}/rpm-state
-%define _pkgconfigdir	%{_libdir}/pkgconfig
+%define _loc_includedir		%{_loc_prefix}/include
+%define _loc_mandir		%{_loc_datarootdir}/man
+%define _rpmstatedir		%{_sharedstatedir}/rpm-state
+%define _pkgconfigdir		%{_libdir}/pkgconfig
 
-%define	_use_internal_dependency_generator 0
-%define	__find_provides %{_builddir}/../SOURCES/find-provides
+#################################################################################
+
+%define __service_user varnish
+%define __service_log_user varnishlog
+%define __service_group varnish
 
 #################################################################################
 
@@ -68,6 +71,9 @@ BuildRequires: pcre-devel
 BuildRequires: pkgconfig
 BuildRequires: python-docutils >= 0.6
 BuildRequires: python-sphinx
+
+#Requires: kaosv
+
 Requires: jemalloc
 Requires: libedit
 Requires: logrotate
@@ -135,7 +141,7 @@ Documentation files for %name
 
 %prep
 %setup -qn varnish-%{version}%{?vd_rc}
-#%setup -q -n varnish-trunk
+
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} .
 cp %{SOURCE6} %{SOURCE7} %{SOURCE8} %{SOURCE9} %{SOURCE10} %{SOURCE11} .
 
@@ -285,13 +291,13 @@ rm -rf %{buildroot}
 %doc doc/changes*.html
 
 %pre
-getent group varnish >/dev/null || groupadd -r varnish
-getent passwd varnishlog >/dev/null || \
-	useradd -r -g varnish -d /dev/null -s /sbin/nologin \
-		-c "varnishlog user" varnishlog
-getent passwd varnish >/dev/null || \
-	useradd -r -g varnish -d /var/lib/varnish -s /sbin/nologin \
-		-c "Varnish Cache" varnish
+getent group %{__service_group} >/dev/null || groupadd -r %{__service_group}
+getent passwd %{__service_log_user} >/dev/null || \
+	useradd -r -g %{__service_group} -d /dev/null -s /sbin/nologin \
+		-c "varnishlog user" %{__service_log_user}
+getent passwd %{__service_user} >/dev/null || \
+	useradd -r -g %{__service_group} -d /var/lib/varnish -s /sbin/nologin \
+		-c "Varnish Cache" %{__service_user}
 exit 0
 
 %post
@@ -340,5 +346,7 @@ fi
 %postun libs -p /sbin/ldconfig
 
 %changelog
+* Wed Jun 08 2016 Alexey Egorychev <extor@jnotes.ru>
+- Change init script for using kaosv. Remove unused variables.
 * Thu Jul 24 2014 Lasse Karstensen <lkarsten@varnish-software.com> - 4.1.1-1
 - This changelog is not in use. See doc/changes.rst for release notes.
