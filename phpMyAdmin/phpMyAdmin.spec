@@ -89,7 +89,7 @@ Requires:       php-phpseclib-crypt-aes
 %endif
 
 %if 0%{?gettext}
-Requires:       %{php_prefix}-gettext
+Requires:       %{php_prefix}-php-gettext %{php_prefix}-gettext
 %endif
 
 %if 0%{?tcpdf}
