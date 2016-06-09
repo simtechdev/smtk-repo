@@ -1,100 +1,86 @@
 ################################################################################
 
-%define _posixroot		/
-%define _root			/root
-%define _bin			/bin
-%define _sbin			/sbin
-%define _srv			/srv
-%define _home			/home
-%define _opt			/opt
-%define _lib32			%{_posixroot}lib
-%define _lib64			%{_posixroot}lib64
-%define _libdir32		%{_prefix}%{_lib32}
-%define _libdir64		%{_prefix}%{_lib64}
-%define _logdir			%{_localstatedir}/log
-%define _rundir			%{_localstatedir}/run
-%define _lockdir		%{_localstatedir}/lock/subsys
-%define _cachedir		%{_localstatedir}/cache
-%define _spooldir		%{_localstatedir}/spool
-%define _crondir		%{_sysconfdir}/cron.d
-%define _loc_prefix		%{_prefix}/local
-%define _loc_exec_prefix	%{_loc_prefix}
-%define _loc_bindir		%{_loc_exec_prefix}/bin
-%define _loc_libdir		%{_loc_exec_prefix}/%{_lib}
-%define _loc_libdir32		%{_loc_exec_prefix}/%{_lib32}
-%define _loc_libdir64		%{_loc_exec_prefix}/%{_lib64}
-%define _loc_libexecdir		%{_loc_exec_prefix}/libexec
-%define _loc_sbindir		%{_loc_exec_prefix}/sbin
-%define _loc_bindir		%{_loc_exec_prefix}/bin
-%define _loc_datarootdir	%{_loc_prefix}/share
-%define _loc_includedir		%{_loc_prefix}/include
-%define _loc_mandir		%{_loc_datarootdir}/man
-%define _rpmstatedir		%{_sharedstatedir}/rpm-state
-%define _pkgconfigdir		%{_libdir}/pkgconfig
+%define _posixroot          /
+%define _root               /root
+%define _bin                /bin
+%define _sbin               /sbin
+%define _srv                /srv
+%define _home               /home
+%define _opt                /opt
+%define _lib32              %{_posixroot}lib
+%define _lib64              %{_posixroot}lib64
+%define _libdir32           %{_prefix}%{_lib32}
+%define _libdir64           %{_prefix}%{_lib64}
+%define _logdir             %{_localstatedir}/log
+%define _rundir             %{_localstatedir}/run
+%define _lockdir            %{_localstatedir}/lock/subsys
+%define _cachedir           %{_localstatedir}/cache
+%define _spooldir           %{_localstatedir}/spool
+%define _crondir            %{_sysconfdir}/cron.d
+%define _loc_prefix         %{_prefix}/local
+%define _loc_exec_prefix    %{_loc_prefix}
+%define _loc_bindir         %{_loc_exec_prefix}/bin
+%define _loc_libdir         %{_loc_exec_prefix}/%{_lib}
+%define _loc_libdir32       %{_loc_exec_prefix}/%{_lib32}
+%define _loc_libdir64       %{_loc_exec_prefix}/%{_lib64}
+%define _loc_libexecdir     %{_loc_exec_prefix}/libexec
+%define _loc_sbindir        %{_loc_exec_prefix}/sbin
+%define _loc_bindir         %{_loc_exec_prefix}/bin
+%define _loc_datarootdir    %{_loc_prefix}/share
+%define _loc_includedir     %{_loc_prefix}/include
+%define _loc_mandir         %{_loc_datarootdir}/man
+%define _rpmstatedir        %{_sharedstatedir}/rpm-state
+%define _pkgconfigdir       %{_libdir}/pkgconfig
 
 #################################################################################
 
-%define __service_user varnish
-%define __service_log_user varnishlog
-%define __service_group varnish
+%define service_user varnish
+%define service_user_log varnishlog
+%define service_group varnish
 
 #################################################################################
 
-Summary: High-performance HTTP accelerator
-Name: varnish
-Version: 4.1.2
-Release: 0%{?dist}
-License: BSD
-Group: System Environment/Daemons
-URL: https://www.varnish-cache.org/
-Source0: http://repo.varnish-cache.org/source/%{name}-%{version}.tar.gz
-Source1: varnish.initrc
-Source2: varnish.sysconfig
-Source3: varnish.logrotate
-Source4: varnish_reload_vcl
-Source5: varnish.params
-Source6: varnish.service
-Source7: varnishlog.initrc
-Source8: varnishlog.service
-Source9: varnishncsa.initrc
-Source10: varnishncsa.service
-Source11: find-provides
+Summary:          High-performance HTTP accelerator
+Name:             varnish
+Version:          4.0.3
+Release:          0%{?dist}
+License:          BSD
+Group:            System Environment/Daemons
+URL:              https://www.varnish-cache.org/
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: automake
-BuildRequires: autoconf
-BuildRequires: jemalloc-devel
-BuildRequires: libedit-devel
-BuildRequires: libtool
-BuildRequires: ncurses-devel
-BuildRequires: pcre-devel
-BuildRequires: pkgconfig
-BuildRequires: python-docutils >= 0.6
-BuildRequires: python-sphinx
+Source0:          http://repo.varnish-cache.org/source/%{name}-%{version}.tar.gz
+Source1:          %{name}.init
+Source2:          %{name}.sysconfig
+Source3:          %{name}.logrotate
+Source4:          varnish_reload_vcl
+Source5:          %{name}.params
+Source6:          %{name}.service
+Source7:          %{name}log.init
+Source8:          %{name}log.service
+Source9:          %{name}ncsa.init
+Source10:         %{name}ncsa.service
 
-#Requires: kaosv
+BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires: jemalloc
-Requires: libedit
-Requires: logrotate
-Requires: ncurses
-Requires: pcre
-Requires: varnish-libs = %{version}-%{release}
-Requires(pre): shadow-utils
-Requires(post): /sbin/chkconfig, /usr/bin/uuidgen
-Requires(preun): /sbin/chkconfig
-Requires(preun): /sbin/service
-%if %{undefined suse_version}
-Requires(preun): initscripts
+BuildRequires:    gcc-c++ automake autoconf jemalloc-devel libedit-devel libtool
+BuildRequires:    ncurses-devel pcre-devel pkgconfig python-docutils >= 0.6 python-sphinx
+%if 0%{?rhel} >= 7
+BuildRequires:    systemd-units
 %endif
-%if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
-Requires(post): systemd-units
-Requires(post): systemd-sysv
-Requires(preun): systemd-units
+
+Requires:         gcc kaosv jemalloc libedit logrotate ncurses pcre pkgconfig python
+Requires:         varnish-libs = %{version}-%{release}
+
+Requires(pre):    shadow-utils
+Requires(post):   /sbin/chkconfig, /usr/bin/uuidgen
+Requires(preun):  /sbin/chkconfig
+Requires(preun):  /sbin/service
+%if 0%{?rhel} >= 7
+Requires(post):   systemd-units
+Requires(post):   systemd-sysv
+Requires(preun):  systemd-units
 Requires(postun): systemd-units
-BuildRequires: systemd-units
 %endif
-Requires: gcc
 
 #################################################################################
 
@@ -109,244 +95,204 @@ significant speed up.
 Documentation wiki and additional information about Varnish Cache is
 available on the following web site: https://www.varnish-cache.org/
 
+#################################################################################
+
 %package libs
-Summary: Libraries for %{name}
-Group: System Environment/Libraries
-BuildRequires: ncurses-devel
+Summary:          Libraries for %{name}
+Group:            System Environment/Libraries
+
+BuildRequires:    ncurses-devel
 
 %description libs
-Libraries for %{name}.
-Varnish Cache is a high-performance HTTP accelerator
+Libraries for %{name}. Varnish Cache is a high-performance HTTP accelerator
+
+#################################################################################
 
 %package libs-devel
-Summary: Development files for %{name}-libs
-Group: System Environment/Libraries
-BuildRequires: ncurses-devel
-Requires: varnish-libs = %{version}-%{release}
-Requires: pkgconfig
-Requires: python
+Summary:          Development files for %{name}-libs
+Group:            System Environment/Libraries
+
+BuildRequires:    ncurses-devel
+
+Requires:         varnish-libs = %{version}-%{release}
 
 %description libs-devel
-Development files for %{name}-libs
-Varnish Cache is a high-performance HTTP accelerator
-
-%package docs
-Summary: Documentation files for %name
-Group: System Environment/Libraries
-
-%description docs
-Documentation files for %name
+Development files for %{name}-libs. Varnish Cache is a high-performance HTTP accelerator
 
 #################################################################################
 
 %prep
-%setup -qn varnish-%{version}%{?vd_rc}
-
-cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} .
-cp %{SOURCE6} %{SOURCE7} %{SOURCE8} %{SOURCE9} %{SOURCE10} %{SOURCE11} .
+%setup -qn %{name}-%{version}
 
 %build
-# No pkgconfig/libpcre.pc in rhel4
-%if 0%{?rhel} == 4
-	export PCRE_CFLAGS="`pcre-config --cflags`"
-	export PCRE_LIBS="`pcre-config --libs`"
-%endif
-
-%if 0%{?rhel} == 6
 export CFLAGS="$CFLAGS -O2 -g -Wp,-D_FORTIFY_SOURCE=0"
-%endif
 
-# jemalloc is not compatible with Red Hat's ppc64 RHEL kernel :-(
-%ifarch ppc64 ppc
-	%configure --localstatedir=/var/lib --without-jemalloc --without-rst2html
-%else
-	%configure --localstatedir=/var/lib --without-rst2html
-%endif
+libtoolize --copy --force
+aclocal -I m4
+autoheader
+automake --add-missing --copy --foreign
+autoconf
+%configure
 
-# We have to remove rpath - not allowed in Fedora
-# (This problem only visible on 64 bit arches)
-#sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g;
-#	s|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-
-make %{?_smp_mflags} V=1
-
-# In 4.0 the built docs need to be copied to the current/4.1 location.
-test -d doc/html || cp -pr doc/sphinx/build/html doc/html
-
-rm -rf doc/html/_sources
-#rm -rf doc/sphinx/build/html/_sources
-#mv doc/sphinx/build/html doc
-rm -rf doc/sphinx/build
-
-%check
-# rhel5 on ppc64 is just too strange
-%ifarch ppc64
-	%if 0%{?rhel} > 4
-		cp bin/varnishd/.libs/varnishd bin/varnishd/lt-varnishd
-	%endif
-%endif
-
-# The redhat ppc builders seem to have some ulimit problems?
-# These tests work on a rhel4 ppc/ppc64 instance outside the builders
-%ifarch ppc64 ppc
-	%if 0%{?rhel} == 4
-		rm bin/varnishtest/tests/c00031.vtc
-		rm bin/varnishtest/tests/r00387.vtc
-	%endif
-%endif
-
-# make check %{?_smp_mflags} LD_LIBRARY_PATH="../../lib/libvarnish/.libs:../../lib/libvarnishcompat/.libs:../../lib/libvarnishapi/.libs:../../lib/libvcc/.libs:../../lib/libvgz/.libs" VERBOSE=1
+make %{?_smp_mflags}
+rm -rf doc/html
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot} INSTALL="install -p"
 
-# None of these for fedora
-find %{buildroot}/%{_libdir}/ -name '*.la' -exec rm -f {} ';'
+make install \
+    DESTDIR=%{buildroot} \
+    INSTALL="install -p"
 
-# Remove this line to build a devel package with symlinks
-#find %{buildroot}/%{_libdir}/ -name '*.so' -type l -exec rm -f {} ';'
+find %{buildroot}%{_libdir}/ -name '*.la' -delete
 
-mkdir -p %{buildroot}/var/lib/varnish
-mkdir -p %{buildroot}/var/log/varnish
-mkdir -p %{buildroot}/var/run/varnish
-mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
-install -D -m 0644 etc/example.vcl %{buildroot}%{_sysconfdir}/varnish/default.vcl
-install -D -m 0644 varnish.logrotate %{buildroot}%{_sysconfdir}/logrotate.d/varnish
-
-# systemd support
-%if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
-mkdir -p %{buildroot}%{_unitdir}
-install -D -m 0644 varnish.service %{buildroot}%{_unitdir}/varnish.service
-install -D -m 0644 varnish.params %{buildroot}%{_sysconfdir}/varnish/varnish.params
-install -D -m 0644 varnishncsa.service %{buildroot}%{_unitdir}/varnishncsa.service
-install -D -m 0644 varnishlog.service %{buildroot}%{_unitdir}/varnishlog.service
-sed -i 's,sysconfig/varnish,varnish/varnish.params,' varnish_reload_vcl
-# default is standard sysvinit
-%else
-install -D -m 0644 varnish.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/varnish
-install -D -m 0755 varnish.initrc %{buildroot}%{_initrddir}/varnish
-install -D -m 0755 varnishlog.initrc %{buildroot}%{_initrddir}/varnishlog
-install -D -m 0755 varnishncsa.initrc %{buildroot}%{_initrddir}/varnishncsa
+install -dm 755 %{buildroot}%{_sysconfdir}/%{name}
+install -dm 755 %{buildroot}%{_sysconfdir}/sysconfig
+install -dm 755 %{buildroot}%{_sysconfdir}/logrotate.d
+install -dm 755 %{buildroot}%{_sysconfdir}/ld.so.conf.d
+install -dm 755 %{buildroot}%{_sharedstatedir}/%{name}
+install -dm 755 %{buildroot}%{_logdir}/%{name}
+install -dm 755 %{buildroot}%{_rundir}/%{name}
+%if 0%{?rhel} == 6
+install -dm 755 %{buildroot}%{_initrddir}
 %endif
-install -D -m 0755 varnish_reload_vcl %{buildroot}%{_sbindir}/varnish_reload_vcl
+%if 0%{?rhel} >= 7
+install -dm 755 %{buildroot}%{_unitdir}
+%endif
 
-echo %{_libdir}/varnish > %{buildroot}%{_sysconfdir}/ld.so.conf.d/varnish-%{_arch}.conf
+install -pm 644 etc/example.vcl %{buildroot}%{_sysconfdir}/%{name}/default.vcl
+install -pm 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
+install -pm 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+install -pm 755 %{SOURCE4} %{buildroot}%{_sbindir}
+%if 0%{?rhel} == 6
+install -pm 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+install -pm 755 %{SOURCE7} %{buildroot}%{_initrddir}/%{name}log
+install -pm 755 %{SOURCE9} %{buildroot}%{_initrddir}/%{name}ncsa
+%endif
+%if 0%{?rhel} >= 7
+install -pm 0644 %{SOURCE6} %{buildroot}%{_unitdir}
+install -pm 0644 %{SOURCE8} %{buildroot}%{_unitdir}
+install -pm 0644 %{SOURCE10} %{buildroot}%{_unitdir}
+%endif
+
+# echo %{_libdir}/varnish > %{buildroot}%{_sysconfdir}/ld.so.conf.d/varnish-%{_arch}.conf
 
 %clean
 rm -rf %{buildroot}
 
+###############################################################################
+
+%pre
+if [[ $1 -eq 1 ]] ; then
+    %{__getent} group %{service_group} >/dev/null || %{__groupadd} -r %{service_group}
+    %{__getent} passwd %{service_user} >/dev/null || \
+        %{__useradd} -r -g %{service_group} -d %{_sharedstatedir}/%{name} -s /sbin/nologin %{service_user}
+    %{__getent} passwd %{service_user_log} >/dev/null || \
+        %{__useradd} -r -g %{service_group} -d /dev/null -s /sbin/nologin %{service_user_log}
+fi
+exit 0
+
+%post
+%if 0%{?rhel} == 6
+if [[ $1 -eq 1 ]] ; then
+    %{__chkconfig} --add %{name}
+    %{__chkconfig} --add %{name}log
+    %{__chkconfig} --add %{name}ncsa
+fi
+%endif
+
+%if 0%{?rhel} == 7
+if [[ $1 -eq 1 ]] ; then
+    %systemd_post %{name}.service
+    %systemd_post %{name}log.service
+    %systemd_post %{name}ncsa.service
+fi
+%endif
+
+if [[ -f %{_sysconfdir}/%{name}/secret ]] ; then
+    uuidgen > %{_sysconfdir}/%{name}/secret
+    chmod 0600 %{_sysconfdir}/%{name}/secret
+fi
+
+%preun
+%if 0%{?rhel} >= 7
+if [[ $1 -lt 1 ]] ; then
+    %systemd_preun %{name}.service
+    %systemd_preun %{name}log.service
+    %systemd_preun %{name}ncsa.service
+fi
+%endif
+
+%if 0%{?rhel} >= 7
+if [[ $1 -lt 1 ]] ; then
+    %{__service} %{name} stop &> /dev/null
+    %{__service} %{name}log stop &> /dev/null
+    %{__service} %{name}ncsa stop &> /dev/null
+    %{__chkconfig} --del %{name}
+    %{__chkconfig} --del %{name}log
+    %{__chkconfig} --del %{name}ncsa
+fi
+%endif
+
+%post libs -p /sbin/ldconfig
+
+%postun libs -p /sbin/ldconfig
+
+###############################################################################
+
 %files
 %defattr(-,root,root,-)
+%doc LICENSE README
+%dir %{_sysconfdir}/%{name}
+%dir %attr(755,%{service_user_log},%{service_group}) %{_logdir}/%{name}
 %{_sbindir}/*
 %{_bindir}/*
-%{_var}/lib/varnish
-%{_var}/log/varnish
+%{_sharedstatedir}/%{name}
 %{_mandir}/man1/*.1*
 %{_mandir}/man3/*.3*
 %{_mandir}/man7/*.7*
-%doc LICENSE README 
-%{_docdir}/varnish/
-%dir %{_sysconfdir}/varnish/
-%config(noreplace) %{_sysconfdir}/varnish/default.vcl
-%config(noreplace) %{_sysconfdir}/logrotate.d/varnish
+%{_docdir}/%{name}/
 
-# systemd from fedora 17 and rhel 7
-%if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
-%{_unitdir}/varnish.service
-%{_unitdir}/varnishncsa.service
-%{_unitdir}/varnishlog.service
-%config(noreplace)%{_sysconfdir}/varnish/varnish.params
+%config(noreplace) %{_sysconfdir}/%{name}/default.vcl
+%config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 
-# default is standard sysvinit
-%else
-%config(noreplace) %{_sysconfdir}/sysconfig/varnish
-%{_initrddir}/varnish
-%{_initrddir}/varnishlog
-%{_initrddir}/varnishncsa
+%if 0%{?rhel} == 6
+%{_initrddir}/%{name}
+%{_initrddir}/%{name}log
+%{_initrddir}/%{name}ncsa
+%endif
+
+%if 0%{?rhel} >= 7
+%{_unitdir}/%{name}.service
+%{_unitdir}/%{name}ncsa.service
+%{_unitdir}/%{name}log.service
+%config(noreplace)%{_sysconfdir}/%{name}/%{name}.params
 %endif
 
 %files libs
 %defattr(-,root,root,-)
-%{_libdir}/*.so.*
-%{_libdir}/varnish
 %doc LICENSE
-%config %{_sysconfdir}/ld.so.conf.d/varnish-%{_arch}.conf
+%{_libdir}/*.so.*
+%{_libdir}/%{name}
 
 %files libs-devel
 %defattr(-,root,root,-)
+%doc LICENSE
 %{_libdir}/lib*.so
 %dir %{_includedir}/varnish
 %{_includedir}/varnish/*
 %{_libdir}/pkgconfig/varnishapi.pc
-/usr/share/varnish
-/usr/share/aclocal
+%{_datarootdir}/%{name}
+%{_datarootdir}/aclocal
 
-%doc LICENSE
-
-%files docs
-%defattr(-,root,root,-)
-%doc LICENSE
-%doc doc/html
-%doc doc/changes*.html
-
-%pre
-getent group %{__service_group} >/dev/null || groupadd -r %{__service_group}
-getent passwd %{__service_log_user} >/dev/null || \
-	useradd -r -g %{__service_group} -d /dev/null -s /sbin/nologin \
-		-c "varnishlog user" %{__service_log_user}
-getent passwd %{__service_user} >/dev/null || \
-	useradd -r -g %{__service_group} -d /var/lib/varnish -s /sbin/nologin \
-		-c "Varnish Cache" %{__service_user}
-exit 0
-
-%post
-%if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-%else
-/sbin/chkconfig --add varnish
-/sbin/chkconfig --add varnishlog
-/sbin/chkconfig --add varnishncsa
-%endif
-test -f /etc/varnish/secret || (uuidgen > /etc/varnish/secret && chmod 0600 /etc/varnish/secret)
-chown varnishlog:varnish /var/log/varnish/
-
-%triggerun -- varnish < 3.0.2-1
-# Save the current service runlevel info
-# User must manually run systemd-sysv-convert --apply varnish
-# to migrate them to systemd targets
-%{_bindir}/systemd-sysv-convert --save varnish >/dev/null 2>&1 ||:
-
-# If the package is allowed to autostart:
-#/bin/systemctl --no-reload enable varnish.service >/dev/null 2>&1 ||:
-
-# Run these because the SysV package being removed won't do them
-/sbin/chkconfig --del varnish >/dev/null 2>&1 || :
-#/bin/systemctl try-restart varnish.service >/dev/null 2>&1 || :
-
-%preun
-if [ $1 -lt 1 ]; then
-  # Package removal, not upgrade
-  %if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
-  /bin/systemctl --no-reload disable varnish.service > /dev/null 2>&1 || :
-  /bin/systemctl stop varnish.service > /dev/null 2>&1 || :
-  /bin/systemctl stop varnishlog.service  > /dev/null 2>&1 || :
-  /bin/systemctl stop varnishncsa.service > /dev/null 2>&1 || :
-  %else
-  /sbin/service varnish stop > /dev/null 2>&1
-  /sbin/service varnishlog stop > /dev/null 2>&1
-  /sbin/service varnishncsa stop > /dev/null 2>%1
-  /sbin/chkconfig --del varnish
-  /sbin/chkconfig --del varnishlog
-  /sbin/chkconfig --del varnishncsa
-  %endif
-fi
-
-%post libs -p /sbin/ldconfig
-%postun libs -p /sbin/ldconfig
+###############################################################################
 
 %changelog
-* Wed Jun 08 2016 Alexey Egorychev <extor@jnotes.ru>
-- Change init script for using kaosv. Remove unused variables.
+* Wed Jun 08 2016 Alexey Egorychev <aegorychev@simtechdev.com> - 4.1.1-2
+- Change init script for using kaosv.
+- Remove unused variables.
+
 * Thu Jul 24 2014 Lasse Karstensen <lkarsten@varnish-software.com> - 4.1.1-1
 - This changelog is not in use. See doc/changes.rst for release notes.
+
