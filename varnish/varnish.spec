@@ -32,6 +32,15 @@
 %define _rpmstatedir        %{_sharedstatedir}/rpm-state
 %define _pkgconfigdir       %{_libdir}/pkgconfig
 
+%define __ldconfig        %{_sbin}/ldconfig
+%define __service         %{_sbin}/service
+%define __touch           %{_bin}/touch
+%define __chkconfig       %{_sbin}/chkconfig
+%define __updalt          %{_sbindir}/update-alternatives
+%define __useradd         %{_sbindir}/useradd
+%define __groupadd        %{_sbindir}/groupadd
+%define __getent          %{_bindir}/getent
+
 #################################################################################
 
 %define service_user varnish
@@ -42,8 +51,8 @@
 
 Summary:          High-performance HTTP accelerator
 Name:             varnish
-Version:          4.0.3
-Release:          0%{?dist}
+Version:          4.1.1
+Release:          2%{?dist}
 License:          BSD
 Group:            System Environment/Daemons
 URL:              https://www.varnish-cache.org/
@@ -203,23 +212,23 @@ fi
 
 %if 0%{?rhel} == 7
 if [[ $1 -eq 1 ]] ; then
-    %systemd_post %{name}.service
-    %systemd_post %{name}log.service
-    %systemd_post %{name}ncsa.service
+    %{systemd_post} %{name}.service
+    %{systemd_post} %{name}log.service
+    %{systemd_post} %{name}ncsa.service
 fi
 %endif
 
-if [[ -f %{_sysconfdir}/%{name}/secret ]] ; then
+if [[ ! -f %{_sysconfdir}/%{name}/secret ]] ; then
     uuidgen > %{_sysconfdir}/%{name}/secret
-    chmod 0600 %{_sysconfdir}/%{name}/secret
+    chmod 600 %{_sysconfdir}/%{name}/secret
 fi
 
 %preun
 %if 0%{?rhel} >= 7
 if [[ $1 -lt 1 ]] ; then
-    %systemd_preun %{name}.service
-    %systemd_preun %{name}log.service
-    %systemd_preun %{name}ncsa.service
+    %{systemd_preun} %{name}.service
+    %{systemd_preun} %{name}log.service
+    %{systemd_preun} %{name}ncsa.service
 fi
 %endif
 
@@ -234,9 +243,11 @@ if [[ $1 -lt 1 ]] ; then
 fi
 %endif
 
-%post libs -p /sbin/ldconfig
+%post libs
+/sbin/ldconfig
 
-%postun libs -p /sbin/ldconfig
+%postun libs
+/sbin/ldconfig
 
 ###############################################################################
 
