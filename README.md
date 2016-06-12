@@ -25,7 +25,7 @@ Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 3. Install SIMTECH public repository
 
     ```
-    [sudo] yum -y -q install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
+    [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
     ```
 
 #### RPMLint status
