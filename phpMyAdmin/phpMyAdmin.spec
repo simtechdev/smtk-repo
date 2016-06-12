@@ -62,7 +62,7 @@
 
 Summary:        Handle the administration of MySQL over the World Wide Web
 Name:           phpMyAdmin
-Version:        4.5.5.1
+Version:        4.6.2
 Release:        0%{?dist}
 License:        GPLv2+
 Group:          Applications/Internet
@@ -71,8 +71,6 @@ URL:            http://www.phpmyadmin.net/
 Source0:        https://files.phpmyadmin.net/%{pkgname}/%{version}/%{pkgname}-%{version}-all-languages.tar.gz
 Source1:        phpMyAdmin-config.inc.php
 Source2:        phpMyAdmin.htaccess
-
-# Requires:       php(api) = 20131106
 
 Requires:       %{php_prefix}-filter, %{php_prefix}-xml
 Requires:       %{php_prefix}-bz2, %{php_prefix}-ctype, %{php_prefix}-curl, %{php_prefix}-date
@@ -91,7 +89,7 @@ Requires:       php-phpseclib-crypt-aes
 %endif
 
 %if 0%{?gettext}
-Requires:       %{php_prefix}-gettext
+Requires:       %{php_prefix}-php-gettext %{php_prefix}-gettext
 %endif
 
 %if 0%{?tcpdf}
@@ -204,6 +202,9 @@ sed -e "/'blowfish_secret'/s/MUSTBECHANGEDONINSTALL/$RANDOM$RANDOM$RANDOM$RANDOM
 ################################################################################
 
 %changelog
+* Wed Jun 08 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 4.6.2-0
+- Upgrade to 4.6.2
+
 * Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> 4.5.5.1-0
 - Upgrade to 4.5.5.1
 

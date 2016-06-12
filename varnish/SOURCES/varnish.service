@@ -1,0 +1,21 @@
+[Unit]
+Description=Varnish Cache, a high-performance HTTP accelerator
+After=syslog.target network.target
+
+[Service]
+LimitNOFILE=131072
+LimitMEMLOCK=82000
+LimitCORE=infinity
+
+EnvironmentFile=/etc/sysconfig/varnish
+
+Type=forking
+PIDFile=/var/run/varnish.pid
+PrivateTmp=true
+ExecStart=/usr/sbin/varnishd $DAEMON_OPTS
+
+ExecReload=/usr/sbin/varnish_reload_vcl
+
+[Install]
+WantedBy=multi-user.target
+
