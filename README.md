@@ -8,19 +8,19 @@ Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
 
 #### Installation
 
-1. Install EPEL repository
+1. Install [EPEL repository](https://fedoraproject.org/wiki/EPEL)
 
     ```
     [sudo] yum -y install epel-release
     ```
 
-2. Install ESSENTIAL KAOS public repository
+2. Install [ESSENTIAL KAOS public repository](https://yum.kaos.io)
 
     ```
     [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.0-0.el6.noarch.rpm
     ```
 
-3. Install SIMTECH public repository
+3. Install [SIMTECH repository](https://release.yum.smtk.us)
 
     ```
     [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
