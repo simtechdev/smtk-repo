@@ -3,6 +3,7 @@
 Spec files and patches for SIMTECH repository.
 
   * [Installation](#installation)
+  * [Supported OS](#supported-os)
   * [RPMLint Status](#rpmlint-status)
   * [License](#license)
 
