@@ -1,6 +1,6 @@
 ## About
 
-Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
+Spec files and patches for SIMTECH repository.
 
   * [Installation](#installation)
   * [RPMLint Status](#rpmlint-status)
@@ -25,6 +25,11 @@ Spec files and patches for SIMTECH repository. It works on CentOS/RHEL 6.x/7.x.
     ```
     [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
     ```
+
+#### Supported OS
+
+* CentOS/RedHat/Scientific Linux 6.x
+* CentOS/RedHat/Scientific Linux 7.x
 
 #### RPMLint status
 
