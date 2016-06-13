@@ -277,7 +277,6 @@ fi
 %{_unitdir}/%{name}.service
 %{_unitdir}/%{name}ncsa.service
 %{_unitdir}/%{name}log.service
-%config(noreplace)%{_sysconfdir}/%{name}/%{name}.params
 %endif
 
 %files libs
