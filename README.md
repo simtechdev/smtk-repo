@@ -29,8 +29,8 @@ Spec files and patches for SIMTECH repository.
 
 #### Supported OS
 
-* CentOS/RedHat/Scientific Linux 6.x
-* CentOS/RedHat/Scientific Linux 7.x
+* CentOS / RedHat / Scientific Linux 6.x
+* CentOS / RedHat / Scientific Linux 7.x
 
 #### RPMLint status
 
