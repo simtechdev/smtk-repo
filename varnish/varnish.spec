@@ -62,7 +62,6 @@ Source1:          %{name}.init
 Source2:          %{name}.sysconfig
 Source3:          %{name}.logrotate
 Source4:          varnish_reload_vcl
-Source5:          %{name}.params
 Source6:          %{name}.service
 Source7:          %{name}log.init
 Source8:          %{name}log.service
