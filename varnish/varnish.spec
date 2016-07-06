@@ -51,8 +51,8 @@
 
 Summary:          High-performance HTTP accelerator
 Name:             varnish
-Version:          4.1.1
-Release:          2%{?dist}
+Version:          4.0.3
+Release:          0%{?dist}
 License:          BSD
 Group:            System Environment/Daemons
 URL:              https://www.varnish-cache.org/
@@ -298,10 +298,5 @@ fi
 ###############################################################################
 
 %changelog
-* Wed Jun 08 2016 Alexey Egorychev <aegorychev@simtechdev.com> - 4.1.1-2
-- Change init script for using kaosv.
-- Remove unused variables.
-
-* Thu Jul 24 2014 Lasse Karstensen <lkarsten@varnish-software.com> - 4.1.1-1
-- This changelog is not in use. See doc/changes.rst for release notes.
-
+* Wed Jul 07 2016 Alexey Egorychev <aegorychev@simtechdev.com> - 4.0.3-0
+- Initial build
