@@ -3,34 +3,32 @@
 Spec files and patches for SIMTECH repository.
 
   * [Installation](#installation)
-  * [Supported OS](#supported-os)
   * [RPMLint Status](#rpmlint-status)
   * [License](#license)
 
 ## Installation
 
-1. Install [EPEL repository](https://fedoraproject.org/wiki/EPEL)
+If you want to install RPM package repository to your system, please follow these steps:
+
+1. Install requirements
 
     ```
     [sudo] yum -y install epel-release
+    [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.1-0.el6.noarch.rpm
     ```
 
-2. Install [ESSENTIAL KAOS public repository](https://yum.kaos.io)
+2. Install package for YUM repository
 
     ```
-    [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.0-0.el6.noarch.rpm
-    ```
-
-3. Install [SIMTECH repository](https://release.yum.smtk.us)
-
-    ```
-    [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
+    [sudo] yum -y install https://release.yum.smtk.us/smtk-release-7.noarch.rpm
     ```
 
 ## Supported OS
 
-* CentOS / RedHat / Scientific Linux 6.x
-* CentOS / RedHat / Scientific Linux 7.x
+We support only these platforms and architectures:
+
+* CentOS / RHEL / Scientific Linux 6.x ([x86_64](https://release.yum.smtk.us/6/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/6/SRPMS/repoview/))
+* CentOS / RHEL / Scientific Linux 7.x ([x86_64](https://release.yum.smtk.us/7/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/7/SRPMS/repoview/))
 
 ## RPMLint status
 
@@ -38,6 +36,10 @@ Spec files and patches for SIMTECH repository.
 |------------|--------|
 | Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
 | Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
+
+## Credits
+
+* [Anton Novojilov](https://github.com/andyone) for a lot of utilities for RPM packaging.
 
 ## License
 
