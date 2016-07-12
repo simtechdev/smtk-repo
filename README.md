@@ -1,4 +1,4 @@
-## About
+# About
 
 Spec files and patches for SIMTECH repository.
 
@@ -7,7 +7,7 @@ Spec files and patches for SIMTECH repository.
   * [RPMLint Status](#rpmlint-status)
   * [License](#license)
 
-#### Installation
+## Installation
 
 1. Install [EPEL repository](https://fedoraproject.org/wiki/EPEL)
 
@@ -27,19 +27,19 @@ Spec files and patches for SIMTECH repository.
     [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm 
     ```
 
-#### Supported OS
+## Supported OS
 
 * CentOS / RedHat / Scientific Linux 6.x
 * CentOS / RedHat / Scientific Linux 7.x
 
-#### RPMLint status
+## RPMLint status
 
 | Repository | Status |
 |------------|--------|
 | Stable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=master)](https://travis-ci.org/simtechdev/smtk-repo) |
 | Unstable | [![Build Status](https://travis-ci.org/simtechdev/smtk-repo.svg?branch=develop)](https://travis-ci.org/simtechdev/smtk-repo) |
 
-#### License
+## License
 
 MIT
 
