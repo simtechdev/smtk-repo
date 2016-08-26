@@ -13,13 +13,16 @@ If you want to install RPM package repository to your system, please follow thes
 1. Install requirements
 
     ```
-    [sudo] yum -y install epel-release
     [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.1-0.el6.noarch.rpm
     ```
 
 2. Install package for YUM repository
 
     ```
+    # CentOS / Scientific Linux 6.x
+    [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm
+
+    # CentOS / Scientific Linux 7.x
     [sudo] yum -y install https://release.yum.smtk.us/smtk-release-7.noarch.rpm
     ```
 
