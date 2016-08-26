@@ -16,7 +16,7 @@ Source:               https://github.com/libevent/libevent/archive/release-%{ver
 
 BuildRoot:            %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:        gcc automake openssl-devel zlib-devel
+BuildRequires:        gcc automake openssl-devel zlib-devel autoconf libtool
 
 ###############################################################################
 

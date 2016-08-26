@@ -1,44 +1,49 @@
 [smtk-testing]
 name=SIMTECH Testing (Unstable) Repo for RHEL/CentOS - $basearch
-baseurl=https://testing.yum.smtk.us/$releasever/$basearch
+baseurl=http://testing.yum.smtk.us/$releasever/$basearch
 mirrorlist=file:///usr/local/share/smtk-repo/testing/$basearch.mirrors
 failovermethod=priority
 priority=1
 enabled=0
-gpgcheck=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-testing-i386]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=https://testing.yum.smtk.us/$releasever/i386
+baseurl=http://testing.yum.smtk.us/$releasever/i386
 mirrorlist=file:///usr/local/share/smtk-repo/testing/i386.mirrors
 failovermethod=priority
 priority=1
 enabled=0
-gpgcheck=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-testing-i686]
 name=Simtech Release (Stable) Repo for RHEL/CentOS - $basearch
-baseurl=https://testing.yum.smtk.us/$releasever/i686
+baseurl=http://testing.yum.smtk.us/$releasever/i686
 mirrorlist=file:///usr/local/share/smtk-repo/testing/i686.mirrors
 failovermethod=priority
 priority=1
 enabled=0
-gpgcheck=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-testing-x64]
 name=SIMTECH Testing (Unstable) Repo for RHEL/CentOS - $basearch
-baseurl=https://testing.yum.smtk.us/$releasever/x86_64
+baseurl=http://testing.yum.smtk.us/$releasever/x86_64
 mirrorlist=file:///usr/local/share/smtk-repo/testing/x86_64.mirrors
 failovermethod=priority
 priority=1
 enabled=0
-gpgcheck=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH
 
 [smtk-testing-src]
 name=SIMTECH Testing (Unstable) Repo for RHEL/CentOS - $basearch
-baseurl=https://testing.yum.smtk.us/$releasever/SRPMS
+baseurl=http://testing.yum.smtk.us/$releasever/SRPMS
 mirrorlist=file:///usr/local/share/smtk-repo/testing/SRPMS.mirrors
 failovermethod=priority
 priority=1
 enabled=0
-gpgcheck=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-SIMTECH

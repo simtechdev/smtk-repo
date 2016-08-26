@@ -1,0 +1,33 @@
+
+Fix dc_client: don't go setuid until after the pidfile has been written.
+
+--- distcache-1.4.5/sessclient/sclient.c.setuid
++++ distcache-1.4.5/sessclient/sclient.c
+@@ -267,13 +267,6 @@
+ 	if(sockperms && !NAL_LISTENER_set_fs_perms(listener, sockperms))
+ 		SYS_fprintf(SYS_stderr, "Warning, can't set socket permissions "
+ 				"to '%s', continuing anyway\n", sockperms);
+-	if(user) {
+-		if(!SYS_setuid(user)) {
+-			SYS_fprintf(SYS_stderr, "Error, couldn't become user "
+-				    "'%s'.\n", user);
+-			return 1;
+-		}
+-	}
+ #endif
+ 
+ 	/* Define a "now" value that can be used during initialisation and
+@@ -312,6 +305,13 @@
+ 		SYS_fprintf(fp, "%lu", (unsigned long)SYS_getpid());
+ 		fclose(fp);
+ 	}
++	if(user) {
++		if(!SYS_setuid(user)) {
++			SYS_fprintf(SYS_stderr, "Error, couldn't become user "
++				    "'%s'.\n", user);
++			return 1;
++		}
++	}
+ #endif
+ 
+ 	/* Choose an appropriate select timeout relative to the retry period */

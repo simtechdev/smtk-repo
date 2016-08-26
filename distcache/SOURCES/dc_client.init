@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# distcache    Startup script for the Distcache SSL Session Cache Client Proxy
+#
+# chkconfig: - 88 12
+# description: Distcache is a Distributed SSL Session Cache Client Proxy.
+# processname: dc_client
+# config: /etc/sysconfig/distcache
+# pidfile: /var/run/dc_client.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+if [ -f /etc/sysconfig/distcache ]; then
+        . /etc/sysconfig/distcache
+fi
+
+port=${PORT-5555}
+socket=${SOCKET-/var/cache/mod_ssl/distcache}
+server=${SERVER-localhost}:${port}
+owner=${OWNER-apache}
+
+prog=dc_client
+RETVAL=0
+runas=distcache
+dc_client=/usr/bin/dc_client
+pidfile=/var/run/dc_client.pid
+
+OPTIONS="-daemon -pidfile ${pidfile} -listen UNIX:${socket} \
+         -sockowner ${owner} -sockperms 0600 -user ${runas} -server IP:${server}"
+
+start() {
+        echo -n $"Starting $prog: "
+        daemon $dc_client $OPTIONS
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch /var/lock/subsys/dc_client
+        return $RETVAL
+}
+stop() {
+	echo -n $"Stopping $prog: "
+	killproc $dc_client
+	RETVAL=$?
+	echo
+	[ $RETVAL = 0 ] && rm -f /var/lock/subsys/dc_client /var/run/dc_client.pid
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  status)
+        status $dc_client
+	RETVAL=$?
+	;;
+  restart)
+	stop
+	start
+	;;
+  condrestart)
+	if [ -f /var/run/dc_client.pid ] ; then
+		stop
+		start
+	fi
+	;;
+  reload)
+        reload
+	;;
+  *)
+	echo $"Usage: $prog {start|stop|restart|condrestart|status|help}"
+	exit 1
+esac
+
+exit $RETVAL

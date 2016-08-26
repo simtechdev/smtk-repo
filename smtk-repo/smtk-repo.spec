@@ -25,7 +25,7 @@
 
 Summary:         Simtech repository
 Name:            smtk-repo
-Version:         1.0
+Version:         1.1
 Release:         0%{?dist}
 License:         MIT
 Vendor:          Simtech
@@ -119,6 +119,9 @@ rm -rf %{buildroot}
 ##########################################################################
 
 %changelog
+* Fri Aug 26 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.1-0
+- Updated list of repositories. 
+
 * Fri Apr 15 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0-0
 - Initial build.
 
