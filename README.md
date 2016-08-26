@@ -27,8 +27,8 @@ If you want to install RPM package repository to your system, please follow thes
 
 We support only these platforms and architectures:
 
-* CentOS / RHEL / Scientific Linux 6.x ([x86_64](https://release.yum.smtk.us/6/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/6/SRPMS/repoview/))
-* CentOS / RHEL / Scientific Linux 7.x ([x86_64](https://release.yum.smtk.us/7/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/7/SRPMS/repoview/))
+* CentOS / Scientific Linux 6.x ([x86_64](https://release.yum.smtk.us/6/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/6/SRPMS/repoview/))
+* CentOS / Scientific Linux 7.x ([x86_64](https://release.yum.smtk.us/7/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/7/SRPMS/repoview/))
 
 ## RPMLint status
 
