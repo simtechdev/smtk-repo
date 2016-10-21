@@ -76,9 +76,14 @@ Requires:       %{php_prefix}-filter, %{php_prefix}-xml
 Requires:       %{php_prefix}-bz2, %{php_prefix}-ctype, %{php_prefix}-curl, %{php_prefix}-date
 Requires:       %{php_prefix}-gd, %{php_prefix}-hash, %{php_prefix}-iconv
 Requires:       %{php_prefix}-json, %{php_prefix}-libxml, %{php_prefix}-mbstring
-Requires:       %{php_prefix}-mysql, %{php_prefix}-mysqli, %{php_prefix}-pcre
+Requires:       %{php_prefix}-mysqli, %{php_prefix}-pcre
 Requires:       %{php_prefix}-session, %{php_prefix}-simplexml, %{php_prefix}-spl
 Requires:       %{php_prefix}-zip, %{php_prefix}-zlib
+%if 0%{?rhel} >= 7
+Requires:       %{php_prefix}-mysqlnd
+%else
+Requires:       %{php_prefix}-mysql
+%endif 
 
 %if 0%{?mcrypt}
 Requires:       %{php_prefix}-mcrypt
