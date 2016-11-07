@@ -72,35 +72,6 @@ Source0:        https://files.phpmyadmin.net/%{pkgname}/%{version}/%{pkgname}-%{
 Source1:        phpMyAdmin-config.inc.php
 Source2:        phpMyAdmin.htaccess
 
-Requires:       %{php_prefix}-filter, %{php_prefix}-xml
-Requires:       %{php_prefix}-bz2, %{php_prefix}-ctype, %{php_prefix}-curl, %{php_prefix}-date
-Requires:       %{php_prefix}-gd, %{php_prefix}-hash, %{php_prefix}-iconv
-Requires:       %{php_prefix}-json, %{php_prefix}-libxml, %{php_prefix}-mbstring
-Requires:       %{php_prefix}-mysqli, %{php_prefix}-pcre
-Requires:       %{php_prefix}-session, %{php_prefix}-simplexml, %{php_prefix}-spl
-Requires:       %{php_prefix}-zip, %{php_prefix}-zlib
-%if 0%{?rhel} >= 7
-Requires:       %{php_prefix}-mysqlnd
-%else
-Requires:       %{php_prefix}-mysql
-%endif 
-
-%if 0%{?mcrypt}
-Requires:       %{php_prefix}-mcrypt
-%else
-%if 0%{?seclib}
-Requires:       php-phpseclib-crypt-aes
-%endif
-%endif
-
-%if 0%{?gettext}
-Requires:       %{php_prefix}-php-gettext %{php_prefix}-gettext
-%endif
-
-%if 0%{?tcpdf}
-Requires:       php-tcpdf, php-tcpdf-dejavu-sans-fonts
-%endif
-
 Provides:       %{pkgname} = %{version}-%{release}
 Provides:       %{name} = %{version}-%{release}
 
