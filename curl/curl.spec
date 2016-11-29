@@ -273,8 +273,8 @@ rm -rf %{buildroot}
 
 %files -n libcurl-devel
 %defattr(-,root,root,-)
-%doc docs/examples/*.c docs/examples/Makefile.example docs/INTERNALS
-%doc docs/CHECKSRC.md docs/CONTRIBUTE docs/libcurl/ABI docs/CODE_STYLE.md
+%doc docs/examples/*.c docs/examples/Makefile.example
+%doc docs/CHECKSRC.md docs/libcurl/ABI docs/CODE_STYLE.md
 %{_bindir}/curl-config
 %{_includedir}/curl/
 %{_libdir}/*.so
