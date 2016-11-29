@@ -51,6 +51,7 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 %defattr(-,root,root,-)
 %{python_sitelib}/*
 %{_bindir}/%{package_name}
+%{_bindir}/%{package_name}_cli
 %{_bindir}/es_repo_mgr
 
 ########################################################################################
