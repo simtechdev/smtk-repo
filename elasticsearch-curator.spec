@@ -6,7 +6,7 @@
 
 Summary:        Utility for tending Elasticsearch indices 
 Name:           elasticsearch-%{package_name}
-Version:        4.0.6
+Version:        4.2.3
 Release:        0%{?dist}
 License:        ASLv2.0
 Group:          Development/Libraries
@@ -56,5 +56,7 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ########################################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.2.3-0
+- Updated to latest version. 
 * Mon Sep 05 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.0.6-0
 - Initial build
