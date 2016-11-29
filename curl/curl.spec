@@ -261,7 +261,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc CHANGES README*
-%doc docs/BUGS docs/FAQ docs/FEATURES docs/SECURITY docs/TODO
+%doc docs/BUGS docs/FAQ docs/FEATURES docs/TODO
 %doc docs/MANUAL docs/RESOURCES docs/TheArtOfHttpScripting
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
