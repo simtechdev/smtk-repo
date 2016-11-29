@@ -46,7 +46,7 @@
 
 Summary:         Real-time web log analyzer and interactive viewer
 Name:            goaccess
-Version:         0.9.8
+Version:         1.1.1
 Release:         0%{?dist}
 Group:           Development/Tools
 License:         GPLv2+
@@ -95,5 +95,8 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.1.1-0
+- Updated to latest release
+
 * Wed Mar 09 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 0.9.8-0
 - Updated to latest release
