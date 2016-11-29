@@ -14,11 +14,11 @@ URL:            https://github.com/elastic/curator
 
 Source:         https://github.com/elastic/%{package_name}/archive/v%{version}.tar.gz
 
-BuildRequires:  python-devel python-setuptools
+BuildRequires:  python-devel python-setuptools python-certifi
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:       python-elasticsearch >= 2.0
+Requires:       python-elasticsearch >= 2.0 python-certifi
 
 BuildArch:      noarch
 
