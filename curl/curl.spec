@@ -70,7 +70,7 @@
 
 Summary:              Utility for getting files from remote servers
 Name:                 curl
-Version:              7.50.1
+Version:              7.51.0
 Release:              0%{?dist}
 License:              MIT
 Group:                Applications/Internet
@@ -287,6 +287,9 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 7.51.0-0
+- Updated to latest version.
+
 * Thu Aug 04 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 7.50.1-0
 - Initial build
 
