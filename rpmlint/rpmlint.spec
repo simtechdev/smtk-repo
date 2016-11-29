@@ -109,4 +109,3 @@ rm -rf %{buildroot}
 %changelog
 * Sat Nov 14 2015 Anton Novojilov <andy@essentialkaos.com> - 1.8-0
 - Initial build
-
