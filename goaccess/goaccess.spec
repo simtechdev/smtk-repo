@@ -89,6 +89,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING README TODO
 %config(noreplace) %{_sysconfdir}/%{name}.conf
+%{_docdir}/%{name}/*
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 
