@@ -6,7 +6,7 @@
 
 Summary:        Python client for interacting with CS-Cart API
 Name:           python-cscart
-Version:        1.0.2
+Version:        1.0.3
 Release:        0%{?dist}
 License:        MIT
 Group:          Development/Libraries
@@ -55,5 +55,8 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 ########################################################################################
 
 %changelog
+* Sun Dec 11 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.3-0
+- Updated to the latest release. 
+
 * Thu Nov 24 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.0.2-0
 - Initial build

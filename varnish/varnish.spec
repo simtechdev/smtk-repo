@@ -298,5 +298,5 @@ fi
 ###############################################################################
 
 %changelog
-* Wed Jul 07 2016 Alexey Egorychev <aegorychev@simtechdev.com> - 4.0.3-0
+* Thu Jul 07 2016 Alexey Egorychev <aegorychev@simtechdev.com> - 4.0.3-0
 - Initial build
