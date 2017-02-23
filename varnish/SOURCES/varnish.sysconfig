@@ -23,9 +23,6 @@ NPROCS="unlimited"
 # VARNISH_ADMIN_LISTEN_PORT, VARNISH_SECRET_FILE.
 RELOAD_VCL=1
 
-# Varnish working directory
-VARNISH_WORKDIR=/var/lib/varnish
-
 # Main configuration file.
 VARNISH_VCL_CONF=/etc/varnish/default.vcl
 #
@@ -63,5 +60,4 @@ DAEMON_OPTS="-a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \
              -p thread_pool_min=${VARNISH_MIN_THREADS} \
              -p thread_pool_max=${VARNISH_MAX_THREADS} \
              -S ${VARNISH_SECRET_FILE} \
-             -n ${VARNISH_WORKDIR} \
              -s ${VARNISH_STORAGE}"
