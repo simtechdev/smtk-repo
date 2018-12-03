@@ -51,13 +51,13 @@
 
 Summary:        MySQL configuration assistant
 Name:           mysqltuner
-Version:        1.6.0
+Version:        1.6.18
 Release:        0%{?dist}
 License:        MIT
 Group:          Development/Tools
 URL:            http://mysqltuner.com/
 
-Source0:        https://github.com/major/%{long_name}/archive/1.6.0.tar.gz
+Source0:        https://github.com/major/%{long_name}/archive/%{version}.tar.gz
 
 BuildRoot:      %{_tmppath}/%{long_name}-%{version}-%{release}
 
@@ -98,6 +98,9 @@ rm -rf %{buildroot}
 ################################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.6.18-0
+- Updated to latest version
+
 * Wed Dec 30 2015 Gleb Goncharov <ggoncharov@simtechdev.com> - 1.6.0-0
 - Updated to latest version
 

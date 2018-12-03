@@ -6,7 +6,7 @@
 
 Summary:        Utility for tending Elasticsearch indices 
 Name:           elasticsearch-%{package_name}
-Version:        4.0.6
+Version:        4.2.3
 Release:        0%{?dist}
 License:        ASLv2.0
 Group:          Development/Libraries
@@ -14,11 +14,11 @@ URL:            https://github.com/elastic/curator
 
 Source:         https://github.com/elastic/%{package_name}/archive/v%{version}.tar.gz
 
-BuildRequires:  python-devel python-setuptools
+BuildRequires:  python-devel python-setuptools python-certifi
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-Requires:       python-elasticsearch >= 2.0
+Requires:       python-elasticsearch >= 2.0 python-certifi
 
 BuildArch:      noarch
 
@@ -51,10 +51,13 @@ python setup.py install --prefix=%{_prefix} --root=%{buildroot}
 %defattr(-,root,root,-)
 %{python_sitelib}/*
 %{_bindir}/%{package_name}
+%{_bindir}/%{package_name}_cli
 %{_bindir}/es_repo_mgr
 
 ########################################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.2.3-0
+- Updated to latest version. 
 * Mon Sep 05 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 4.0.6-0
 - Initial build

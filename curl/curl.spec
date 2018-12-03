@@ -70,7 +70,7 @@
 
 Summary:              Utility for getting files from remote servers
 Name:                 curl
-Version:              7.50.1
+Version:              7.51.0
 Release:              0%{?dist}
 License:              MIT
 Group:                Applications/Internet
@@ -261,7 +261,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc CHANGES README*
-%doc docs/BUGS docs/FAQ docs/FEATURES docs/SECURITY docs/TODO
+%doc docs/BUGS docs/FAQ docs/FEATURES docs/TODO
 %doc docs/MANUAL docs/RESOURCES docs/TheArtOfHttpScripting
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
@@ -273,8 +273,8 @@ rm -rf %{buildroot}
 
 %files -n libcurl-devel
 %defattr(-,root,root,-)
-%doc docs/examples/*.c docs/examples/Makefile.example docs/INTERNALS
-%doc docs/CHECKSRC.md docs/CONTRIBUTE docs/libcurl/ABI docs/CODE_STYLE.md
+%doc docs/examples/*.c docs/examples/Makefile.example
+%doc docs/CHECKSRC.md docs/libcurl/ABI docs/CODE_STYLE.md
 %{_bindir}/curl-config
 %{_includedir}/curl/
 %{_libdir}/*.so
@@ -287,6 +287,9 @@ rm -rf %{buildroot}
 ###############################################################################
 
 %changelog
+* Tue Nov 29 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 7.51.0-0
+- Updated to latest version.
+
 * Thu Aug 04 2016 Gleb Goncharov <ggoncharov@simtechdev.com> - 7.50.1-0
 - Initial build
 

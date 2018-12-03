@@ -3,14 +3,16 @@
 Spec files and patches for SIMTECH repository.
 
   * [Installation](#installation)
+  * [Supported OS](#supported-os)
   * [RPMLint Status](#rpmlint-status)
+  * [Credits](#credits)
   * [License](#license)
 
 ## Installation
 
 If you want to install RPM package repository to your system, please follow these steps:
 
-1. Install requirements
+1. Install ESSENTIAL KAOS repository
 
     ```
     [sudo] yum -y install http://release.yum.kaos.io/x86_64/kaos-repo-7.1-0.el6.noarch.rpm
@@ -19,19 +21,15 @@ If you want to install RPM package repository to your system, please follow thes
 2. Install package for YUM repository
 
     ```
-    # CentOS / Scientific Linux 6.x
     [sudo] yum -y install https://release.yum.smtk.us/smtk-release-6.noarch.rpm
-
-    # CentOS / Scientific Linux 7.x
-    [sudo] yum -y install https://release.yum.smtk.us/smtk-release-7.noarch.rpm
     ```
 
 ## Supported OS
 
 We support only these platforms and architectures:
 
-* CentOS / Scientific Linux 6.x ([x86_64](https://release.yum.smtk.us/6/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/6/SRPMS/repoview/))
-* CentOS / Scientific Linux 7.x ([x86_64](https://release.yum.smtk.us/7/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/7/SRPMS/repoview/))
+* CentOS / RHEL 6.x ([x86_64](https://release.yum.smtk.us/6/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/6/SRPMS/repoview/))
+* CentOS / RHEL 7.x ([x86_64](https://release.yum.smtk.us/7/x86_64/repoview/), [SRPMS](https://release.yum.smtk.us/7/SRPMS/repoview/))
 
 ## RPMLint status
 
@@ -42,7 +40,7 @@ We support only these platforms and architectures:
 
 ## Credits
 
-* [Anton Novojilov](https://github.com/andyone) for a lot of utilities for RPM packaging.
+* Many thanks [Anton Novojilov](https://github.com/andyone) for helping us maintain repository.
 
 ## License
 
